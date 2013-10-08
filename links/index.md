@@ -13,3 +13,4 @@ comments: yes
 - <a href="http://blog.fooleap.org/" targen="_blank">Fooleap 很喜欢他博客twitter的效果</a>
 - <a href="http://kantou.tk/" targen="_blank"> 看透那世界 </a>
 - <a href="http://sann.me/" targen="_blank"> SEYREN的小屋 </a>
+- <a href="http://xwyam.github.com/" targen="_blank"> 叶神 </a>
