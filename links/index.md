@@ -14,3 +14,6 @@ comments: yes
 - <a href="http://kantou.tk/" targen="_blank"> 看透那世界 </a>
 - <a href="http://sann.me/" targen="_blank"> SEYREN的小屋 </a>
 - <a href="http://xwyam.github.com/" targen="_blank"> 叶神 </a>
+- <a href="http://www.imsuzie.com" targen="_blank"> 酥西黄 </a>
+- <a href="http://lilydjwg.is-programmer.com/" targen="_blank"> 依云 </a>
+- <a href="http://ihacklog.com/" targen="_blank"> 荒野无灯 </a>
