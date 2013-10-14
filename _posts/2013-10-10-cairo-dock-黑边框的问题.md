@@ -12,7 +12,7 @@ tags: archlinux xfce4
 
 以前在gnome下用过cairo-dock ,一直很喜欢，最是中意的属它的chrome主题，这次决定就换成它。安装很简单:
 
-$ sudo pacman -S cairo-dock 
+   $ sudo pacman -S cairo-dock 
 
 然后启用它，在启用的时候我没注意选择，最后导致出现黑边框的问题（第一次好好配置，可以避免的）。然后我去archwiki找解决方法,在最后确实找到的（<a href="https://wiki.archlinux.org/index.php/Cairo-Dock" targen="_blank"> 点击这里 </a> ），但是却不能用上。 
 
