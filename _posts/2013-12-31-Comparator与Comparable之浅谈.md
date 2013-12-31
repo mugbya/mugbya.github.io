@@ -12,12 +12,11 @@ tags: java
    在对可排序的集合排序时，我们常用 Comparable 进行排序，当要对某些集合按照自己指定的排序方式排序时，我们就使用 Comparator ,此两个接口都须实现相应的方法
    
    - Comparable
-  {% highlight objc linenos %}
-   
-   public class ComparatorDemo {
+ <!-- more -->
+ public class ComparatorDemo {
 	public static void main(String[] args) {
-		List<String> list = new LinkedList<String>();
-		list.add("killer");
+	List<String> list = new LinkedList<String>();
+	list.add("killer");
 		list.add("adm");
 		list.add("Marry");
 		list.add("Boss");
@@ -36,4 +35,5 @@ tags: java
 		System.out.println(list);
 		Collections.sort(list, comparator);		
 		System.out.println(list);
-	}{% endhighlight %}
+	}
+    <!-- more -->
