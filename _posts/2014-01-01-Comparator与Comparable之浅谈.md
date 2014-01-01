@@ -31,8 +31,7 @@ tags: java
 					return arg1.length() - arg0.length();  
 					}  
 			     };
-
-		  	System.out.println(list);  
+			System.out.println(list);  
 		        Collections.sort(list, comparator);  
   	    		System.out.println(list);  
  		    }  
