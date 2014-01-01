@@ -65,4 +65,6 @@ compareTo方法 与 compare 都返回一个int类型的值，此值不关心具�
 
 在Comparator和Comparable的接口实现时仅需比较出两个对象的大小，而排序的实现是由Collections.sort()和Arrays.sor()提供的。Collections.sort() 是调用了 Arrays.sort() 方法排序后的效果就是要保证[i-1].compare([i])<=0,就是在[i-1].compare([i]) >0 时交换顺序。换个角度理解就是他总是保持某种意义上的升序排列方式，让前一个对象与后一个对象相比是小于零的（注：虽然在比较的时候参数顺序可调换，但是元素在排序前是没有换顺序的，即按照给定的顺序进行比较）
 
+ * 参考链接： <a href="http://www.blogjava.net/fastunit/archive/2008/04/08/191533.html" target="_blank">点击这里</a>
+
   于 2014 年 1 月 1 号 完结
