@@ -41,8 +41,8 @@ tags: java
 >Comparable接口的定义如下：
 
     		public  interface  Comparable<T>{
-      		  public  int compareTo(T  o);
-		}
+      			 public  int compareTo(T  o);
+			}
 
 compareTo方法 与 compare 都返回一个int类型的值，此值不关心具体数值，只关心取值范围，即int的值是一下三种(用 compareTo 做推论，compare 类似)：
  * 返回值 > 0 ：当前对象比给定的对象大
@@ -62,7 +62,7 @@ compareTo方法 与 compare 都返回一个int类型的值，此值不关心具�
 一直很疑惑是怎样的一种机制，改变两个值的顺序，就能实现反序排列
 
 在查阅资料跟看源码中有已下心得（用 Comparator 做说明）：
-在Comparator和Comparable的接口实现时仅需比较出两个对象的大小，而排序的实现是由Collections.sort()和Arrays.sort()提供的 Collections.sort() 是调用了 Arrays.sort() 方法 
-排序后的效果就是要保证 [i-1].compare([i]) <=0,就是在 [i-1].compare([i]) >0 时交换顺序。换个角度理解就是他总是保持某种意义上的升序排列方式，让前一个对象与后一个对象相比是小于零的（注：虽然在比较的时候参数顺序可调换，但是元素在排序前是没有换顺序的，即按照给定的顺序进行比较）
+
+在Comparator和Comparable的接口实现时仅需比较出两个对象的大小，而排序的实现是由Collections.sort()和Arrays.sor()提供的。Collections.sort() 是调用了 Arrays.sort() 方法排序后的效果就是要保证[i-1].compare([i])<=0,就是在[i-1].compare([i]) >0 时交换顺序。换个角度理解就是他总是保持某种意义上的升序排列方式，让前一个对象与后一个对象相比是小于零的（注：虽然在比较的时候参数顺序可调换，但是元素在排序前是没有换顺序的，即按照给定的顺序进行比较）
 
   于 2014 年 1 月 1 号 完结
