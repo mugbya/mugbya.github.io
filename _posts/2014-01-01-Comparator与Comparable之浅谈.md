@@ -30,7 +30,7 @@ tags: java
 				public int compare(String arg0, String arg1) {  
 					return arg1.length() - arg0.length();  
 					}  
-			     };	 
+			     };
 
 		  	System.out.println(list);  
 		        Collections.sort(list, comparator);  
