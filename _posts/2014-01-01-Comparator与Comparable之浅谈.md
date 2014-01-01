@@ -33,8 +33,8 @@ tags: java
 			     };	 
 
 		  	System.out.println(list);  
-			  Collections.sort(list, comparator);  
-  	    	System.out.println(list);  
+		        Collections.sort(list, comparator);  
+  	    		System.out.println(list);  
  		    }  
 		 }  
 
