@@ -19,3 +19,4 @@ comments: yes
 - <a href="http://lilydjwg.is-programmer.com/" target="_blank"> 依云 </a>
 - <a href="http://ihacklog.com/" target="_blank"> 荒野无灯 </a>
 - <a href="http://ldwqh0.blog.163.com/" target="_blank"> 东哥 </a>
+- <a href="http://www.cnblogs.com/xlong/" target="_blank"> 小龙 </a>
