@@ -1,0 +1,13 @@
+markdown: rdiscount
+permalink: /:title/
+url: http://mugbya.github.io
+name: Mugbya's Blog
+author: mugbya
+email: mugbya@gmail.com
+duoshuo: mugbya
+cnzz: 1000092406
+github: mugbya
+pygments: true
+safe: true
+paginate: 20
+
