@@ -37,7 +37,7 @@ copy 代码时，连css都copy了，拷贝过去的样式真是丑极了，至�
 
 邮箱：[{{ site.email }}](mailto:{{ site.email }})
 
-GitHub : [http:github.com/mugbya](http://github.com/mubya)
+GitHub : [http:github.com/mugbya](http://github.com/mugbya)
 
 
 ----
