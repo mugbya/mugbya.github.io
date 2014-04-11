@@ -23,9 +23,9 @@ tags: javaEE
 
  ![图1](/assets/java_web/FreeMarker template error.PNG)
 
-网上看看基本有两种原因： 
+网上看看基本有两种原因：
 - 这种问题的引起往往是你在action中使用了addActionError这样的方法在汇报actionerror，而你在调用addActionError方法时传入了null值，这时候机会导致这样的问题发生，所以如果发生这样的情况请检查你的代码，看看是否因为某种问题导致给addActionError方法传入了null值，找到了解决这个问题就可以了。
-- struts2中的标签漏了必要的属性。例如：用struts2中的checkBoxList标签时没有给标签加name属性，加上name属性后，问题消失。(我中于此情况)  
+- struts2中的标签漏了必要的属性。例如：用struts2中的checkBoxList标签时没有给标签加name属性，加上name属性后，问题消失。(我中于此情况)
 - 参考链接：http://justsee.iteye.com/blog/755631
 
 ####问题三
