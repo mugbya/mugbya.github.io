@@ -16,12 +16,12 @@ awesome 都安装大概有一个月之久了，但因为刚入职，才接触这
 
 #### awesome 配置 
 
-awesome本也可不需要配置，但是不配置的或许大多数人都不会喜欢。我们大多都会建立自己的 tag, 自己的的应用程序菜单。
+awesome本也可不需要配置，但是不配置的或许大多数人都不会喜欢。我们大多都会建立自己的 tag, 自己的应用程序菜单。
 
 
 #### awesome 美化
 
-awesome 默认是黑色的主题，我们可以修改其themes ，下面是我修改后的thems 
+awesome 默认是黑色的主题，我们可以修改其themes ，下面是我修改后的themes  
 
 	beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
 
@@ -29,7 +29,7 @@ awesome 默认是黑色的主题，我们可以修改其themes ，下面是我�
 
 如： 我要换个背景，将状态条放大点，将应用程序菜单扩大些。
 
-背景在你选择的themes里面去换掉。如我在我的 <code>/usr/share/awesome/themes/zenburn</code>文件下 进行了更改，置换了图片，当然还需要修改配置完文件，即修改 theme.lua 。
+背景在你选择的themes里面去换掉。如我在我的<code>/usr/share/awesome/themes/zenburn</code>文件下 进行了更改，置换了图片，当然还需要修改配置完文件，即修改 theme.lua 。
 
 
 打开它,修改 theme.wallpaper = "path" 。 path 是你的背景图片路径。
@@ -39,7 +39,7 @@ awesome 默认是黑色的主题，我们可以修改其themes ，下面是我�
         theme.menu_height = 15 
         theme.menu_width  = 100
 
-调试它们，知道成为你满意的样子。
+调试它们，直到它成为你满意的样子。
 
 
 要美化的地方可能还有很多，这个文件也还有很多可折腾的，我就做了我想做的一些事情，你也可以做一些你喜欢的事情，让它令你满意。如果觉得你做的更好，你或许可以分享出来，帮助更多的人。
@@ -51,8 +51,9 @@ awesome 默认是黑色的主题，我们可以修改其themes ，下面是我�
 
 - <a href="http://awesome.naquadah.org/wiki/Main_Page/zh" target="_blank">awesome.naquadah.org</a>
 
-下面是我配置部分的效果展示
- ![图11](/assets/arch/awesome/awesome_1.jpg)
+下面是我配置部分的效果展示 
+
+![图1](/assets/arch/awesome/awesome_1.png)
 
 
 
