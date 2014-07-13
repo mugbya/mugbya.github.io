@@ -26,7 +26,7 @@ arch的安装不是很难，但确实很繁琐。这次打算把系统做在U盘
 
 如果把arch装在移动设备，那么该移动硬盘在不同的机器上很可能有不同的设备号（sdx,x的序号不同），那么这时我们就需要注意一些地方了。
 
-- 在生成fstacb。在把系统安装到移动设备上，那么一定要以UUID的方式生成fstab。  
+- 在生成fstab。在把系统安装到移动设备上，那么一定要以UUID的方式生成fstab。  
 
    	 	 # genfstab -U -p /mnt >> /mnt/etc/fstab
   		 # nano /mnt/etc/fstab
