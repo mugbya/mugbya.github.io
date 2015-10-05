@@ -1,0 +1,447 @@
+<!DOCTYPE HTML>
+
+    <html lang="zh-Hans">
+  
+<head>
+  <meta charset="utf-8">
+  
+  <title>slf4j+log4j2在tomcat8 下无日志输出 | mugbya的折腾集</title>
+  <meta name="author" content="mugbya">
+  
+  <meta name="description" content="mugbua&#39;s blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="slf4j+log4j2在tomcat8 下无日志输出"/>
+  <meta property="og:site_name" content="mugbya的折腾集"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+    <meta http-equiv="Content-Language" content="zh-Hans"/>
+  
+
+  <link href="/img/favicon.ico" rel="icon">
+  
+    <link rel="apple-touch-icon" href="/img/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="/img/favicon.ico">
+    
+
+  <link rel="alternate" href="/atom.xml" title="mugbya的折腾集" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+  <!-- Chinese readability improment -->
+  <style type="text/css">
+    article {font-weight: 400;letter-spacing: .01rem;}
+    article .entry{line-height:2;}
+  </style>
+  
+  
+  <style type="text/css">
+  /* Tim Pietrusky advanced checkbox hack (Android <= 4.1.2) */
+body{ -webkit-animation: bugfix infinite 1s; }
+@-webkit-keyframes bugfix { from {padding:0;} to {padding:0;} }
+</style>
+
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'undefined', 'auto');
+  ga('send', 'pageview');
+ 
+</script>
+
+
+
+
+  
+    <!-- 360 Font and Baidu CDN in China -->
+    
+      <link href='http://fonts.useso.com/css?family=Open+Sans:300,400|Playball' rel='stylesheet' type='text/css'>
+    
+  <link href='http://apps.bdimg.com/libs/fontawesome/4.1.0/css/font-awesome.css' rel='stylesheet' type='text/css'>
+  <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+  
+
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="padding">
+	<div class="alignleft logo">
+	  <h1><a href="/">mugbya的折腾集</a></h1>
+	</div>
+	<nav id="main-nav" class="alignright">
+		<input type="checkbox" id="toggle" />
+		<label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu" onclick><i class="fa fa-bars"></i></label>
+	  <ul class="menu">
+	    
+	      <li><a href="/">Home</a></li>
+	    
+	      <li><a href="/archives">Archives</a></li>
+	    
+	    
+	    	<li><a href="/atom.xml" target="_blank" title="bruce tan blog rss" class="rss-top"><i class="fa fa-rss"></i></a></li>
+	    
+	  </ul>
+	</nav>
+	<div class="clearfix"></div>
+</div>
+</header>
+  <div id="page-heading-wrap">
+  	<div class="inner">
+      <div class="padding">
+    		
+          <h2>本站点的折腾文章都在自己一定的能力,环境下而得。所以对你并不完全适用,请看客小心参照</h2>
+        
+      </div>
+  	</div>
+  </div>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper" class="padding"><article class="photo">
+  
+  
+    <div class="post-content">
+  
+      
+      <div class="entry">
+        
+          <p>　　在写这个问题之前,先声明,这个问题肯定不是大家都能遇到,只是特性条件会出现这个情况,因了解还不是太深入,目前只记录我了解的所有.</p>
+<ul>
+<li><a href="http://segmentfault.com/q/1010000000737900" target="_blank" rel="external">参见segmentfault上的问题描述</a></li>
+</ul>
+<p>　　在问题的版本差异比较时,慢慢发现一些问题:</p>
+<pre><code>/<span class="regexp">/ tomcat7
+SLF4J: Found binding in [jar:file:~/project</span><span class="regexp">/out/artifacts</span><span class="regexp">/cjtrade_Web_exploded/</span><span class="constant">WEB</span>-<span class="constant">INF</span>/<span class="class"><span class="keyword">lib</span>/<span class="title">log4j</span>-<span class="title">slf4j</span>-<span class="title">impl</span>-2.0.1.<span class="title">jar!</span>/<span class="title">org</span>/<span class="title">slf4j</span>/<span class="title">impl</span>/<span class="title">StaticLoggerBinder</span>.<span class="title">class</span>]</span>
+<span class="constant">SLF4J</span><span class="symbol">:</span> <span class="constant">Found</span> binding in [<span class="symbol">jar:</span><span class="symbol">file:</span>~<span class="regexp">/project/out</span><span class="regexp">/artifacts/cjtrade</span>_Web_exploded/<span class="constant">WEB</span>-<span class="constant">INF</span>/<span class="class"><span class="keyword">lib</span>/<span class="title">slf4j</span>-<span class="title">log4j12</span>-1.7.6.<span class="title">jar!</span>/<span class="title">org</span>/<span class="title">slf4j</span>/<span class="title">impl</span>/<span class="title">StaticLoggerBinder</span>.<span class="title">class</span>]</span>
+
+/<span class="regexp">/ tomcat8
+SLF4J: Found binding in [jar:file:~/project</span><span class="regexp">/out/artifacts</span><span class="regexp">/cjtrade_Web_exploded/</span><span class="constant">WEB</span>-<span class="constant">INF</span>/<span class="class"><span class="keyword">lib</span>/<span class="title">slf4j</span>-<span class="title">log4j12</span>-1.7.6.<span class="title">jar!</span>/<span class="title">org</span>/<span class="title">slf4j</span>/<span class="title">impl</span>/<span class="title">StaticLoggerBinder</span>.<span class="title">class</span>]</span>
+<span class="constant">SLF4J</span><span class="symbol">:</span> <span class="constant">Found</span> binding in [<span class="symbol">jar:</span><span class="symbol">file:</span>~<span class="regexp">/project/out</span><span class="regexp">/artifacts/cjtrade</span>_Web_exploded/<span class="constant">WEB</span>-<span class="constant">INF</span>/<span class="class"><span class="keyword">lib</span>/<span class="title">log4j</span>-<span class="title">slf4j</span>-<span class="title">impl</span>-2.0.1.<span class="title">jar!</span>/<span class="title">org</span>/<span class="title">slf4j</span>/<span class="title">impl</span>/<span class="title">StaticLoggerBinder</span>.<span class="title">class</span>]</span>
+</code></pre><p>　　如果认真对比,你会发现slf4j找到了两个实现的类,但是在不同的版本它们的顺序却不一样. 结合slf4j实际绑定的类型</p>
+<pre><code><span class="comment">// tomcat 7</span>
+SLF4J: Actual binding is of type [org<span class="class">.apache</span><span class="class">.logging</span><span class="class">.slf4j</span><span class="class">.Log4jLoggerFactory</span>]
+log4j:WARN No appenders could be found <span class="keyword">for</span> logger (com<span class="class">.mchange</span><span class="class">.v2</span><span class="class">.log</span><span class="class">.MLog</span>).
+
+<span class="comment">// tomcat 8</span>
+SLF4J: Actual binding is of type [org<span class="class">.slf4j</span><span class="class">.impl</span><span class="class">.Log4jLoggerFactory</span>]
+log4j:WARN No appenders could be found <span class="keyword">for</span> logger (org<span class="class">.springframework</span><span class="class">.web</span><span class="class">.context</span><span class="class">.ContextLoader</span>).
+</code></pre><p>　　找到的绑定类的都是一样,但在不同的包下,这两个都实现了,来分别看下这两个包:</p>
+<center><img src="/assets/java_web/log4j-slf4j-impl.png" alt="log4j-slf4j-impl"></center><br><center><img src="/assets/java_web/slf4j-log4j12.png" alt="slf4j-log4j12.png"></center>
+
+<p>针对于slf4j跟log4j2搭配,<a href="http://logging.apache.org/log4j/2.x/log4j-slf4j-impl/index.html" target="_blank" rel="external">log4j2</a>官网有明确指出:</p>
+<pre><code><span class="operator"><span class="keyword">Use</span> <span class="keyword">of</span> the Log4j <span class="number">2</span> SLF4J Binding (log4j-slf4j-impl-<span class="number">2.0</span>.jar) together <span class="keyword">with</span> the SLF4J adapter (log4j-<span class="keyword">to</span>-slf4j-<span class="number">2.0</span>.jar) should <span class="keyword">never</span> be attempted, <span class="keyword">as</span> it will cause <span class="keyword">events</span> <span class="keyword">to</span> endlessly be routed <span class="keyword">between</span> SLF4J <span class="keyword">and</span> Log4j <span class="number">2.</span></span>
+</code></pre><p>所以我们应该确信用log4j-slf4j-impl这一个jar,但是slf4j-log4j12这一个是怎么回事呢,在<a href="http://www.slf4j.org/manual.html" target="_blank" rel="external">slf4j</a>官网上有这样的叙述:</p>
+<pre><code>slf4j-log4j12-<span class="number">1.7</span>.<span class="number">7</span><span class="class">.jar</span>
+Binding <span class="keyword">for</span> log4j version <span class="number">1.2</span>, <span class="tag">a</span> widely used logging framework. You also need to place log4j<span class="class">.jar</span> on your class path.
+</code></pre><p>从这来看,不是这个版本才对.当我们在maven中删除这个依赖,但是好像还是会有默认的依赖(1.7.6)存在.所以我们只能去lib移除了它了.这样只让slf4j绑定log4j-slf4j-impl包下的<em>org.apache.logging.slf4j.Log4jLoggerFactory</em>就解决了</p>
+<p>　　至于为什么tomcat8 跟 tomcat7 会加载顺序不一样,这点我还是没懂.了解的太少了,只知道7跟8差异很大,你去比较<em>conf/catalina.properties</em>这个文件你就知道了</p>
+
+        
+      </div>
+      <footer>
+        
+          
+  
+  <div class="categories">
+    <a href="/categories/记录/">记录</a>
+  </div>
+
+          
+  
+  <div class="tags">
+    <a href="/tags/log4j2/">log4j2</a>, <a href="/tags/slf4j/">slf4j</a>
+  </div>
+
+          <div class="share">
+  
+</div>
+          
+<nav class="article-nav clearfix">
+ 
+ <div class="article-prev" >
+ <a href="/2014/10/31/nautilus/" title="nautilus的问题">
+  <i class="fa fa-long-arrow-left"></i>
+  <span>
+  nautilus的问题</span>
+</a>
+</div>
+
+
+<div class="article-next">
+<a href="/2014/10/23/grid-column/"  title="Extjs Grid column 下的button按钮">
+ <span>Extjs Grid column 下的button按钮
+</span>
+<i class="fa fa-long-arrow-right"></i>
+</a>
+</div>
+
+</nav>
+
+        
+        <div class="clearfix"></div>
+      </footer>
+    </div>
+</article>
+
+
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+  
+
+     <!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2014/10/25/slf4j-tomcat/" data-title="slf4j+log4j2在tomcat8 下无日志输出" data-url="http://blog.mugbya.com2014/10/25/slf4j-tomcat/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"mugbya"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright"><div class="padding">
+	
+	  
+        
+
+
+
+
+	
+	  
+<div class="widget recent-post">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2015/10/05/odoo-study-first/">odoo学习(一)</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/30/sql-injection/">sql注入学习(一)</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/10/archlinux-install-vmware/">archlinux下安装vmware</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/08/web-security/">读&lt;白帽子讲web安全&gt;</a>
+      </li>
+    
+      <li>
+        <a href="/2015/02/13/systemd-service/">手动编写 Systemd 服务文件</a>
+      </li>
+    
+  </ul>
+</div>
+
+	
+	  
+<div class="widget category">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/activiti/">activiti</a><small>3</small></li>
+  
+    <li><a href="/categories/archlinux/">archlinux</a><small>3</small></li>
+  
+    <li><a href="/categories/extjs/">extjs</a><small>0</small></li>
+  
+    <li><a href="/categories/python/">python</a><small>0</small></li>
+  
+    <li><a href="/categories/安全/">安全</a><small>2</small></li>
+  
+    <li><a href="/categories/折腾/">折腾</a><small>1</small></li>
+  
+    <li><a href="/categories/记录/">记录</a><small>13</small></li>
+  
+  </ul>
+</div>
+
+	
+	  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  
+    <a href="/tags/archlinux/">archlinux<small>1</small></a>
+  
+    <a href="/tags/atombios/">atombios<small>1</small></a>
+  
+    <a href="/tags/awesome/">awesome<small>1</small></a>
+  
+    <a href="/tags/extjs/">extjs<small>1</small></a>
+  
+    <a href="/tags/grub/">grub<small>1</small></a>
+  
+    <a href="/tags/hexo/">hexo<small>1</small></a>
+  
+    <a href="/tags/java/">java<small>3</small></a>
+  
+    <a href="/tags/javascript/">javascript<small>0</small></a>
+  
+    <a href="/tags/log4j2/">log4j2<small>1</small></a>
+  
+    <a href="/tags/nautilus/">nautilus<small>1</small></a>
+  
+    <a href="/tags/netctl/">netctl<small>1</small></a>
+  
+    <a href="/tags/nexus/">nexus<small>1</small></a>
+  
+    <a href="/tags/odoo/">odoo<small>1</small></a>
+  
+    <a href="/tags/phantomjs/">phantomjs<small>1</small></a>
+  
+    <a href="/tags/python/">python<small>0</small></a>
+  
+    <a href="/tags/slf4j/">slf4j<small>1</small></a>
+  
+    <a href="/tags/sql注入/">sql注入<small>1</small></a>
+  
+    <a href="/tags/systemd/">systemd<small>1</small></a>
+  
+    <a href="/tags/tomcat/">tomcat<small>1</small></a>
+  
+    <a href="/tags/vim/">vim<small>1</small></a>
+  
+    <a href="/tags/vmware/">vmware<small>1</small></a>
+  
+    <a href="/tags/webdriver/">webdriver<small>0</small></a>
+  
+    <a href="/tags/web安全/">web安全<small>1</small></a>
+  
+    <a href="/tags/运维/">运维<small>1</small></a>
+  
+</div>
+
+	
+</div></aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="padding">
+	<div class="alignleft">
+	  
+	  &copy; 2015 mugbya
+	  
+	  Powerd by <a href="http://hexo.io/" target="_blank">hexo</a>
+	  and Theme by <a href="https://github.com/mugbya/moon-metro" target="_blank">moon-metro</a>
+	</div>
+
+	<div class="alignright">
+		
+		
+			<a href="https://github.com/mugbya" target="_blank" title="mugbya Github"><i class="fa fa-github-square"></i></a>	
+		
+		
+		
+		
+		
+		
+			<a href="/atom.xml" target="_blank" title="mugbya RSS"><i class="fa fa-rss-square"></i></a>
+		
+	</div>
+
+	<div class="clearfix"></div>
+</div>
+
+<div class="scroll-top"><i class="fa fa-arrow-circle-up"></i></div></footer>
+  
+
+ <script type="text/javascript">
+var duoshuoQuery = {short_name:"mugbya"};
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<script type="text/javascript">
+$(window).scroll(function() {
+
+    if($(this).scrollTop() > 400) {
+        $('.scroll-top').fadeIn(200);
+    } else {
+        $('.scroll-top').fadeOut(200);
+    }
+});
+
+$('.scroll-top').bind('click', function(e) {
+    e.preventDefault();
+    $('body,html').animate({scrollTop:0},200);
+});
+</script>
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
+</html>

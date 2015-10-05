@@ -1,0 +1,480 @@
+<!DOCTYPE HTML>
+
+    <html lang="zh-Hans">
+  
+<head>
+  <meta charset="utf-8">
+  
+  <title>archlinux下安装vmware | mugbya的折腾集</title>
+  <meta name="author" content="mugbya">
+  
+  <meta name="description" content="mugbua&#39;s blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="archlinux下安装vmware"/>
+  <meta property="og:site_name" content="mugbya的折腾集"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+    <meta http-equiv="Content-Language" content="zh-Hans"/>
+  
+
+  <link href="/img/favicon.ico" rel="icon">
+  
+    <link rel="apple-touch-icon" href="/img/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="/img/favicon.ico">
+    
+
+  <link rel="alternate" href="/atom.xml" title="mugbya的折腾集" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+  <!-- Chinese readability improment -->
+  <style type="text/css">
+    article {font-weight: 400;letter-spacing: .01rem;}
+    article .entry{line-height:2;}
+  </style>
+  
+  
+  <style type="text/css">
+  /* Tim Pietrusky advanced checkbox hack (Android <= 4.1.2) */
+body{ -webkit-animation: bugfix infinite 1s; }
+@-webkit-keyframes bugfix { from {padding:0;} to {padding:0;} }
+</style>
+
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'undefined', 'auto');
+  ga('send', 'pageview');
+ 
+</script>
+
+
+
+
+  
+    <!-- 360 Font and Baidu CDN in China -->
+    
+      <link href='http://fonts.useso.com/css?family=Open+Sans:300,400|Playball' rel='stylesheet' type='text/css'>
+    
+  <link href='http://apps.bdimg.com/libs/fontawesome/4.1.0/css/font-awesome.css' rel='stylesheet' type='text/css'>
+  <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+  
+
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="padding">
+	<div class="alignleft logo">
+	  <h1><a href="/">mugbya的折腾集</a></h1>
+	</div>
+	<nav id="main-nav" class="alignright">
+		<input type="checkbox" id="toggle" />
+		<label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu" onclick><i class="fa fa-bars"></i></label>
+	  <ul class="menu">
+	    
+	      <li><a href="/">Home</a></li>
+	    
+	      <li><a href="/archives">Archives</a></li>
+	    
+	    
+	    	<li><a href="/atom.xml" target="_blank" title="bruce tan blog rss" class="rss-top"><i class="fa fa-rss"></i></a></li>
+	    
+	  </ul>
+	</nav>
+	<div class="clearfix"></div>
+</div>
+</header>
+  <div id="page-heading-wrap">
+  	<div class="inner">
+      <div class="padding">
+    		
+          <h1>archlinux下安装vmware</h1>
+          <ul>
+            <li>
+              <span class="heading-span">Posted on: </span>
+              <time datetime="2015-03-10T13:07:24.000Z">2015-03-10</time>
+            </li>
+            
+              <li>
+                <span class="heading-span">By: </span>
+
+                
+                  <a href="/">mugbya</a>
+                
+
+              </li>
+            
+            <li>
+              <span class="heading-span">With: </span>
+              
+
+                <a href="#ds-thread"><span class="ds-thread-count" data-thread-key="2015/03/10/archlinux-install-vmware/" data-count-type="comments"></span></a>
+              
+            </li>
+          </ul>
+        
+      </div>
+  	</div>
+  </div>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper" class="padding"><article class="post">
+  
+  
+    <div class="post-content">
+  
+      
+      <div class="entry">
+        
+          <pre><code>env: Arch <span class="number">3.18</span><span class="number">.6</span>-<span class="number">1</span>-ARCH ; vmware-workstation : <span class="number">11.1</span><span class="number">.0</span><span class="number">.2496824</span>
+</code></pre><h2 id="缘起">缘起</h2><p>在archlinux下我用的虚拟机都是vbox,但是这次因为接受一个vmware虚拟的系统,我还使劲力气都不能将格式转换成vbox支持的格式.无法,只能在arch上装vmware.</p>
+<h2 id="参考链接">参考链接</h2><ul>
+<li><a href="https://wiki.archlinux.org/index.php/VMware" target="_blank" rel="external">vmware-archwiki(English)</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/VMware_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)" target="_blank" rel="external">vmware-archwiki(中文)</a></li>
+<li><a href="http://icooke.blog.51cto.com/4123148/757946" target="_blank" rel="external">Linux系统上安装Vmware Workstation</a></li>
+<li><a href="http://www.aichengxu.com/view/38314" target="_blank" rel="external">linux下安装VMware出错：Gtk-Message: Failed to load modul</a></li>
+</ul>
+<hr>
+<h2 id="须知">须知</h2><p>archlinux默认没有locate指令,所以需要先自行安装.</p>
+<pre><code><span class="preprocessor"># pacman -S mlocate</span>
+</code></pre><p>安装完,执行如果出现下面错误</p>
+<pre><code># locate rc.<span class="keyword">conf</span>
+locate: can not stat () `/<span class="keyword">var</span>/lib/mlocate/mlocate.<span class="keyword">db</span>': <span class="keyword">No</span> such <span class="keyword">file</span> or directory
+</code></pre><p>则请执行:</p>
+<pre><code><span class="preprocessor"># updatedb</span>
+</code></pre><p>vmware的卸载指令是: vmware-installer -u vmware-workstation<br>vmware 11 的序列码: 1F04Z-6D111-7Z029-AV0Q4-3AEH8</p>
+<hr>
+<h2 id="问题罗列">问题罗列</h2><h3 id="module_丢失">module 丢失</h3><p>error:</p>
+<pre><code>Gtk-Message: Failed <span class="keyword">to</span> load <span class="keyword">module</span> <span class="string">"canberra-gtk-module"</span>: libcanberra-gtk-<span class="keyword">module</span>.so: 无法打开共享对象文件: 没有那个文件或目录
+</code></pre><p>先查找libcanberra-gtk-module.so,如下是我在本地找到的; 但是如没有找到请安装 <strong>extra/libcanberra</strong></p>
+<pre><code>➜  ~  locate libcanberra-gtk-<span class="class"><span class="keyword">module</span>.<span class="title">so</span></span>
+/usr/<span class="class"><span class="keyword">lib</span>/<span class="title">gtk</span>-2.0/<span class="title">modules</span>/<span class="title">libcanberra</span>-<span class="title">gtk</span>-<span class="title">module</span>.<span class="title">so</span></span>
+/usr/<span class="class"><span class="keyword">lib</span>/<span class="title">gtk</span>-3.0/<span class="title">modules</span>/<span class="title">libcanberra</span>-<span class="title">gtk</span>-<span class="title">module</span>.<span class="title">so</span></span>
+</code></pre><p>添加系统加载modules的路径。</p>
+<pre><code><span class="comment"># vim /etc/ld.so.conf.d/gtk-2.0.conf</span>
+/usr/<span class="class"><span class="keyword">lib</span>/<span class="title">gtk</span>-2.0/<span class="title">modules</span></span>
+</code></pre><p>重新加载后重装。</p>
+<pre><code><span class="preprocessor"># ldconfig</span>
+</code></pre><hr>
+<h3 id="内核不匹配">内核不匹配</h3><p>error:</p>
+<pre><code><span class="keyword">before</span> you can <span class="command">run</span> vmware several modules must be compiled <span class="keyword">and</span> loaded <span class="keyword">into</span> <span class="keyword">the</span> <span class="property">running</span> kernel
+</code></pre><p>看到这个,你需要编译头文件,让vmware能用编译后与之匹配的内核</p>
+<pre><code><span class="comment">vmware</span><span class="literal">-</span><span class="comment">modconfig</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">console</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">install</span><span class="literal">-</span><span class="comment">all</span>
+</code></pre><p>再次之前一定要确认你有 <strong>linxu-headers</strong>,如果出现 <em>c header files matching your running kernel were not found </em>,说明你该去自己安装与之匹配的头文件了</p>
+
+        
+      </div>
+      <footer>
+        
+          
+  
+  <div class="categories">
+    <a href="/categories/记录/">记录</a>
+  </div>
+
+          
+  
+  <div class="tags">
+    <a href="/tags/vmware/">vmware</a>
+  </div>
+
+          <div class="share">
+  
+</div>
+          
+<nav class="article-nav clearfix">
+ 
+ <div class="article-prev" >
+ <a href="/2015/03/30/sql-injection/" title="sql注入学习(一)">
+  <i class="fa fa-long-arrow-left"></i>
+  <span>
+  sql注入学习(一)</span>
+</a>
+</div>
+
+
+<div class="article-next">
+<a href="/2015/03/08/web-security/"  title="读&lt;白帽子讲web安全&gt;">
+ <span>读&lt;白帽子讲web安全&gt;
+</span>
+<i class="fa fa-long-arrow-right"></i>
+</a>
+</div>
+
+</nav>
+
+        
+        <div class="clearfix"></div>
+      </footer>
+    </div>
+</article>
+
+
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+  
+
+     <!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2015/03/10/archlinux-install-vmware/" data-title="archlinux下安装vmware" data-url="http://blog.mugbya.com2015/03/10/archlinux-install-vmware/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"mugbya"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright"><div class="padding">
+	
+	  
+        
+            <div class="toc">
+                <h2> 文章目录 </h2> 
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#缘起"><span class="toc-number">1.</span> <span class="toc-text">缘起</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考链接"><span class="toc-number">2.</span> <span class="toc-text">参考链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#须知"><span class="toc-number">3.</span> <span class="toc-text">须知</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题罗列"><span class="toc-number">4.</span> <span class="toc-text">问题罗列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#module_丢失"><span class="toc-number">4.1.</span> <span class="toc-text">module 丢失</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内核不匹配"><span class="toc-number">4.2.</span> <span class="toc-text">内核不匹配</span></a></li></ol></li></ol>
+            </div>
+        
+
+
+
+
+	
+	  
+<div class="widget recent-post">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2015/10/05/odoo-study-first/">odoo学习(一)</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/30/sql-injection/">sql注入学习(一)</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/10/archlinux-install-vmware/">archlinux下安装vmware</a>
+      </li>
+    
+      <li>
+        <a href="/2015/03/08/web-security/">读&lt;白帽子讲web安全&gt;</a>
+      </li>
+    
+      <li>
+        <a href="/2015/02/13/systemd-service/">手动编写 Systemd 服务文件</a>
+      </li>
+    
+  </ul>
+</div>
+
+	
+	  
+<div class="widget category">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/activiti/">activiti</a><small>3</small></li>
+  
+    <li><a href="/categories/archlinux/">archlinux</a><small>3</small></li>
+  
+    <li><a href="/categories/extjs/">extjs</a><small>0</small></li>
+  
+    <li><a href="/categories/python/">python</a><small>0</small></li>
+  
+    <li><a href="/categories/安全/">安全</a><small>2</small></li>
+  
+    <li><a href="/categories/折腾/">折腾</a><small>1</small></li>
+  
+    <li><a href="/categories/记录/">记录</a><small>13</small></li>
+  
+  </ul>
+</div>
+
+	
+	  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  
+    <a href="/tags/archlinux/">archlinux<small>1</small></a>
+  
+    <a href="/tags/atombios/">atombios<small>1</small></a>
+  
+    <a href="/tags/awesome/">awesome<small>1</small></a>
+  
+    <a href="/tags/extjs/">extjs<small>1</small></a>
+  
+    <a href="/tags/grub/">grub<small>1</small></a>
+  
+    <a href="/tags/hexo/">hexo<small>1</small></a>
+  
+    <a href="/tags/java/">java<small>3</small></a>
+  
+    <a href="/tags/javascript/">javascript<small>0</small></a>
+  
+    <a href="/tags/log4j2/">log4j2<small>1</small></a>
+  
+    <a href="/tags/nautilus/">nautilus<small>1</small></a>
+  
+    <a href="/tags/netctl/">netctl<small>1</small></a>
+  
+    <a href="/tags/nexus/">nexus<small>1</small></a>
+  
+    <a href="/tags/odoo/">odoo<small>1</small></a>
+  
+    <a href="/tags/phantomjs/">phantomjs<small>1</small></a>
+  
+    <a href="/tags/python/">python<small>0</small></a>
+  
+    <a href="/tags/slf4j/">slf4j<small>1</small></a>
+  
+    <a href="/tags/sql注入/">sql注入<small>1</small></a>
+  
+    <a href="/tags/systemd/">systemd<small>1</small></a>
+  
+    <a href="/tags/tomcat/">tomcat<small>1</small></a>
+  
+    <a href="/tags/vim/">vim<small>1</small></a>
+  
+    <a href="/tags/vmware/">vmware<small>1</small></a>
+  
+    <a href="/tags/webdriver/">webdriver<small>0</small></a>
+  
+    <a href="/tags/web安全/">web安全<small>1</small></a>
+  
+    <a href="/tags/运维/">运维<small>1</small></a>
+  
+</div>
+
+	
+</div></aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="padding">
+	<div class="alignleft">
+	  
+	  &copy; 2015 mugbya
+	  
+	  Powerd by <a href="http://hexo.io/" target="_blank">hexo</a>
+	  and Theme by <a href="https://github.com/mugbya/moon-metro" target="_blank">moon-metro</a>
+	</div>
+
+	<div class="alignright">
+		
+		
+			<a href="https://github.com/mugbya" target="_blank" title="mugbya Github"><i class="fa fa-github-square"></i></a>	
+		
+		
+		
+		
+		
+		
+			<a href="/atom.xml" target="_blank" title="mugbya RSS"><i class="fa fa-rss-square"></i></a>
+		
+	</div>
+
+	<div class="clearfix"></div>
+</div>
+
+<div class="scroll-top"><i class="fa fa-arrow-circle-up"></i></div></footer>
+  
+
+ <script type="text/javascript">
+var duoshuoQuery = {short_name:"mugbya"};
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<script type="text/javascript">
+$(window).scroll(function() {
+
+    if($(this).scrollTop() > 400) {
+        $('.scroll-top').fadeIn(200);
+    } else {
+        $('.scroll-top').fadeOut(200);
+    }
+});
+
+$('.scroll-top').bind('click', function(e) {
+    e.preventDefault();
+    $('body,html').animate({scrollTop:0},200);
+});
+</script>
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+</body>
+</html>
