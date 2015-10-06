@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>记录 | mugbya的折腾集</title>
+  <title>mac下安装nautilus | mugbya的折腾集</title>
   <meta name="author" content="mugbya">
   
   <meta name="description" content="mugbua&#39;s blog">
@@ -13,7 +13,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="mac下安装nautilus"/>
   <meta property="og:site_name" content="mugbya的折腾集"/>
 
   
@@ -103,403 +103,146 @@ body{ -webkit-animation: bugfix infinite 1s; }
   	<div class="inner">
       <div class="padding">
     		
-          <h2>本站点的折腾文章都在自己一定的能力,环境下而得。所以对你并不完全适用,请看客小心参照</h2>
+          <h1>mac下安装nautilus</h1>
+          <ul>
+            <li>
+              <span class="heading-span">Posted on: </span>
+              <time datetime="2015-10-06T16:23:59.000Z">2015-10-7</time>
+            </li>
+            
+              <li>
+                <span class="heading-span">By: </span>
+
+                
+                  <a href="/">mugbya</a>
+                
+
+              </li>
+            
+            <li>
+              <span class="heading-span">With: </span>
+              
+
+                <a href="#ds-thread"><span class="ds-thread-count" data-thread-key="2015/10/07/mac-install-nautilus/" data-count-type="comments"></span></a>
+              
+            </li>
+          </ul>
         
       </div>
   	</div>
   </div>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper" class="padding">
-<h2 class="archive-title category">记录</h2>
-
-
-  
-    <article class="post">
+    <div id="main-col" class="alignleft"><div id="wrapper" class="padding"><article class="post">
   
   
-    <div class="post-content-index">
+    <div class="post-content">
   
-      
-        <header>
-          <div class="icon"></div>
-
-            <time datetime="2015-10-05T12:24:07.000Z"><a href="/2015/10/05/odoo-study-first/">2015-10-5</a></time>
-             &nbsp; &nbsp;
-              
-    
-      <h1 class="title transition"><a href="/2015/10/05/odoo-study-first/">odoo学习(一)</a></h1>
-    
-  
-
-        </header>
       
       <div class="entry">
         
+          <p>mac 下安装 nautilus</p>
+<h2 id="琰圭">琰圭</h2><p>对于文件管理器来说，我还是nautilus的忠实爱好者，至于为什么喜欢它，那是跟其他的相比，觉得它的可配置性更不错，更方便我这样有癖好的人。</p>
+<p>mac 下默认的Finder 我是真的用不惯，不能方便的显示隐藏文件，不能自定义书签快捷定位(?) , 所以国庆一空，就忍不住黑科技一下。</p>
+<h2 id="郑传">郑传</h2><p>mac下安装软件可以通过几种方式，app store, brew, 源码安装。 但nautilus 不支持这些安装方式。搜集得到一个有用的链接</p>
+<ul>
+<li><a href="http://apple.stackexchange.com/questions/5685/is-it-possible-to-run-nautilus-on-os-x" target="_blank" rel="external">Is it possible to run Nautilus on OS X?</a></li>
+</ul>
+<p>通过MacPorts 安装 nautilus。</p>
+<p>这里简述下步凑：</p>
+<ol>
+<li><p><a href="http://www.macports.org/install.php" target="_blank" rel="external">安装MacPorts </a><br><a href="http://www.cnblogs.com/ifantastic/p/3677066.html" target="_blank" rel="external">安装中文指南macports</a></p>
+<p> 安装完后，记得更新 macports ，然后导出变量</p>
+<pre><code>sudo port -v selfupdate
+
+export <span class="constant">PATH</span>=<span class="variable">$PATH</span><span class="symbol">:/opt/local/bin</span>
+</code></pre></li>
+</ol>
+<ol>
+<li><p>安装nautilus </p>
+<pre><code><span class="title">sudo</span> <span class="foreign"><span class="keyword">port</span> install nautilus  </span>
+</code></pre></li>
+</ol>
+<h2 id="问题汇总">问题汇总</h2><h3 id="nautilus_不能打开">nautilus 不能打开</h3><p>成功安装nautilus后，但是却不能打开，打开错误如下:</p>
+<pre><code>(nautilus:48868): Gtk-WARNING <span class="keyword">*</span><span class="keyword">*</span>: cannot open display: 
+</code></pre><p>遇到这个问题，需要首先安装 xorg-server。</p>
+<pre><code><span class="title">sudo</span> <span class="foreign"><span class="keyword">port</span> install xorg-server</span>
+</code></pre>
         
       </div>
       <footer>
         
-          <div class="alignright">
-            <a href="/2015/10/05/odoo-study-first/#more" class="more-link">阅读全文<i class="fa fa-long-arrow-right fa-1"></i></a>
-          </div>
-        
-        <div class="clearfix"></div>
-      </footer>
-    </div>
-</article>
-
-
-
+          
   
-    <article class="post">
-  
-  
-    <div class="post-content-index">
-  
-      
-        <header>
-          <div class="icon"></div>
+  <div class="categories">
+    <a href="/categories/折腾/">折腾</a>
+  </div>
 
-            <time datetime="2015-03-10T13:07:24.000Z"><a href="/2015/03/10/archlinux-install-vmware/">2015-03-10</a></time>
-             &nbsp; &nbsp;
-              
-    
-      <h1 class="title transition"><a href="/2015/03/10/archlinux-install-vmware/">archlinux下安装vmware</a></h1>
-    
+          
   
+  <div class="tags">
+    <a href="/tags/nautilus/">nautilus</a>
+  </div>
 
-        </header>
-      
-      <div class="entry">
-        
-        
-      </div>
-      <footer>
-        
-          <div class="alignright">
-            <a href="/2015/03/10/archlinux-install-vmware/#more" class="more-link">阅读全文<i class="fa fa-long-arrow-right fa-1"></i></a>
-          </div>
-        
-        <div class="clearfix"></div>
-      </footer>
-    </div>
-</article>
-
-
-
+          <div class="share">
   
-    <article class="post">
-  
-  
-    <div class="post-content-index">
-  
-      
-        <header>
-          <div class="icon"></div>
+</div>
+          
+<nav class="article-nav clearfix">
+ 
 
-            <time datetime="2015-02-13T02:48:57.000Z"><a href="/2015/02/13/systemd-service/">2015-02-13</a></time>
-             &nbsp; &nbsp;
-              
-    
-      <h1 class="title transition"><a href="/2015/02/13/systemd-service/">手动编写 Systemd 服务文件</a></h1>
-    
-  
+<div class="article-next">
+<a href="/2015/10/05/odoo-study-first/"  title="odoo学习(一)">
+ <span>odoo学习(一)
+</span>
+<i class="fa fa-long-arrow-right"></i>
+</a>
+</div>
 
-        </header>
-      
-      <div class="entry">
-        
-        
-      </div>
-      <footer>
-        
-          <div class="alignright">
-            <a href="/2015/02/13/systemd-service/#more" class="more-link">阅读全文<i class="fa fa-long-arrow-right fa-1"></i></a>
-          </div>
-        
-        <div class="clearfix"></div>
-      </footer>
-    </div>
-</article>
-
-
-
-  
-    <article class="post">
-  
-  
-    <div class="post-content-index">
-  
-      
-        <header>
-          <div class="icon"></div>
-
-            <time datetime="2015-01-20T02:33:22.000Z"><a href="/2015/01/20/exeToservice/">2015-01-20</a></time>
-             &nbsp; &nbsp;
-              
-    
-      <h1 class="title transition"><a href="/2015/01/20/exeToservice/">将exe程序变成系统服务</a></h1>
-    
-  
-
-        </header>
-      
-      <div class="entry">
-        
-        
-      </div>
-      <footer>
-        
-          <div class="alignright">
-            <a href="/2015/01/20/exeToservice/#more" class="more-link">阅读全文<i class="fa fa-long-arrow-right fa-1"></i></a>
-          </div>
-        
-        <div class="clearfix"></div>
-      </footer>
-    </div>
-</article>
-
-
-
-  
-    <article class="post">
-  
-  
-    <div class="post-content-index">
-  
-      
-        <header>
-          <div class="icon"></div>
-
-            <time datetime="2014-11-09T08:03:50.000Z"><a href="/2014/11/09/phantomjs/">2014-11-9</a></time>
-             &nbsp; &nbsp;
-              
-    
-      <h1 class="title transition"><a href="/2014/11/09/phantomjs/">phantomjs使用记录</a></h1>
-    
-  
-
-        </header>
-      
-      <div class="entry">
-        
-        
-      </div>
-      <footer>
-        
-          <div class="alignright">
-            <a href="/2014/11/09/phantomjs/#more" class="more-link">阅读全文<i class="fa fa-long-arrow-right fa-1"></i></a>
-          </div>
-        
-        <div class="clearfix"></div>
-      </footer>
-    </div>
-</article>
-
-
-
-  
-    <article class="photo">
-  
-  
-    <div class="post-content-index">
-  
-      
-        <header>
-          <div class="icon"></div>
-
-            <time datetime="2014-10-25T12:55:35.000Z"><a href="/2014/10/25/slf4j-tomcat/">2014-10-25</a></time>
-             &nbsp; &nbsp;
-              
-    
-      <h1 class="title transition"><a href="/2014/10/25/slf4j-tomcat/">slf4j+log4j2在tomcat8 下无日志输出</a></h1>
-    
-  
-
-        </header>
-      
-      <div class="entry">
-        
-        
-      </div>
-      <footer>
-        
-          <div class="alignright">
-            <a href="/2014/10/25/slf4j-tomcat/#more" class="more-link">阅读全文<i class="fa fa-long-arrow-right fa-1"></i></a>
-          </div>
-        
-        <div class="clearfix"></div>
-      </footer>
-    </div>
-</article>
-
-
-
-  
-    <article class="post">
-  
-  
-    <div class="post-content-index">
-  
-      
-        <header>
-          <div class="icon"></div>
-
-            <time datetime="2014-10-23T14:42:33.000Z"><a href="/2014/10/23/grid-column/">2014-10-23</a></time>
-             &nbsp; &nbsp;
-              
-    
-      <h1 class="title transition"><a href="/2014/10/23/grid-column/">Extjs Grid column 下的button按钮</a></h1>
-    
-  
-
-        </header>
-      
-      <div class="entry">
-        
-        
-      </div>
-      <footer>
-        
-          <div class="alignright">
-            <a href="/2014/10/23/grid-column/#more" class="more-link">阅读全文<i class="fa fa-long-arrow-right fa-1"></i></a>
-          </div>
-        
-        <div class="clearfix"></div>
-      </footer>
-    </div>
-</article>
-
-
-
-  
-    <article class="post">
-  
-  
-    <div class="post-content-index">
-  
-      
-        <header>
-          <div class="icon"></div>
-
-            <time datetime="2014-10-17T03:21:11.000Z"><a href="/2014/10/17/jasperreports/">2014-10-17</a></time>
-             &nbsp; &nbsp;
-              
-    
-      <h1 class="title transition"><a href="/2014/10/17/jasperreports/">jasperreports 使用问题</a></h1>
-    
-  
-
-        </header>
-      
-      <div class="entry">
-        
-        
-      </div>
-      <footer>
-        
-          <div class="alignright">
-            <a href="/2014/10/17/jasperreports/#more" class="more-link">阅读全文<i class="fa fa-long-arrow-right fa-1"></i></a>
-          </div>
-        
-        <div class="clearfix"></div>
-      </footer>
-    </div>
-</article>
-
-
-
-  
-    <article class="post">
-  
-  
-    <div class="post-content-index">
-  
-      
-        <header>
-          <div class="icon"></div>
-
-            <time datetime="2014-07-14T16:00:00.000Z"><a href="/2014/07/15/vim-questions/">2014-07-15</a></time>
-             &nbsp; &nbsp;
-              
-    
-      <h1 class="title transition"><a href="/2014/07/15/vim-questions/">vim学习笔记</a></h1>
-    
-  
-
-        </header>
-      
-      <div class="entry">
-        
-        
-      </div>
-      <footer>
-        
-          <div class="alignright">
-            <a href="/2014/07/15/vim-questions/#more" class="more-link">阅读全文<i class="fa fa-long-arrow-right fa-1"></i></a>
-          </div>
-        
-        <div class="clearfix"></div>
-      </footer>
-    </div>
-</article>
-
-
-
-  
-    <article class="photo">
-  
-  
-    <div class="post-content-index">
-  
-      
-        <header>
-          <div class="icon"></div>
-
-            <time datetime="2014-07-12T16:00:00.000Z"><a href="/2014/07/13/generate-application-menu-for-awesome/">2014-07-13</a></time>
-             &nbsp; &nbsp;
-              
-    
-      <h1 class="title transition"><a href="/2014/07/13/generate-application-menu-for-awesome/">awesome的美化</a></h1>
-    
-  
-
-        </header>
-      
-      <div class="entry">
-        
-        
-      </div>
-      <footer>
-        
-          <div class="alignright">
-            <a href="/2014/07/13/generate-application-menu-for-awesome/#more" class="more-link">阅读全文<i class="fa fa-long-arrow-right fa-1"></i></a>
-          </div>
-        
-        <div class="clearfix"></div>
-      </footer>
-    </div>
-</article>
-
-
-
-  
-
-  <nav id="pagination">
-  
-  
-    <a href="/categories/记录/page/2/" class="alignright next">下一页</a>
-  
-  <div class="clearfix"></div>
 </nav>
 
+        
+        <div class="clearfix"></div>
+      </footer>
+    </div>
+</article>
 
 
+<section id="comment">
+  <h2 class="title">留言</h2>
 
-   </div></div>
+  
+
+     <!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2015/10/07/mac-install-nautilus/" data-title="mac下安装nautilus" data-url="http://blog.mugbya.com2015/10/07/mac-install-nautilus/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"mugbya"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+
+  
+</section>
+
+</div></div>
     <aside id="sidebar" class="alignright"><div class="padding">
 	
 	  
+        
+            <div class="toc">
+                <h2> 文章目录 </h2> 
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#琰圭"><span class="toc-number">1.</span> <span class="toc-text">琰圭</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#郑传"><span class="toc-number">2.</span> <span class="toc-text">郑传</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题汇总"><span class="toc-number">3.</span> <span class="toc-text">问题汇总</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nautilus_不能打开"><span class="toc-number">3.1.</span> <span class="toc-text">nautilus 不能打开</span></a></li></ol></li></ol>
+            </div>
+        
+
 
 
 
