@@ -149,19 +149,19 @@ body{ -webkit-animation: bugfix infinite 1s; }
 </ul>
 <p>通过MacPorts 安装 nautilus。</p>
 <p>这里简述下步凑：</p>
-<ol>
+<ul>
 <li><p><a href="http://www.macports.org/install.php" target="_blank" rel="external">安装MacPorts </a><br><a href="http://www.cnblogs.com/ifantastic/p/3677066.html" target="_blank" rel="external">安装中文指南macports</a></p>
-<p> 安装完后，记得更新 macports ，然后导出变量</p>
+<p>  安装完后，记得更新 macports ，然后导出变量</p>
 <pre><code>sudo port -v selfupdate
 
 export <span class="constant">PATH</span>=<span class="variable">$PATH</span><span class="symbol">:/opt/local/bin</span>
 </code></pre></li>
-</ol>
-<ol>
+</ul>
+<ul>
 <li><p>安装nautilus </p>
 <pre><code><span class="title">sudo</span> <span class="foreign"><span class="keyword">port</span> install nautilus  </span>
 </code></pre></li>
-</ol>
+</ul>
 <h2 id="问题汇总">问题汇总</h2><h3 id="nautilus_不能打开">nautilus 不能打开</h3><p>成功安装nautilus后，但是却不能打开，打开错误如下:</p>
 <pre><code>(nautilus:48868): Gtk-WARNING <span class="keyword">*</span><span class="keyword">*</span>: cannot open display: 
 </code></pre><p>遇到这个问题，需要首先安装 xorg-server。</p>
