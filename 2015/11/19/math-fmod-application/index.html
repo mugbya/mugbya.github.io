@@ -159,7 +159,16 @@ return num - math.<span class="function"><span class="title">fmod</span><span cl
 <span class="function"><span class="title">cal_num</span><span class="params">(<span class="number">2.990</span>)</span></span>   ---&gt; <span class="number">2.5</span>
 </code></pre><p>math.fmod 的描述如下：</p>
 <pre><code>math.<span class="built_in">fmod</span>(<span class="keyword">x</span>, <span class="keyword">y</span>)
-Return <span class="built_in">fmod</span>(<span class="keyword">x</span>, <span class="keyword">y</span>), <span class="keyword">as</span> defined by the platform C library.注意：Python 表达式 <span class="keyword">x</span> % <span class="keyword">y</span> 可能不会返回相同结果。C 标准意图，譬如：函数 <span class="built_in">fmod</span>(<span class="keyword">x</span>, <span class="keyword">y</span>) 数学上会精确 (到无穷精度) 等于表达式 <span class="keyword">x</span> - <span class="keyword">n</span>*<span class="keyword">y</span> (其中 <span class="keyword">n</span> 是整数)；该函数结果具有如 <span class="keyword">x</span> 的相同正负号且幅度小于 <span class="built_in">abs</span>(<span class="keyword">y</span>) 内置函数。相反，Python 操作 <span class="keyword">x</span> % <span class="keyword">y</span> 会返回具有 <span class="keyword">y</span> 正负号的结果，且不会精确计算浮点数自变量。譬如：函数 <span class="built_in">fmod</span>(-<span class="number">1</span><span class="keyword">e</span>-<span class="number">100</span>, <span class="number">1</span>e100) 的结果是 -<span class="number">1</span><span class="keyword">e</span>-<span class="number">100</span>，而 Python 操作 -<span class="number">1</span><span class="keyword">e</span>-<span class="number">100</span> % <span class="number">1</span>e100 的结果是 <span class="number">1</span>e100-<span class="number">1</span><span class="keyword">e</span>-<span class="number">100</span> (不能精确表示浮点数结果，还会舍入成出人意料的 <span class="number">1</span>e100)。由于这种原因，当处理浮点数时，通常首选 <span class="built_in">fmod</span>() 函数；当处理整数时，首选 Python 操作 <span class="keyword">x</span> % <span class="keyword">y</span>。
+Return <span class="built_in">fmod</span>(<span class="keyword">x</span>, <span class="keyword">y</span>), <span class="keyword">as</span> defined by the platform C library. 
+注意：Python 表达式 <span class="keyword">x</span> % <span class="keyword">y</span> 可能不会返回相同结果。
+C 标准意图，譬如：函数 <span class="built_in">fmod</span>(<span class="keyword">x</span>, <span class="keyword">y</span>) 数学上会精确 (到无穷精度) 等于表达式 <span class="keyword">x</span> - <span class="keyword">n</span>*<span class="keyword">y</span> (其中 <span class="keyword">n</span> 是整数)；
+该函数结果具有如 <span class="keyword">x</span> 的相同正负号且幅度小于 <span class="built_in">abs</span>(<span class="keyword">y</span>) 内置函数。
+相反，Python 操作 <span class="keyword">x</span> % <span class="keyword">y</span> 会返回具有 <span class="keyword">y</span> 正负号的结果，且不会精确计算浮点数自变量。
+譬如：函数 <span class="built_in">fmod</span>(-<span class="number">1</span><span class="keyword">e</span>-<span class="number">100</span>, <span class="number">1</span>e100) 的结果是 -<span class="number">1</span><span class="keyword">e</span>-<span class="number">100</span>，
+而 Python 操作 -<span class="number">1</span><span class="keyword">e</span>-<span class="number">100</span> % <span class="number">1</span>e100 的结果是 <span class="number">1</span>e100-<span class="number">1</span><span class="keyword">e</span>-<span class="number">100</span> (不能精确表示浮点数结果，
+还会舍入成出人意料的 <span class="number">1</span>e100)。
+
+由于这种原因，当处理浮点数时，通常首选 <span class="built_in">fmod</span>() 函数；当处理整数时，首选 Python 操作 <span class="keyword">x</span> % <span class="keyword">y</span>。
 </code></pre><p>理解这个真的是跟数学思维有关的问题了，所以也就只有写到如此，学习理解这种思维就好。</p>
 
         
