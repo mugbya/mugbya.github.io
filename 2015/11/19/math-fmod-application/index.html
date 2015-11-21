@@ -149,7 +149,7 @@ body{ -webkit-animation: bugfix infinite 1s; }
 </code></pre><h2 id="解决">解决</h2><p>咋一看，有点向下取数的感觉，但是不能用 floor(保留的是整数)。 而round 是跟整数部分奇偶性有关的四舍五入，用起来很麻烦。</p>
 <p>这样看来是没有系统api可以调用了，就想到自己写逻辑实现。</p>
 <p>自己确实写了一个最容易想到的，毕竟太年轻。但是群里面有人用了数学思维解决了这个需求。</p>
-<p>代码大概如下： </p>
+<h3 id="方式一">方式一</h3><p>代码大概如下： </p>
 <pre><code> def <span class="function"><span class="title">cal_num</span><span class="params">(num)</span></span>:
 return num - math.<span class="function"><span class="title">fmod</span><span class="params">(num, <span class="number">0.5</span>)</span></span>
 
@@ -169,6 +169,7 @@ C 标准意图，譬如：函数 <span class="built_in">fmod</span>(<span class=
 还会舍入成出人意料的 <span class="number">1</span>e100)。
 
 由于这种原因，当处理浮点数时，通常首选 <span class="built_in">fmod</span>() 函数；当处理整数时，首选 Python 操作 <span class="keyword">x</span> % <span class="keyword">y</span>。
+</code></pre><h3 id="方式二">方式二</h3><pre><code><span class="keyword">int</span>(num*<span class="number">2</span>)/<span class="number">2.0</span>
 </code></pre><p>理解这个真的是跟数学思维有关的问题了，所以也就只有写到如此，学习理解这种思维就好。</p>
 
         
@@ -238,7 +239,7 @@ var duoshuoQuery = {short_name:"mugbya"};
         
             <div class="toc">
                 <h2> 文章目录 </h2> 
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#缘起"><span class="toc-number">1.</span> <span class="toc-text">缘起</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#需求"><span class="toc-number">2.</span> <span class="toc-text">需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决"><span class="toc-number">3.</span> <span class="toc-text">解决</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#缘起"><span class="toc-number">1.</span> <span class="toc-text">缘起</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#需求"><span class="toc-number">2.</span> <span class="toc-text">需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决"><span class="toc-number">3.</span> <span class="toc-text">解决</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方式一"><span class="toc-number">3.1.</span> <span class="toc-text">方式一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方式二"><span class="toc-number">3.2.</span> <span class="toc-text">方式二</span></a></li></ol></li></ol>
             </div>
         
 
