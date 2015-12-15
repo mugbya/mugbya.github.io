@@ -165,7 +165,12 @@ body{ -webkit-animation: bugfix infinite 1s; }
 
 <span class="constant">return</span> {<span class="string">'value'</span>: vals,
         <span class="string">'domain'</span>:{<span class="string">'holiday_status_id'</span>: [(<span class="string">'id'</span>,<span class="string">'in'</span>, status_id_list)]}}
-</code></pre>
+</code></pre><blockquote>
+<p>在给出的链接中提到 on_change 可以返回三种类型，其中value 是最常用的，自然不必说。 domain 在本文已有介绍。 而最后一种返回 warning 。链接中的写法是有问题的。正确的写法如下：</p>
+</blockquote>
+<pre><code><span class="keyword">return</span> {<span class="string">'warning'</span>:{<span class="string">'title'</span>: <span class="string">'警告'</span>, <span class="string">'message'</span>: <span class="string">u'请不要手动对该值做修改!'</span>}}
+</code></pre><p>即是说，warning 本身也是一个字典</p>
+
         
       </div>
       <footer>
