@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>math_fmod 解决实际应用问题 | mugbya的折腾集</title>
+  <title>odoo 下单对象对应多视图 | mugbya的折腾集</title>
   <meta name="author" content="mugbya">
   
   <meta name="description" content="mugbua&#39;s blog">
@@ -13,7 +13,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="math_fmod 解决实际应用问题"/>
+  <meta property="og:title" content="odoo 下单对象对应多视图"/>
   <meta property="og:site_name" content="mugbya的折腾集"/>
 
   
@@ -103,11 +103,11 @@ body{ -webkit-animation: bugfix infinite 1s; }
   	<div class="inner">
       <div class="padding">
     		
-          <h1>math_fmod 解决实际应用问题</h1>
+          <h1>odoo 下单对象对应多视图</h1>
           <ul>
             <li>
               <span class="heading-span">Posted on: </span>
-              <time datetime="2015-11-19T03:47:24.000Z">2015-11-19</time>
+              <time datetime="2016-01-20T07:58:10.000Z">2016-01-20</time>
             </li>
             
               <li>
@@ -123,7 +123,7 @@ body{ -webkit-animation: bugfix infinite 1s; }
               <span class="heading-span">With: </span>
               
 
-                <a href="#ds-thread"><span class="ds-thread-count" data-thread-key="2015/11/19/math-fmod-application/" data-count-type="comments"></span></a>
+                <a href="#ds-thread"><span class="ds-thread-count" data-thread-key="2016/01/20/simple-object-mutil-view-for-odoo/" data-count-type="comments"></span></a>
               
             </li>
           </ul>
@@ -140,38 +140,69 @@ body{ -webkit-animation: bugfix infinite 1s; }
       
       <div class="entry">
         
-          <h2 id="缘起">缘起</h2><p>记录这篇并不是突然心血来潮，而是确实在实际中遇到了，并且用数学的方式快捷简单的搞定问题。</p>
-<h2 id="需求">需求</h2><p>在实际项目中某字段是float型，需求保留一位小数，但要求如下:</p>
-<pre><code><span class="number">2.01</span>   ----&gt;  <span class="number">2.0</span>
-<span class="number">2.499</span>  ----&gt;  <span class="number">2.0</span>
-<span class="number">2.501</span>  ----&gt;  <span class="number">2.5</span>
-<span class="number">2.990</span>  ----&gt;  <span class="number">2.5</span>
-</code></pre><h2 id="解决">解决</h2><p>咋一看，有点向下取数的感觉，但是不能用 floor(保留的是整数)。 而round 是跟整数部分奇偶性有关的四舍五入，用起来很麻烦。</p>
-<p>这样看来是没有系统api可以调用了，就想到自己写逻辑实现。</p>
-<p>自己确实写了一个最容易想到的，毕竟太年轻。但是群里面有人用了数学思维解决了这个需求。</p>
-<h3 id="方式一">方式一</h3><p>代码大概如下： </p>
-<pre><code> def <span class="function"><span class="title">cal_num</span><span class="params">(num)</span></span>:
-return num - math.<span class="function"><span class="title">fmod</span><span class="params">(num, <span class="number">0.5</span>)</span></span>
+          <p>odoo 单对象如果要展示 tree 跟 form 视图的，只需在 action 中 指定 tree 跟 form 就ok</p>
+<p>但某些需求 需要 单对象 对应不同的视图显示时，那odoo 下能怎么实现呢</p>
+<h3 id="需求">需求</h3><blockquote>
+<p>单对象除了表示业务外，还要在其上体现工作流。 但是在展示时有要求，处于待审批，跟已审批 不需要odoo 自带的 一些按钮（如： 新建， 删除， 保存，编辑 ，放弃）。<br>但是 这些内置按钮却不能通过 流程流装状态来动态控制是否展示（是不能吧，如果能，请大神指点我）。 这里就有一种实现方法是用单对象对应多个 视图。</p>
+</blockquote>
+<h3 id="实现">实现</h3><p>对单对象写不同form 、 tree 视图， 其中一些给新建，编辑权限，一些去掉这些权限。</p>
+<p>指定多个视图后，那么action 在找视图时就需要显示指定那个action 对应哪个 form 视图跟tree视图。</p>
+<p>如：</p>
+<p><strong>默认版</strong></p>
+<pre><code><span class="tag">&lt;<span class="title">record</span> <span class="attribute">model</span>=<span class="value">"ir.ui.view"</span> <span class="attribute">id</span>=<span class="value">"view_holiday_allocation_tree"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">field</span> <span class="attribute">name</span>=<span class="value">"name"</span>&gt;</span>hr.holidays.allocation.tree<span class="tag">&lt;/<span class="title">field</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">field</span> <span class="attribute">name</span>=<span class="value">"model"</span>&gt;</span>hr.holidays<span class="tag">&lt;/<span class="title">field</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">field</span> <span class="attribute">name</span>=<span class="value">"arch"</span> <span class="attribute">type</span>=<span class="value">"xml"</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">tree</span> <span class="attribute">colors</span>=<span class="value">"red:state == 'refuse';blue:state == 'draft';black:state in ('confirm','validate','validate1')"</span> &gt;</span>
+            <span class="tag">&lt;<span class="title">field</span> <span class="attribute">name</span>=<span class="value">"employee_id"</span>/&gt;</span>
+        <span class="tag">&lt;/<span class="title">tree</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">field</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">record</span>&gt;</span>
+</code></pre><p><strong>阉割版</strong></p>
+<pre><code><span class="tag">&lt;<span class="title">record</span> <span class="attribute">model</span>=<span class="value">"ir.ui.view"</span> <span class="attribute">id</span>=<span class="value">"disable_view_holiday_allocation_tree"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">field</span> <span class="attribute">name</span>=<span class="value">"name"</span>&gt;</span>hr.holidays.allocation.tree<span class="tag">&lt;/<span class="title">field</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">field</span> <span class="attribute">name</span>=<span class="value">"model"</span>&gt;</span>hr.holidays<span class="tag">&lt;/<span class="title">field</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">field</span> <span class="attribute">name</span>=<span class="value">"arch"</span> <span class="attribute">type</span>=<span class="value">"xml"</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">tree</span> <span class="attribute">create</span>=<span class="value">'false'</span> <span class="attribute">delete</span>=<span class="value">'false'</span> <span class="attribute">edit</span>=<span class="value">'false'</span> <span class="attribute">colors</span>=<span class="value">"red:state == 'refuse';blue:state == 'draft';black:state in ('confirm','validate','validate1')"</span> &gt;</span>
+            <span class="tag">&lt;<span class="title">field</span> <span class="attribute">name</span>=<span class="value">"employee_id"</span>/&gt;</span>
+        <span class="tag">&lt;/<span class="title">tree</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">field</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">record</span>&gt;</span>
+</code></pre><p>form 同理。 </p>
+<p>在action 中关联自己需要的view  。 <strong>注意 view_id 跟 context</strong></p>
+<pre><code><span class="tag">&lt;<span class="title">record</span> <span class="attribute">model</span>=<span class="value">"ir.actions.act_window"</span> <span class="attribute">id</span>=<span class="value">"hr_holidays_management.request_approve_holidays"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">field</span> <span class="attribute">name</span>=<span class="value">"name"</span>&gt;</span>待审批休假单<span class="tag">&lt;/<span class="title">field</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">field</span> <span class="attribute">name</span>=<span class="value">"res_model"</span>&gt;</span>hr.holidays<span class="tag">&lt;/<span class="title">field</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">field</span> <span class="attribute">name</span>=<span class="value">"view_type"</span>&gt;</span>form<span class="tag">&lt;/<span class="title">field</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">field</span> <span class="attribute">name</span>=<span class="value">"view_mode"</span>&gt;</span>tree,calendar,form<span class="tag">&lt;/<span class="title">field</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">field</span> <span class="attribute">name</span>=<span class="value">"view_id"</span> <span class="attribute">ref</span>=<span class="value">"hr_holidays_management.disable_view_holiday_allocation_tree"</span>/&gt;</span>
+    <span class="tag">&lt;<span class="title">field</span> <span class="attribute">name</span>=<span class="value">"context"</span>&gt;</span>{'form_view_ref': 'hr_holidays_management.disable_edit_holiday_new'}<span class="tag">&lt;/<span class="title">field</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">field</span> <span class="attribute">name</span>=<span class="value">"domain"</span>&gt;</span>[('approver_ids','=',uid)]<span class="tag">&lt;/<span class="title">field</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">record</span>&gt;</span>
+</code></pre><p>这样我们实现了 单对象对应不同的视图。</p>
+<h3 id="其他">其他</h3><p>当一个对象有多个视图时，还可以通过 优先级还控制指定哪个。</p>
+<p>还有通过   ir.actions.act_window.view 实现 。</p>
+<pre><code>&lt;record model=<span class="string">"ir.actions.act_window"</span> id=<span class="string">"action_my_hr_employee_seq"</span>&gt;
+    &lt;field name=<span class="string">"name"</span>&gt;<span class="type">Angajati</span>&lt;/field&gt;
+    &lt;field name=<span class="string">"res_model"</span>&gt;hr.employee&lt;/field&gt;
+    &lt;field name=<span class="string">"view_type"</span>&gt;form&lt;/field&gt;
+    &lt;field name=<span class="string">"view_mode"</span>&gt;tree,form&lt;/field&gt;
+&lt;/record&gt;
 
-<span class="function"><span class="title">cal_num</span><span class="params">(<span class="number">2.01</span>)</span></span>    ---&gt; <span class="number">2.0</span>
-<span class="function"><span class="title">cal_num</span><span class="params">(<span class="number">2.499</span>)</span></span>   ---&gt; <span class="number">2.0</span>
-<span class="function"><span class="title">cal_num</span><span class="params">(<span class="number">2.501</span>)</span></span>   ---&gt; <span class="number">2.5</span>
-<span class="function"><span class="title">cal_num</span><span class="params">(<span class="number">2.990</span>)</span></span>   ---&gt; <span class="number">2.5</span>
-</code></pre><p>math.fmod 的描述如下：</p>
-<pre><code>math.<span class="built_in">fmod</span>(<span class="keyword">x</span>, <span class="keyword">y</span>)
-Return <span class="built_in">fmod</span>(<span class="keyword">x</span>, <span class="keyword">y</span>), <span class="keyword">as</span> defined by the platform C library. 
-注意：Python 表达式 <span class="keyword">x</span> % <span class="keyword">y</span> 可能不会返回相同结果。
-C 标准意图，譬如：函数 <span class="built_in">fmod</span>(<span class="keyword">x</span>, <span class="keyword">y</span>) 数学上会精确 (到无穷精度) 等于表达式 <span class="keyword">x</span> - <span class="keyword">n</span>*<span class="keyword">y</span> (其中 <span class="keyword">n</span> 是整数)；
-该函数结果具有如 <span class="keyword">x</span> 的相同正负号且幅度小于 <span class="built_in">abs</span>(<span class="keyword">y</span>) 内置函数。
-相反，Python 操作 <span class="keyword">x</span> % <span class="keyword">y</span> 会返回具有 <span class="keyword">y</span> 正负号的结果，且不会精确计算浮点数自变量。
-譬如：函数 <span class="built_in">fmod</span>(-<span class="number">1</span><span class="keyword">e</span>-<span class="number">100</span>, <span class="number">1</span>e100) 的结果是 -<span class="number">1</span><span class="keyword">e</span>-<span class="number">100</span>，
-而 Python 操作 -<span class="number">1</span><span class="keyword">e</span>-<span class="number">100</span> % <span class="number">1</span>e100 的结果是 <span class="number">1</span>e100-<span class="number">1</span><span class="keyword">e</span>-<span class="number">100</span> (不能精确表示浮点数结果，
-还会舍入成出人意料的 <span class="number">1</span>e100)。
+&lt;record model=<span class="string">"ir.actions.act_window.view"</span> id=<span class="string">"act_hr_employee_tree_view"</span>&gt;
+    &lt;field eval=<span class="string">"1"</span> name=<span class="string">"sequence"</span>/&gt;
+    &lt;field name=<span class="string">"view_mode"</span>&gt;tree&lt;/field&gt;
+    &lt;field name=<span class="string">"view_id"</span> <span class="keyword">ref</span>=<span class="string">"your_tree_view_id"</span>/&gt;
+    &lt;field name=<span class="string">"act_window_id"</span> <span class="keyword">ref</span>=<span class="string">"action_my_hr_employee_seq"</span>/&gt;
+&lt;/record&gt;
 
-由于这种原因，当处理浮点数时，通常首选 <span class="built_in">fmod</span>() 函数；当处理整数时，首选 Python 操作 <span class="keyword">x</span> % <span class="keyword">y</span>。
-</code></pre><h3 id="方式二">方式二</h3><pre><code><span class="keyword">int</span>(num*<span class="number">2</span>)/<span class="number">2.0</span>
-</code></pre><p>理解这个真的是跟数学思维有关的问题了，所以也就只有写到如此，学习理解这种思维就好。</p>
-
+&lt;record model=<span class="string">"ir.actions.act_window.view"</span> id=<span class="string">"act_hr_employee_form_view"</span>&gt;
+    &lt;field eval=<span class="string">"2"</span> name=<span class="string">"sequence"</span>/&gt;
+    &lt;field name=<span class="string">"view_mode"</span>&gt;form&lt;/field&gt;
+    &lt;field name=<span class="string">"view_id"</span> <span class="keyword">ref</span>=<span class="string">"your_form_view_id"</span>/&gt;
+    &lt;field name=<span class="string">"act_window_id"</span> <span class="keyword">ref</span>=<span class="string">"action_my_hr_employee_seq"</span>/&gt;
+&lt;/record&gt;
+</code></pre>
         
       </div>
       <footer>
@@ -180,7 +211,7 @@ C 标准意图，譬如：函数 <span class="built_in">fmod</span>(<span class=
           
   
   <div class="tags">
-    <a href="/tags/python/">python</a>
+    <a href="/tags/odoo/">odoo</a>
   </div>
 
           <div class="share">
@@ -189,18 +220,10 @@ C 标准意图，譬如：函数 <span class="built_in">fmod</span>(<span class=
           
 <nav class="article-nav clearfix">
  
- <div class="article-prev" >
- <a href="/2015/12/08/field-domain-openerp/" title="openerp下关联字段如何用domain做过滤">
-  <i class="fa fa-long-arrow-left"></i>
-  <span>
-  openerp下关联字段如何用domain做过滤</span>
-</a>
-</div>
-
 
 <div class="article-next">
-<a href="/2015/10/07/mac-install-nautilus/"  title="mac下安装nautilus">
- <span>mac下安装nautilus
+<a href="/2015/12/08/field-domain-openerp/"  title="openerp下关联字段如何用domain做过滤">
+ <span>openerp下关联字段如何用domain做过滤
 </span>
 <i class="fa fa-long-arrow-right"></i>
 </a>
@@ -221,7 +244,7 @@ C 标准意图，譬如：函数 <span class="built_in">fmod</span>(<span class=
   
 
      <!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="2015/11/19/math-fmod-application/" data-title="math_fmod 解决实际应用问题" data-url="http://blog.mugbya.com2015/11/19/math-fmod-application/"></div>
+	<div class="ds-thread" data-thread-key="2016/01/20/simple-object-mutil-view-for-odoo/" data-title="odoo 下单对象对应多视图" data-url="http://blog.mugbya.com2016/01/20/simple-object-mutil-view-for-odoo/"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
@@ -247,7 +270,7 @@ var duoshuoQuery = {short_name:"mugbya"};
         
             <div class="toc">
                 <h2> 文章目录 </h2> 
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#缘起"><span class="toc-number">1.</span> <span class="toc-text">缘起</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#需求"><span class="toc-number">2.</span> <span class="toc-text">需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决"><span class="toc-number">3.</span> <span class="toc-text">解决</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方式一"><span class="toc-number">3.1.</span> <span class="toc-text">方式一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方式二"><span class="toc-number">3.2.</span> <span class="toc-text">方式二</span></a></li></ol></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#需求"><span class="toc-number">1.</span> <span class="toc-text">需求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-number">2.</span> <span class="toc-text">实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他"><span class="toc-number">3.</span> <span class="toc-text">其他</span></a></li></ol>
             </div>
         
 
