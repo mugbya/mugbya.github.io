@@ -140,14 +140,47 @@ body{ -webkit-animation: bugfix infinite 1s; }
       
       <div class="entry">
         
-          <p>odoo 权限是odoo 很重要的功能，这里不写它怎么实现了，只记录下在界面上一些组件的权限控制。 其中会涉及到。 菜单，按钮（action）, 字段。</p>
+          <p>权限是odoo 很重要的功能，这里不写它如何实现，只记录下在界面上一些组件的权限控制。 其中会涉及到： 菜单、按钮（action）、 字段。</p>
 <h2 id="前提">前提</h2><p>在进行权限控制前，需要先设置好权限组</p>
 <h3 id="菜单">菜单</h3><p>对菜单的权限控制是通过 groups 实现</p>
 <pre><code>&lt;menuitem <span class="property">name</span>=<span class="string">"Human Resources"</span> <span class="property">id</span>=<span class="string">"menu_hr_root"</span>  groups=<span class="string">"base.group_hr_manager,base.group_hr_user,base.group_user"</span> sequence=<span class="string">"90"</span>/&gt;
 </code></pre><h3 id="按钮">按钮</h3><h4 id="内置按钮">内置按钮</h4><p>内置按钮如： 新建，编辑，删除， 保存，放弃 这些odoo 自带的权限控制</p>
-<h4 id="自实现按钮">自实现按钮</h4><p>按钮在 odoo 中是一个action（这里的action 指的是 ir.actions.act_window ） ,在定义action 时我们就能够进行权限控制。</p>
+<p>这些按钮通过 写 ir.model.access.xml 来根据组控制是否展示</p>
+<pre><code>&lt;record model=<span class="string">"ir.model.access"</span> id=<span class="string">"access_hr_holidays_allot_hr_user"</span>&gt;
+  &lt;field name=<span class="string">"name"</span>&gt;**name&lt;/field&gt;
+  &lt;field name=<span class="string">"model_id"</span> <span class="keyword">ref</span>=<span class="string">"model_your_model"</span>/&gt;
+  &lt;field name=<span class="string">"group_id"</span> <span class="keyword">ref</span>=<span class="string">"base.group_hr_user"</span>/&gt;
+  &lt;field eval=<span class="string">"True"</span> name=<span class="string">"perm_read"</span>/&gt;
+  &lt;field eval=<span class="string">"True"</span> name=<span class="string">"perm_write"</span>/&gt;
+  &lt;field eval=<span class="string">"True"</span> name=<span class="string">"perm_create"</span>/&gt;
+  &lt;field eval=<span class="string">"True"</span> name=<span class="string">"perm_unlink"</span>/&gt;
+&lt;/record&gt;
+</code></pre><h4 id="自实现按钮">自实现按钮</h4><p>按钮在 odoo 中是一个action（这里的action 指的是 ir.actions.act_window ） ,在定义action 时我们就能够进行权限控制。</p>
 <p>action 有两种写法 。指定 权限控制的字段也不一样。</p>
-<p>具体详细例子可以参见 <a href="http://repository.pub/qs/07c3037c-44ea-451f-b4ad-9b7b5ec156e3/" target="_blank" rel="external">在form 表单中新增action</a></p>
+<p>简单的来说： </p>
+<pre><code>&lt;act_window
+<span class="property">id</span>=<span class="string">""</span>
+<span class="property">name</span>=<span class="string">""</span>
+res_model=<span class="string">""</span>
+src_model=<span class="string">""</span>
+view_mode=<span class="string">"form"</span>
+key2=<span class="string">"client_action_multi"</span>
+groups=<span class="string">"base.group_hr_user"</span>
+context=<span class="string">""</span>/&gt;
+</code></pre><p>or</p>
+<pre><code><span class="tag">&lt;<span class="title">record</span> <span class="attribute">id</span>=<span class="value">""</span> <span class="attribute">model</span>=<span class="value">"ir.actions.act_window"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">field</span> <span class="attribute">name</span>=<span class="value">"name"</span>&gt;</span>**name<span class="tag">&lt;/<span class="title">field</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">field</span> <span class="attribute">name</span>=<span class="value">"type"</span>&gt;</span>ir.actions.act_window<span class="tag">&lt;/<span class="title">field</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">field</span> <span class="attribute">name</span>=<span class="value">"res_model"</span>&gt;</span><span class="tag">&lt;/<span class="title">field</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">field</span> <span class="attribute">name</span>=<span class="value">"src_model"</span>&gt;</span><span class="tag">&lt;/<span class="title">field</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">field</span> <span class="attribute">name</span>=<span class="value">"view_type"</span>&gt;</span>form<span class="tag">&lt;/<span class="title">field</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">field</span> <span class="attribute">name</span>=<span class="value">"view_mode"</span>&gt;</span>tree,form<span class="tag">&lt;/<span class="title">field</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">field</span> <span class="attribute">name</span>=<span class="value">"groups_id"</span>&gt;</span><span class="tag">&lt;/<span class="title">field</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">field</span> <span class="attribute">name</span>=<span class="value">"context"</span>&gt;</span><span class="tag">&lt;/<span class="title">field</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">field</span> <span class="attribute">name</span>=<span class="value">"domain"</span>&gt;</span><span class="tag">&lt;/<span class="title">field</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">field</span> <span class="attribute">name</span>=<span class="value">"view_id"</span> <span class="attribute">ref</span>=<span class="value">"edit_holiday_new"</span>/&gt;</span>
+<span class="tag">&lt;/<span class="title">record</span>&gt;</span>
+</code></pre><p>具体详细例子可以参见 <a href="http://repository.pub/qs/07c3037c-44ea-451f-b4ad-9b7b5ec156e3/" target="_blank" rel="external">在form 表单中新增action</a></p>
 <h3 id="字段">字段</h3><p>对字段进行权限控制 还是会有这种需求的。 当遇到这种我们不能直接在字段上做。</p>
 <p>我们需要通过 改变我们实现方式，但还是借助 ： groups_id 控制。</p>
 <p>不恩给你直接控制，我们需要在权限控制下重写它，当满足权限条件，则重写覆盖。例如：</p>
