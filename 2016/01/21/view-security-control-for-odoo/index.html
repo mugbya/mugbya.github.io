@@ -181,9 +181,15 @@ context=<span class="string">""</span>/&gt;
     <span class="tag">&lt;<span class="title">field</span> <span class="attribute">name</span>=<span class="value">"view_id"</span> <span class="attribute">ref</span>=<span class="value">"edit_holiday_new"</span>/&gt;</span>
 <span class="tag">&lt;/<span class="title">record</span>&gt;</span>
 </code></pre><p>具体详细例子可以参见 <a href="http://repository.pub/qs/07c3037c-44ea-451f-b4ad-9b7b5ec156e3/" target="_blank" rel="external">在form 表单中新增action</a></p>
-<h3 id="字段">字段</h3><p>对字段进行权限控制 还是会有这种需求的。 当遇到这种我们不能直接在字段上做。</p>
-<p>我们需要通过 改变我们实现方式，但还是借助 ： groups_id 控制。</p>
-<p>不恩给你直接控制，我们需要在权限控制下重写它，当满足权限条件，则重写覆盖。例如：</p>
+<h3 id="字段">字段</h3><p>对字段的控制，这里说两种实用场景。</p>
+<ol>
+<li>字段对不同权限组是否可见。</li>
+<li>字段对不同权限组有不同的操作权限</li>
+</ol>
+<p>对于第一种，我们需要用groups </p>
+<field name="company_id" string="公司" groups="base.group_multi_company" on_change="onchange_company(company_id)">
+
+<p>对于第二种，要在不同的权限下有不同的操作。需要在权限控制下重写它，当满足权限条件，则重写覆盖。例如：</p>
 <p><strong><em>一般用户看到的字段</em></strong></p>
 <pre><code>&lt;field name=<span class="string">"employee_id"</span> attrs=<span class="string">"{'</span><span class="transposed_variable">readonly'</span>:<span class="matrix">[(<span class="string">'is_hr'</span>, <span class="string">'='</span>, False)]</span>}<span class="string">" on_change="</span>onchange_employee_id(employee_id, context)<span class="string">"/&gt;</span>
 </code></pre><p><strong><em>hr看到的字段</em></strong>         </p>
@@ -198,7 +204,7 @@ context=<span class="string">""</span>/&gt;
         <span class="tag">&lt;/<span class="title">xpath</span>&gt;</span>
     <span class="tag">&lt;/<span class="title">field</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">record</span>&gt;</span>
-</code></pre>
+</code></pre></field>
         
       </div>
       <footer>
