@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://blog.mugbya.me/freeswitch-1-6-deploy-01/</loc>
+    
+    <lastmod>2020-10-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.mugbya.me/rabbitmq-auto-ack/</loc>
+    
+    <lastmod>2020-10-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.mugbya.me/es-term-freq/</loc>
+    
+    <lastmod>2020-10-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.mugbya.me/es-version-history/</loc>
+    
+    <lastmod>2020-10-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.mugbya.me/es-discovery/</loc>
+    
+    <lastmod>2020-10-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.mugbya.me/es-doc-values-fielddata/</loc>
+    
+    <lastmod>2020-10-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.mugbya.me/Hexo-maupassant/</loc>
+    
+    <lastmod>2020-10-28</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.mugbya.me/es-close-freeze/</loc>
+    
+    <lastmod>2020-10-28</lastmod>
+    
+  </url>
+  
+
+  <url>
+    <loc>http://blog.mugbya.me/</loc>
+    <lastmod>2020-10-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  
+  <url>
+    <loc>http://blog.mugbya.me/tags/%E6%8A%80%E6%9C%AF/</loc>
+    <lastmod>2020-10-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.mugbya.me/tags/maupassant/</loc>
+    <lastmod>2020-10-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+
+  
+  <url>
+    <loc>http://blog.mugbya.me/categories/hexo/</loc>
+    <lastmod>2020-10-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.mugbya.me/categories/freeswitch/</loc>
+    <lastmod>2020-10-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.mugbya.me/categories/elasticsearch/</loc>
+    <lastmod>2020-10-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.mugbya.me/categories/rabbitmq/</loc>
+    <lastmod>2020-10-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+</urlset>
