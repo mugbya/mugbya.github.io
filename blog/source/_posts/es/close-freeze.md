@@ -59,3 +59,5 @@ freeze index后，集群几乎没有开销，除了在内存中维护元数据�
 总结: 偶尔要被检索的cold数据就用freeze就行，不需要在去close。 iml close policy 可以配置成 freeze, 可以iml真的是好用啊
 
 
+
+
