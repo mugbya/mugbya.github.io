@@ -169,7 +169,7 @@ table th {
 table td {
   text-align: left;
   margin: 0;
-  padding: 6px 13px;
+  padding: 3px 5px;
 }
 table tr th:first-child,
 table tr td:first-child {
@@ -1255,9 +1255,8 @@ figure.highlight pre {
   white-space: pre;
 }
 figure.highlight .gutter {
+  width: 1%;
   color: #999;
-  padding-right: 3px;
-  padding-left: 0px;
   border-right: 1px solid #ddd;
   text-align: right;
 }
