@@ -1,0 +1,466 @@
+<!DOCTYPE HTML>
+
+    <html lang="zh-Hans">
+  
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo主题maupassant优化却失败 | mugbya探索</title>
+  <meta name="author" content="mugbya">
+  
+  <meta name="description" content="本站点的折腾文章都在自己一定的能力跟环境下而得。所以对你并不完全适用,请看官小心参照">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Hexo主题maupassant优化却失败"/>
+  <meta property="og:site_name" content="mugbya探索"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <meta http-equiv="Content-Language" content="zh-Hans"/>
+  
+
+  <link href="/img/favicon.ico" rel="icon">
+  
+    <link rel="apple-touch-icon" href="/img/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="/img/favicon.ico">
+    
+
+  <link rel="alternate" href="/atom.xml" title="mugbya探索" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+  <!-- Chinese readability improment -->
+  <style type="text/css">
+    article {font-weight: 400;letter-spacing: .01rem;}
+    article .entry{line-height:2;}
+  </style>
+  
+
+  <style type="text/css">
+  /* Tim Pietrusky advanced checkbox hack (Android <= 4.1.2) */
+body{ -webkit-animation: bugfix infinite 1s; }
+@-webkit-keyframes bugfix { from {padding:0;} to {padding:0;} }
+</style>
+
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-168207447-1', 'auto');
+  ga('send', 'pageview');
+ 
+</script>
+
+
+
+
+  
+    <!-- 360 Font and Baidu CDN in China -->
+    
+    
+  <link href='http://apps.bdimg.com/libs/fontawesome/4.1.0/css/font-awesome.css' rel='stylesheet' type='text/css'>
+  <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+  
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <div class="body_container">
+      <header id="header" class="inner">
+
+<div class="padding">
+    <div class="alignleft logo">
+      <h1><a href="/">mugbya探索</a></h1>
+      <p class="description"> 本站点的折腾文章都在自己一定的能力跟环境下而得。所以对你并不完全适用,请看官小心参照</p>
+    </div>
+    <nav id="main-nav" class="alignright">
+        <input type="checkbox" id="toggle" />
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu" onclick><i class="fa fa-bars"></i></label>
+      <ul class="menu">
+        
+          <!-- <li><a href="[object Object]">0</a></li> -->
+          <!-- +a_with_current(theme.menu[i].directory, __(theme.menu[i].page), theme.menu[i].icon)-->
+          <li><a href="/"><i class="fa fa-home"> home </i></a></li>
+        
+          <!-- <li><a href="[object Object]">1</a></li> -->
+          <!-- +a_with_current(theme.menu[i].directory, __(theme.menu[i].page), theme.menu[i].icon)-->
+          <li><a href="/archives"><i class="fa fa-archive"> archive </i></a></li>
+        
+
+      </ul>
+    </nav>
+    <div class="clearfix"></div>
+</div>
+
+</header>
+
+      <!-- <div id="page-heading-wrap">
+  	<div class="inner">
+      <div class="padding">
+    		
+          <h1>Hexo主题maupassant优化却失败</h1>
+          <ul>
+            <li>
+              <span class="heading-span">Posted on: </span>
+              <time datetime="2020-05-26T06:44:06.000Z">2020-05-26</time>
+            </li>
+            
+              <li>
+                <span class="heading-span">By: </span>
+
+                
+                  <a href="/">mugbya</a>
+                
+
+              </li>
+            
+            <li>
+              <span class="heading-span">With: </span>
+              
+            </li>
+          </ul>
+        
+      </div>
+  	</div>
+  </div> -->
+
+      <div id="content" class="inner">
+        <div id="main-col" class="pure-u-md-3-4 alignleft"><div id="wrapper" class="padding"><article class="post">
+  
+  
+    <div class="post-content">
+  
+        <header>
+          <div class="icon"></div>
+
+            <time datetime="2020-05-26T06:44:06.000Z"><a href="/Hexo-maupassant/">2020-05-26</a></time>
+             &nbsp; &nbsp;
+              
+    
+      <h1 class="title transition"> Hexo主题maupassant优化却失败</h1>
+
+
+    
+  
+
+
+        </header>
+
+      <div class="entry">
+        
+
+          <h2 id="1-自白"><a href="#1-自白" class="headerlink" title="1. 自白"></a>1. 自白</h2><p>重开博客, 发现以前的博客样子不怎么好看，就在<code>hexo</code>的 theme 库里选了很久，结果都没有选到自己喜欢的主题</p>
+<p>但在浏览博客时却发现一个喜欢的主题，找了很久终于知道叫 <a href="https://github.com/pagecho/maupassant/" target="_blank" rel="noopener">maupassant</a>, 不过找到的是 jekyll 的，不过最下面有 hexo 下的主题</p>
+<p>使用时才知道它的目录是放在 文章的右侧，而不是在挂件(widget)的区域, 然后就尝试修改,想改成widget下的一个子挂件</p>
+<p>然后我就开始了自我尝试</p>
+<h2 id="2-修改"><a href="#2-修改" class="headerlink" title="2. 修改"></a>2. 修改</h2><p>然后说下修改部分, <code>maupassant</code> 本身是支持 toc 的，故此修改的部分不算多</p>
+<ol>
+<li><p>首先是在 _widget 下增加 <code>tag.pug</code>, 内容如下</p>
+ <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">.widget</span></span><br><span class="line"><span class="string">.widget-title</span></span><br><span class="line">  <span class="string">i(class='fa</span> <span class="string">fa-folder-o')=</span> <span class="string">' '</span> <span class="string">+</span> <span class="string">__('contents')</span></span><br><span class="line"><span class="string">!=</span> <span class="string">toc(page.content,</span> <span class="string">&#123;list_number:</span> <span class="string">theme.toc_number&#125;)</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>提示</strong></p>
+<p>有关 pug语法问题 <a href="https://pugjs.org/api/getting-started.html" target="_blank" rel="noopener">请点击这里</a>，里面详细解释了<code>!=</code> 这是什么东西，以及其他一些用法</p>
+</blockquote>
+</li>
+<li><p>修改 <code>maupassant/_config.yml</code></p>
+ <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改 toc_number</span></span><br><span class="line"><span class="attr">toc_number:</span> <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="attr">widgets:</span> </span><br><span class="line"><span class="bullet">-</span> <span class="string">toc</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">search</span></span><br><span class="line"><span class="string">...</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<ol start="3">
+<li><p>修改样式</p>
+ <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.toc-article</span> &#123;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#bbb</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">7px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">1.1em</span> <span class="number">0</span> <span class="number">0</span> <span class="number">2em</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0.7em</span> <span class="number">0.7em</span> <span class="number">0</span> <span class="number">0.7em</span>;</span><br><span class="line">    <span class="attribute">max-width</span>: <span class="number">40%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.toc-title</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">120%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="selector-class">.toc</span> &#123;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0.5em</span>;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">1.8em</span>;</span><br><span class="line">    li &#123;</span><br><span class="line">        <span class="selector-tag">list-style-type</span>: <span class="selector-tag">none</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.toc-child</span> &#123;</span><br><span class="line">    <span class="attribute">margin-left</span>: <span class="number">1em</span>;</span><br><span class="line">    <span class="attribute">padding-left</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<hr>
+<p>然后它就长这样</p>
+<p><img src="/images/hexo-toc-01.png" alt=""></p>
+<h2 id="3-问题"><a href="#3-问题" class="headerlink" title="3. 问题"></a>3. 问题</h2><p>但是最后发现一个严重问题 ———— 不在文章详情页面时，也会有这个目录，包括首页，归档，这个就不对了！！！</p>
+<p>但是我探究了很久我都搞不定这个问题，探究的结果是  <strong>widget里面的变量全都变成了全局变量，即使页面发生变化但里面的变量的值还是初次的赋值</strong></p>
+<p>目前只能探究到这，写下此篇文章，等有机会再来搞定它。</p>
+<p>最终我只能全部撤回，使用默认的目录</p>
+
+        
+      </div>
+
+
+
+            
+             <footer>
+             <div class="agreement">
+                  本作品系原创，<a target="_blank" class="text-secondary" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">采用《署名-非商业性使用-禁止演绎 4.0国际》许可协议</a>
+                </div>
+                  
+  
+  <div class="categories">
+    <a href="/categories/hexo/">hexo</a>
+  </div>
+
+                  
+  
+  <div class="tags">
+    <a href="/tags/技术/">技术</a>, <a href="/tags/maupassant/">maupassant</a>
+  </div>
+
+
+                  <div class="share">
+  
+</div>
+                  
+<nav class="article-nav clearfix">
+ 
+ <div class="article-prev" >
+ <a href="/es-doc-values-fielddata/" title="ES之doc_values与fielddata">
+  <i class="fa fa-long-arrow-left"></i>
+  <span>
+  ES之doc_values与fielddata</span>
+</a>
+</div>
+
+
+<div class="article-next">
+<a href="/es-version-history/"  title="ES版本变化史">
+ <span>ES版本变化史
+</span>
+<i class="fa fa-long-arrow-right"></i>
+</a>
+</div>
+
+</nav>
+
+              </footer>
+            
+
+            <div class="clearfix"></div>
+
+
+
+    </div>
+</article>
+
+
+    <section id="comment">
+      <!--
+      <h2 class="title">留言</h2>
+      -->
+
+      
+
+      
+        <div id="container">
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css?v=0.0.0">
+            <div id="gitalk-container"></div>
+            <script src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=0.0.0"></script>
+            <script src="https://unpkg.com/gitalk/dist/gitalk.min.js?v=0.0.0"></script>
+            <script type="text/javascript">
+                var gitalk = new Gitalk({
+                    clientID: 'dba722f78823fd4ce557',
+                    clientSecret: '5c86ba6e2ef5e93793d134c8abe3658f15552938',
+                    id: window.location.pathname,
+                    repo: 'git@github.com:mugbya/mugbya.github.io.git',
+                    owner: 'mugbya',
+                    admin: 'mugbya'
+                })
+                gitalk.render('gitalk-container')
+            </script>
+        </div>
+      
+
+    </section>
+
+
+
+</div></div>
+        <aside id="sidebar" class="pure-u-1-4 alignright"><div class="padding">
+	
+	  
+        
+            <div class="toc">
+                <h2> 文章目录 </h2> 
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-自白"><span class="toc-text">1. 自白</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-修改"><span class="toc-text">2. 修改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-问题"><span class="toc-text">3. 问题</span></a></li></ol>
+            </div>
+        
+
+
+
+
+	
+	  
+<div class="widget recent-post">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/es-term-freq/">ES之词频统计</a>
+      </li>
+    
+      <li>
+        <a href="/rabbitmq-auto-ack/">探究rabbitmq接收自动应答</a>
+      </li>
+    
+      <li>
+        <a href="/es-discovery/">ES之集群自动发现</a>
+      </li>
+    
+      <li>
+        <a href="/freeswitch-1-6-deploy-01/">freeswitch-1.6部署-01</a>
+      </li>
+    
+      <li>
+        <a href="/es-close-freeze/">ES之简介close与freeze</a>
+      </li>
+    
+  </ul>
+</div>
+
+	
+	  
+<div class="widget category">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/elasticsearch/">elasticsearch</a><small>5</small></li>
+  
+    <li><a href="/categories/freeswitch/">freeswitch</a><small>1</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/categories/rabbitmq/">rabbitmq</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+	
+	  
+<div class="widget category">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/maupassant/">maupassant</a><small>1</small></li>
+  
+    <li><a href="/tags/技术/">技术</a><small>8</small></li>
+  
+  </ul>
+</div>
+
+
+	
+</div></aside>
+        <!-- <div class="clearfix"></div> -->
+      </div>
+      <footer id="footer" class="inner"><div class="padding ">
+
+	<div class="alignleft">
+
+
+
+	  
+	  &copy; 2020 mugbya
+	  
+	  Powerd by <a href="http://hexo.io/" target="_blank">hexo</a>
+	  and Theme by <a href="https://github.com/mugbya/moon-metro" target="_blank">moon-metro</a>
+
+		
+		
+			<a href="https://github.com/mugbya" target="_blank" title="mugbya Github"><i class="fa fa-github-square"></i></a>
+		
+		
+		
+		
+		
+		
+			<a href="/atom.xml" target="_blank" title="mugbya RSS"><i class="fa fa-rss-square"></i></a>
+		
+	</div>
+
+	<div class="alignright ">
+
+	</div>
+
+	<div class="clearfix"></div>
+</div>
+
+<div class="scroll-top"><i class="fa fa-arrow-circle-up"></i></div>
+</footer>
+      
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<script type="text/javascript">
+$(window).scroll(function() {
+
+    if($(this).scrollTop() > 400) {
+        $('.scroll-top').fadeIn(200);
+    } else {
+        $('.scroll-top').fadeOut(200);
+    }
+});
+
+$('.scroll-top').bind('click', function(e) {
+    e.preventDefault();
+    $('body,html').animate({scrollTop:0},200);
+});
+</script>
+
+
+      <!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,493 @@
+<!DOCTYPE HTML>
+
+    <html lang="zh-Hans">
+  
+<head>
+  <meta charset="utf-8">
+  
+  <title>探究rabbitmq接收自动应答 | mugbya探索</title>
+  <meta name="author" content="mugbya">
+  
+  <meta name="description" content="本站点的折腾文章都在自己一定的能力跟环境下而得。所以对你并不完全适用,请看官小心参照">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="探究rabbitmq接收自动应答"/>
+  <meta property="og:site_name" content="mugbya探索"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <meta http-equiv="Content-Language" content="zh-Hans"/>
+  
+
+  <link href="/img/favicon.ico" rel="icon">
+  
+    <link rel="apple-touch-icon" href="/img/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="/img/favicon.ico">
+    
+
+  <link rel="alternate" href="/atom.xml" title="mugbya探索" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+  <!-- Chinese readability improment -->
+  <style type="text/css">
+    article {font-weight: 400;letter-spacing: .01rem;}
+    article .entry{line-height:2;}
+  </style>
+  
+
+  <style type="text/css">
+  /* Tim Pietrusky advanced checkbox hack (Android <= 4.1.2) */
+body{ -webkit-animation: bugfix infinite 1s; }
+@-webkit-keyframes bugfix { from {padding:0;} to {padding:0;} }
+</style>
+
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-168207447-1', 'auto');
+  ga('send', 'pageview');
+ 
+</script>
+
+
+
+
+  
+    <!-- 360 Font and Baidu CDN in China -->
+    
+    
+  <link href='http://apps.bdimg.com/libs/fontawesome/4.1.0/css/font-awesome.css' rel='stylesheet' type='text/css'>
+  <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+  
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <div class="body_container">
+      <header id="header" class="inner">
+
+<div class="padding">
+    <div class="alignleft logo">
+      <h1><a href="/">mugbya探索</a></h1>
+      <p class="description"> 本站点的折腾文章都在自己一定的能力跟环境下而得。所以对你并不完全适用,请看官小心参照</p>
+    </div>
+    <nav id="main-nav" class="alignright">
+        <input type="checkbox" id="toggle" />
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu" onclick><i class="fa fa-bars"></i></label>
+      <ul class="menu">
+        
+          <!-- <li><a href="[object Object]">0</a></li> -->
+          <!-- +a_with_current(theme.menu[i].directory, __(theme.menu[i].page), theme.menu[i].icon)-->
+          <li><a href="/"><i class="fa fa-home"> home </i></a></li>
+        
+          <!-- <li><a href="[object Object]">1</a></li> -->
+          <!-- +a_with_current(theme.menu[i].directory, __(theme.menu[i].page), theme.menu[i].icon)-->
+          <li><a href="/archives"><i class="fa fa-archive"> archive </i></a></li>
+        
+
+      </ul>
+    </nav>
+    <div class="clearfix"></div>
+</div>
+
+</header>
+
+      <!-- <div id="page-heading-wrap">
+  	<div class="inner">
+      <div class="padding">
+    		
+          <h1>探究rabbitmq接收自动应答</h1>
+          <ul>
+            <li>
+              <span class="heading-span">Posted on: </span>
+              <time datetime="2020-09-27T06:33:02.000Z">2020-09-27</time>
+            </li>
+            
+              <li>
+                <span class="heading-span">By: </span>
+
+                
+                  <a href="/">mugbya</a>
+                
+
+              </li>
+            
+            <li>
+              <span class="heading-span">With: </span>
+              
+            </li>
+          </ul>
+        
+      </div>
+  	</div>
+  </div> -->
+
+      <div id="content" class="inner">
+        <div id="main-col" class="pure-u-md-3-4 alignleft"><div id="wrapper" class="padding"><article class="post">
+  
+  
+    <div class="post-content">
+  
+        <header>
+          <div class="icon"></div>
+
+            <time datetime="2020-09-27T06:33:02.000Z"><a href="/rabbitmq-auto-ack/">2020-09-27</a></time>
+             &nbsp; &nbsp;
+              
+    
+      <h1 class="title transition"> 探究rabbitmq接收自动应答</h1>
+
+
+    
+  
+
+
+        </header>
+
+      <div class="entry">
+        
+
+          <h2 id="1-缘起"><a href="#1-缘起" class="headerlink" title="1.缘起"></a>1.缘起</h2><p>最近一直在补rabbitmq知识，必须往深入拓展嘛</p>
+<p>然后我在浏览别人的博客时，发现了关于自动应答的两种描述</p>
+<ul>
+<li><a href="https://segmentfault.com/a/1190000015369917" target="_blank" rel="noopener">自动应答：如果报错了，消息不会丢失，会无限循环消费，很容易就吧磁盘空间耗完</a></li>
+<li><a href="https://blog.csdn.net/zhetmdoubeizhanyong/article/details/103223777" target="_blank" rel="noopener">MQ broker只需要确认消息发送成功，无需等待应答就会丢弃消息</a></li>
+</ul>
+<p>第一个说自动应答，消费异常会无限循环；第二个说只要消息发送成功，无需等待应答就会丢弃消息。那么肯定就不会有无限循环</p>
+<p>又是两种不同的结论，我疑惑了，也来了兴趣，写了demo，也有了这篇博文</p>
+<h2 id="2-实践"><a href="#2-实践" class="headerlink" title="2.实践"></a>2.实践</h2><h3 id="2-1-错误尝试"><a href="#2-1-错误尝试" class="headerlink" title="2.1 错误尝试"></a>2.1 错误尝试</h3><p>实践其实很简答，配置设置自动模式</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">rabbitmq:</span></span><br><span class="line">    <span class="attr">host:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">5672</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">guest</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">guest</span></span><br><span class="line">    <span class="attr">virtual-host:</span> <span class="string">test</span></span><br><span class="line">    <span class="attr">ttl:</span> <span class="number">5000</span></span><br><span class="line">    <span class="attr">publisher-confirm-type:</span> <span class="string">correlated</span></span><br><span class="line">    <span class="attr">publisher-returns:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">listener:</span></span><br><span class="line">      <span class="attr">simple:</span></span><br><span class="line">        <span class="attr">acknowledge-mode:</span> <span class="string">auto</span></span><br></pre></td></tr></table></figure>
+
+<p>然后消费逻辑如此而已</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReceiveHandler</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RabbitListener</span>(queues = &#123;RabbitMQConfig.ORDER_QUEUE&#125;)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">receiveOrderMessage</span><span class="params">(String msg, Message message, Channel channel)</span> <span class="keyword">throws</span> IOException, InterruptedException </span>&#123;</span><br><span class="line">        log.info(<span class="string">"接受订单的消息: &#123;&#125;"</span>, msg);</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">1</span> / <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果发现消费端确实无限循环消费，如第一贴博主所说。而且这个情况完全跟这边文章中的消息无限投递一样 <a href="https://juejin.im/post/6844904205438681095" target="_blank" rel="noopener">用了 springboot + rabbitmq 消息确认机制，我感觉掉坑里了</a></p>
+<p>消息被无限循环投递，消费端无限循环消费</p>
+<blockquote>
+<p>可以在消费日志看到 Delivery Tag 一直在增加</p>
+</blockquote>
+<p>其中rabbitmq UI看到如下</p>
+<p><img src="/images/rabbitmq/auto_ack-unack.png" alt=""></p>
+<p>当停止消费程序, 消息重新回到ready状态, 该图略</p>
+<p>这个情况让我有点诧异。自动ack居然跟手工ack 下 nack 重回队列完全一致</p>
+<blockquote>
+<p><strong>更多尝试</strong><br>通过开启重试机制，设置<code>最大重试次数</code>可以避免消息无限重复投递，此种情况则符合<code>fire-and-forget</code>, 即使没有catch住异常。</p>
+<ul>
+<li>达到最大重试次数，即使消费还失败，此时队列会删除该消息</li>
+<li>rabbitmq只发送一次，重试是在消费端内部进行，重试时Delivery Tag不变</li>
+</ul>
+</blockquote>
+<hr>
+<p>然后稍微修改了下代码，catch住异常</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReceiveHandler</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RabbitListener</span>(queues = &#123;RabbitMQConfig.ORDER_QUEUE&#125;)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">receiveOrderMessage</span><span class="params">(String msg, Message message, Channel channel)</span> <span class="keyword">throws</span> IOException, InterruptedException </span>&#123;</span><br><span class="line">        log.info(<span class="string">"接受订单的消息: &#123;&#125;"</span>, msg);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">int</span> a = <span class="number">1</span> / <span class="number">0</span>;</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            log.info(message.getMessageProperties().getDeliveryTag() + <span class="string">""</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果就发现没有无限循环投递跟消费情况</p>
+<p>demo地址: <a href="https://github.com/mugbya/Java-Collection/tree/master/springboot-rabbitmq" target="_blank" rel="noopener">点击查看</a></p>
+<blockquote>
+<p>注意：demo很可能进行其他试验调整，还请相应更改</p>
+</blockquote>
+<h3 id="2-2-拨乱反正"><a href="#2-2-拨乱反正" class="headerlink" title="2.2 拨乱反正"></a>2.2 拨乱反正</h3><p>上面做了demo，还导致我做出了一个(<strong>错误</strong>)的总结。但是我心里确纳闷，为啥java没有严格按照规范实现。心里有刺，去了技术群询问，也去了别的博文留言，结果别人心细一下就找到问题。先感谢下博主的回答<a href="https://segmentfault.com/a/1190000022763182?_ea=67081401" target="_blank" rel="noopener">RabbitMQ - 消息确认</a></p>
+<p><code>spring.rabbitmq.listener.simple.acknowledge-mode</code> 也有是三个值</p>
+<ul>
+<li>none: 这才是自动确认</li>
+<li>auto: 根据情况确认(根据是正常返回还是引发异常来发出确认/否定)</li>
+<li>manual: 手工确认</li>
+</ul>
+<p>源码 <code>org.springframework.amqp.core.AcknowledgeMode</code> 定义如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * No acks - &#123;@code autoAck&#x3D;true&#125; in &#123;@code Channel.basicConsume()&#125;.</span><br><span class="line"> *&#x2F;</span><br><span class="line">NONE,</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * Manual acks - user must ack&#x2F;nack via a channel aware listener.</span><br><span class="line"> *&#x2F;</span><br><span class="line">MANUAL,</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * Auto - the container will issue the ack&#x2F;nack based on whether</span><br><span class="line"> * the listener returns normally, or throws an exception.</span><br><span class="line"> * &lt;p&gt;&lt;em&gt;Do not confuse with RabbitMQ &#123;@code autoAck&#125; which is</span><br><span class="line"> * represented by &#123;@link #NONE&#125; here&lt;&#x2F;em&gt;.</span><br><span class="line"> *&#x2F;</span><br><span class="line">AUTO;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>所以一定要注意 none 才是自动确认啊！！！ </p>
+</blockquote>
+<p>当acknowledge-mode设置为none时，这回真的做到了<code>fire-and-forget</code></p>
+<h2 id="3-总结"><a href="#3-总结" class="headerlink" title="3.总结"></a>3.总结</h2><h3 id="3-1-错误总结"><a href="#3-1-错误总结" class="headerlink" title="3.1 错误总结"></a>3.1 错误总结</h3><p>至此，我有如下看法：springboot-rabbitmq 的自动ack，<del>并没有如 <code>fire-and-forget</code> 实现，而是消费逻辑处理完成就会自动返回ack, catch住异常保证了程序正常运行，如果没有，则一旦异常，消费端就不会返回 ack。而是返回的类似nack requeue=true 这种</del>.</p>
+<p><del>所以并不存在发送就丢弃的情况，不知道是否在实现自动ack进行的改良</del></p>
+<br>
+
+<h3 id="3-2-再次总结"><a href="#3-2-再次总结" class="headerlink" title="3.2 再次总结"></a>3.2 再次总结</h3><p>自动应答模式下(none)：发送后即丢弃。即使消息消费异常<br>动态模式下(auto): 消费正常，则自动应答。 如果异常且没有处理，则返回nack, requeue=true</p>
+<h2 id="4-结尾"><a href="#4-结尾" class="headerlink" title="4.结尾"></a>4.结尾</h2><p>在写博客一直避免 以其昏昏，使人昭昭。 因为我曾经被错误的博客误导，所以想自己的博客不会误导别人。</p>
+<p>这次明显发现冲突的地方，但是却没有真正点击进去查看到底有哪些参数, 这个错误犯的真是低级！</p>
+<p>记录下完整的经过，时时回来看该篇文章，以便提醒自己做事细心谨慎，慢慢改变自己不谨慎的毛病</p>
+
+        
+      </div>
+
+
+
+            
+             <footer>
+             <div class="agreement">
+                  本作品系原创，<a target="_blank" class="text-secondary" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">采用《署名-非商业性使用-禁止演绎 4.0国际》许可协议</a>
+                </div>
+                  
+  
+  <div class="categories">
+    <a href="/categories/rabbitmq/">rabbitmq</a>
+  </div>
+
+                  
+  
+  <div class="tags">
+    <a href="/tags/技术/">技术</a>
+  </div>
+
+
+                  <div class="share">
+  
+</div>
+                  
+<nav class="article-nav clearfix">
+ 
+ <div class="article-prev" >
+ <a href="/es-term-freq/" title="ES之词频统计">
+  <i class="fa fa-long-arrow-left"></i>
+  <span>
+  ES之词频统计</span>
+</a>
+</div>
+
+
+<div class="article-next">
+<a href="/es-discovery/"  title="ES之集群自动发现">
+ <span>ES之集群自动发现
+</span>
+<i class="fa fa-long-arrow-right"></i>
+</a>
+</div>
+
+</nav>
+
+              </footer>
+            
+
+            <div class="clearfix"></div>
+
+
+
+    </div>
+</article>
+
+
+    <section id="comment">
+      <!--
+      <h2 class="title">留言</h2>
+      -->
+
+      
+
+      
+        <div id="container">
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css?v=0.0.0">
+            <div id="gitalk-container"></div>
+            <script src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=0.0.0"></script>
+            <script src="https://unpkg.com/gitalk/dist/gitalk.min.js?v=0.0.0"></script>
+            <script type="text/javascript">
+                var gitalk = new Gitalk({
+                    clientID: 'dba722f78823fd4ce557',
+                    clientSecret: '5c86ba6e2ef5e93793d134c8abe3658f15552938',
+                    id: window.location.pathname,
+                    repo: 'git@github.com:mugbya/mugbya.github.io.git',
+                    owner: 'mugbya',
+                    admin: 'mugbya'
+                })
+                gitalk.render('gitalk-container')
+            </script>
+        </div>
+      
+
+    </section>
+
+
+
+</div></div>
+        <aside id="sidebar" class="pure-u-1-4 alignright"><div class="padding">
+	
+	  
+        
+            <div class="toc">
+                <h2> 文章目录 </h2> 
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-缘起"><span class="toc-text">1.缘起</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-实践"><span class="toc-text">2.实践</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-错误尝试"><span class="toc-text">2.1 错误尝试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-拨乱反正"><span class="toc-text">2.2 拨乱反正</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-总结"><span class="toc-text">3.总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-错误总结"><span class="toc-text">3.1 错误总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-再次总结"><span class="toc-text">3.2 再次总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-结尾"><span class="toc-text">4.结尾</span></a></li></ol>
+            </div>
+        
+
+
+
+
+	
+	  
+<div class="widget recent-post">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/es-term-freq/">ES之词频统计</a>
+      </li>
+    
+      <li>
+        <a href="/rabbitmq-auto-ack/">探究rabbitmq接收自动应答</a>
+      </li>
+    
+      <li>
+        <a href="/es-discovery/">ES之集群自动发现</a>
+      </li>
+    
+      <li>
+        <a href="/freeswitch-1-6-deploy-01/">freeswitch-1.6部署-01</a>
+      </li>
+    
+      <li>
+        <a href="/es-close-freeze/">ES之简介close与freeze</a>
+      </li>
+    
+  </ul>
+</div>
+
+	
+	  
+<div class="widget category">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/elasticsearch/">elasticsearch</a><small>5</small></li>
+  
+    <li><a href="/categories/freeswitch/">freeswitch</a><small>1</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/categories/rabbitmq/">rabbitmq</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+	
+	  
+<div class="widget category">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/maupassant/">maupassant</a><small>1</small></li>
+  
+    <li><a href="/tags/技术/">技术</a><small>8</small></li>
+  
+  </ul>
+</div>
+
+
+	
+</div></aside>
+        <!-- <div class="clearfix"></div> -->
+      </div>
+      <footer id="footer" class="inner"><div class="padding ">
+
+	<div class="alignleft">
+
+
+
+	  
+	  &copy; 2020 mugbya
+	  
+	  Powerd by <a href="http://hexo.io/" target="_blank">hexo</a>
+	  and Theme by <a href="https://github.com/mugbya/moon-metro" target="_blank">moon-metro</a>
+
+		
+		
+			<a href="https://github.com/mugbya" target="_blank" title="mugbya Github"><i class="fa fa-github-square"></i></a>
+		
+		
+		
+		
+		
+		
+			<a href="/atom.xml" target="_blank" title="mugbya RSS"><i class="fa fa-rss-square"></i></a>
+		
+	</div>
+
+	<div class="alignright ">
+
+	</div>
+
+	<div class="clearfix"></div>
+</div>
+
+<div class="scroll-top"><i class="fa fa-arrow-circle-up"></i></div>
+</footer>
+      
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<script type="text/javascript">
+$(window).scroll(function() {
+
+    if($(this).scrollTop() > 400) {
+        $('.scroll-top').fadeIn(200);
+    } else {
+        $('.scroll-top').fadeOut(200);
+    }
+});
+
+$('.scroll-top').bind('click', function(e) {
+    e.preventDefault();
+    $('body,html').animate({scrollTop:0},200);
+});
+</script>
+
+
+      <!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </div>
+</body>
+</html>

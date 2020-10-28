@@ -1,0 +1,452 @@
+<!DOCTYPE HTML>
+
+    <html lang="zh-Hans">
+  
+<head>
+  <meta charset="utf-8">
+  
+  <title>ES之词频统计 | mugbya探索</title>
+  <meta name="author" content="mugbya">
+  
+  <meta name="description" content="本站点的折腾文章都在自己一定的能力跟环境下而得。所以对你并不完全适用,请看官小心参照">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="ES之词频统计"/>
+  <meta property="og:site_name" content="mugbya探索"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <meta http-equiv="Content-Language" content="zh-Hans"/>
+  
+
+  <link href="/img/favicon.ico" rel="icon">
+  
+    <link rel="apple-touch-icon" href="/img/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="/img/favicon.ico">
+    
+
+  <link rel="alternate" href="/atom.xml" title="mugbya探索" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+  <!-- Chinese readability improment -->
+  <style type="text/css">
+    article {font-weight: 400;letter-spacing: .01rem;}
+    article .entry{line-height:2;}
+  </style>
+  
+
+  <style type="text/css">
+  /* Tim Pietrusky advanced checkbox hack (Android <= 4.1.2) */
+body{ -webkit-animation: bugfix infinite 1s; }
+@-webkit-keyframes bugfix { from {padding:0;} to {padding:0;} }
+</style>
+
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-168207447-1', 'auto');
+  ga('send', 'pageview');
+ 
+</script>
+
+
+
+
+  
+    <!-- 360 Font and Baidu CDN in China -->
+    
+    
+  <link href='http://apps.bdimg.com/libs/fontawesome/4.1.0/css/font-awesome.css' rel='stylesheet' type='text/css'>
+  <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+  
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <div class="body_container">
+      <header id="header" class="inner">
+
+<div class="padding">
+    <div class="alignleft logo">
+      <h1><a href="/">mugbya探索</a></h1>
+      <p class="description"> 本站点的折腾文章都在自己一定的能力跟环境下而得。所以对你并不完全适用,请看官小心参照</p>
+    </div>
+    <nav id="main-nav" class="alignright">
+        <input type="checkbox" id="toggle" />
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu" onclick><i class="fa fa-bars"></i></label>
+      <ul class="menu">
+        
+          <!-- <li><a href="[object Object]">0</a></li> -->
+          <!-- +a_with_current(theme.menu[i].directory, __(theme.menu[i].page), theme.menu[i].icon)-->
+          <li><a href="/"><i class="fa fa-home"> home </i></a></li>
+        
+          <!-- <li><a href="[object Object]">1</a></li> -->
+          <!-- +a_with_current(theme.menu[i].directory, __(theme.menu[i].page), theme.menu[i].icon)-->
+          <li><a href="/archives"><i class="fa fa-archive"> archive </i></a></li>
+        
+
+      </ul>
+    </nav>
+    <div class="clearfix"></div>
+</div>
+
+</header>
+
+      <!-- <div id="page-heading-wrap">
+  	<div class="inner">
+      <div class="padding">
+    		
+          <h1>ES之词频统计</h1>
+          <ul>
+            <li>
+              <span class="heading-span">Posted on: </span>
+              <time datetime="2020-10-28T09:25:38.000Z">2020-10-28</time>
+            </li>
+            
+              <li>
+                <span class="heading-span">By: </span>
+
+                
+                  <a href="/">mugbya</a>
+                
+
+              </li>
+            
+            <li>
+              <span class="heading-span">With: </span>
+              
+            </li>
+          </ul>
+        
+      </div>
+  	</div>
+  </div> -->
+
+      <div id="content" class="inner">
+        <div id="main-col" class="pure-u-md-3-4 alignleft"><div id="wrapper" class="padding"><article class="post">
+  
+  
+    <div class="post-content">
+  
+        <header>
+          <div class="icon"></div>
+
+            <time datetime="2020-10-28T09:25:38.000Z"><a href="/es-term-freq/">2020-10-28</a></time>
+             &nbsp; &nbsp;
+              
+    
+      <h1 class="title transition"> ES之词频统计</h1>
+
+
+    
+  
+
+
+        </header>
+
+      <div class="entry">
+        
+
+          <h2 id="1-缘起"><a href="#1-缘起" class="headerlink" title="1. 缘起"></a>1. 缘起</h2><p>今天在群里遇到一个需求：<strong>统计北京、天津、河北出现的总数（不是文档数目)</strong></p>
+<p><img src="/images/es/term-freq-01.png" alt=""></p>
+<p>期望得到 北京：3； 天津：5；河北：1</p>
+<h2 id="2-实践"><a href="#2-实践" class="headerlink" title="2. 实践"></a>2. 实践</h2><p>这个需求以前没有接触过，然后去搜索下了，发现这是一个词频统计的问题</p>
+<p>相关链接</p>
+<ul>
+<li><a href="https://elasticsearch.cn/question/6834" target="_blank" rel="noopener">es中怎么判断同一条信息中同一个词出现的次数</a></li>
+<li><a href="https://developer.aliyun.com/article/707393" target="_blank" rel="noopener">Elasticsearch词频统计实现与原理解读</a></li>
+</ul>
+<p>然后我也简单实现了下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">POST</span> <span class="string">_bulk</span></span><br><span class="line"><span class="string">&#123;"index":&#123;"_index":"test","_type":"_doc","_id":"1"&#125;&#125;</span></span><br><span class="line"><span class="string">&#123;"cities":["北京"]&#125;</span></span><br><span class="line"><span class="string">&#123;"index":&#123;"_index":"test","_type":"_doc","_id":"2"&#125;&#125;</span></span><br><span class="line"><span class="string">&#123;"cities":["北京",</span>  <span class="string">"天津"</span><span class="string">]&#125;</span></span><br><span class="line"><span class="string">&#123;"index":&#123;"_index":"test","_type":"_doc","_id":"3"&#125;&#125;</span></span><br><span class="line"><span class="string">&#123;"cities":["河北",</span>  <span class="string">"天津"</span><span class="string">]&#125;</span></span><br><span class="line"><span class="string">&#123;"index":&#123;"_index":"test","_type":"_doc","_id":"4"&#125;&#125;</span></span><br><span class="line"><span class="string">&#123;"cities":["天津"]&#125;</span></span><br><span class="line"><span class="string">&#123;"index":&#123;"_index":"test","_type":"_doc","_id":"5"&#125;&#125;</span></span><br><span class="line"><span class="string">&#123;"cities":["北京",</span> <span class="string">"北京"</span><span class="string">,</span>  <span class="string">"天津"</span><span class="string">]&#125;</span></span><br><span class="line"><span class="string">&#123;"index":&#123;"_index":"test","_type":"_doc","_id":"6"&#125;&#125;</span></span><br><span class="line"><span class="string">&#123;"cities":["天津"]&#125;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">GET</span> <span class="string">test/_search</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line">  <span class="attr">"size":</span> <span class="number">0</span><span class="string">,</span> </span><br><span class="line">  <span class="attr">"aggs":</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="attr">"term_sum":</span> <span class="string">&#123;</span></span><br><span class="line">      <span class="attr">"terms":</span> <span class="string">&#123;</span></span><br><span class="line">         <span class="attr">"order":</span> <span class="string">&#123;</span></span><br><span class="line">          <span class="attr">"_term":</span> <span class="string">"desc"</span></span><br><span class="line">        <span class="string">&#125;,</span></span><br><span class="line">        <span class="attr">"field":</span> <span class="string">"cities.keyword"</span><span class="string">,</span></span><br><span class="line">        <span class="attr">"size":</span> <span class="number">10</span></span><br><span class="line">      <span class="string">&#125;</span></span><br><span class="line">    <span class="string">&#125;</span></span><br><span class="line">  <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这里使用es自带的mappings, es会自动给text类型再增加一个keyword类型，因为 text 类型不能用于聚合，以前文章有相关内容</p>
+</blockquote>
+<p>聚合结果也是题主想要的</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"aggregations"</span> <span class="string">:</span> <span class="string">&#123;</span></span><br><span class="line">  <span class="string">"term_sum"</span> <span class="string">:</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="string">"doc_count_error_upper_bound"</span> <span class="string">:</span> <span class="number">0</span><span class="string">,</span></span><br><span class="line">    <span class="string">"sum_other_doc_count"</span> <span class="string">:</span> <span class="number">0</span><span class="string">,</span></span><br><span class="line">    <span class="string">"buckets"</span> <span class="string">:</span> <span class="string">[</span></span><br><span class="line">      <span class="string">&#123;</span></span><br><span class="line">        <span class="string">"key"</span> <span class="string">:</span> <span class="string">"河北"</span><span class="string">,</span></span><br><span class="line">        <span class="string">"doc_count"</span> <span class="string">:</span> <span class="number">1</span></span><br><span class="line">      <span class="string">&#125;,</span></span><br><span class="line">      <span class="string">&#123;</span></span><br><span class="line">        <span class="string">"key"</span> <span class="string">:</span> <span class="string">"天津"</span><span class="string">,</span></span><br><span class="line">        <span class="string">"doc_count"</span> <span class="string">:</span> <span class="number">5</span></span><br><span class="line">      <span class="string">&#125;,</span></span><br><span class="line">      <span class="string">&#123;</span></span><br><span class="line">        <span class="string">"key"</span> <span class="string">:</span> <span class="string">"北京"</span><span class="string">,</span></span><br><span class="line">        <span class="string">"doc_count"</span> <span class="string">:</span> <span class="number">3</span></span><br><span class="line">      <span class="string">&#125;</span></span><br><span class="line">    <span class="string">]</span></span><br><span class="line">  <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>我以为自此这个需求我就实现了，本质是<strong>数据进入es会被拆成token(词元), 然后就是对词元的一个频率统计</strong></p>
+<p>结果一会群主补了一篇文章 <a href="https://wx.zsxq.com/dweb2/index/topic_detail/582245525418184" target="_blank" rel="noopener">星球文章</a></p>
+<p>一看是一个我不曾用过的api, 看了下<a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.8/docs-multi-termvectors.html" target="_blank" rel="noopener">官方文档</a>，竟然1.3 开始就有了。 然后我对照着实现了下，</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">PUT</span> <span class="string">my_index_003</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line">  <span class="attr">"mappings":</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="attr">"properties":</span> <span class="string">&#123;</span></span><br><span class="line">      <span class="attr">"title":</span> <span class="string">&#123;</span></span><br><span class="line">        <span class="attr">"type":</span> <span class="string">"keyword"</span></span><br><span class="line">      <span class="string">&#125;,</span></span><br><span class="line">      <span class="attr">"tags":</span> <span class="string">&#123;</span></span><br><span class="line">        <span class="attr">"type":</span> <span class="string">"keyword"</span></span><br><span class="line">      <span class="string">&#125;</span></span><br><span class="line">    <span class="string">&#125;</span></span><br><span class="line">  <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="string">GET</span> <span class="string">my_index_003/_search</span></span><br><span class="line"></span><br><span class="line"><span class="string">POST</span> <span class="string">my_index_003/_bulk</span></span><br><span class="line"><span class="string">&#123;"index":&#123;"_id":1&#125;&#125;</span></span><br><span class="line"><span class="string">&#123;"tags":["北京","北京","天津"]&#125;</span></span><br><span class="line"><span class="string">&#123;"index":&#123;"_id":2&#125;&#125;</span></span><br><span class="line"><span class="string">&#123;"tags":"北京"&#125;</span></span><br><span class="line"><span class="string">&#123;"index":&#123;"_id":3&#125;&#125;</span></span><br><span class="line"><span class="string">&#123;"tags":["北京","天津"]&#125;</span></span><br><span class="line"><span class="string">&#123;"index":&#123;"_id":4&#125;&#125;</span></span><br><span class="line"><span class="string">&#123;"tags":["河北","天津"]&#125;</span></span><br><span class="line"><span class="string">&#123;"index":&#123;"_id":5&#125;&#125;</span></span><br><span class="line"><span class="string">&#123;"tags":"天津"&#125;</span></span><br><span class="line"><span class="string">&#123;"index":&#123;"_id":6&#125;&#125;</span></span><br><span class="line"><span class="string">&#123;"tags":"天津"&#125;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">POST</span> <span class="string">my_index_003/_search</span></span><br><span class="line"></span><br><span class="line"><span class="string">GET</span> <span class="string">my_index_003/_mtermvectors</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line">  <span class="attr">"ids":</span> <span class="string">[</span></span><br><span class="line">    <span class="number">1</span><span class="string">,</span></span><br><span class="line">    <span class="number">2</span><span class="string">,</span></span><br><span class="line">    <span class="number">3</span><span class="string">,</span></span><br><span class="line">    <span class="number">4</span><span class="string">,</span></span><br><span class="line">    <span class="number">5</span><span class="string">,</span></span><br><span class="line">    <span class="number">6</span></span><br><span class="line">  <span class="string">],</span></span><br><span class="line">  <span class="attr">"parameters":</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="attr">"fields":</span> <span class="string">[</span></span><br><span class="line">      <span class="string">"tags"</span></span><br><span class="line">    <span class="string">],</span></span><br><span class="line">    <span class="attr">"term_statistics":</span> <span class="literal">true</span><span class="string">,</span></span><br><span class="line">    <span class="attr">"offsets":</span> <span class="literal">false</span><span class="string">,</span></span><br><span class="line">    <span class="attr">"payloads":</span> <span class="literal">false</span><span class="string">,</span></span><br><span class="line">    <span class="attr">"positions":</span> <span class="literal">false</span></span><br><span class="line">  <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>结果一看结果明白它更具体的场景，它是用在 统计文档某个字段的词频情况，也给出了该词出现在多少文档中</p>
+<h2 id="3-总结"><a href="#3-总结" class="headerlink" title="3. 总结"></a>3. 总结</h2><ol>
+<li>如果需要统计词频在总文档出现的次数，用 terms 更方便直接</li>
+<li>如果需要查看某个文档下某字段有多少词元，及出现的频率；或者在给定文档范围情况下，统计词元 <strong>在该文档出现的次数</strong> 跟 <strong>出现在多少文档中</strong>，并不直接提供统计词元出现的总数</li>
+</ol>
+
+        
+      </div>
+
+
+
+            
+             <footer>
+             <div class="agreement">
+                  本作品系原创，<a target="_blank" class="text-secondary" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">采用《署名-非商业性使用-禁止演绎 4.0国际》许可协议</a>
+                </div>
+                  
+  
+  <div class="categories">
+    <a href="/categories/elasticsearch/">elasticsearch</a>
+  </div>
+
+                  
+  
+  <div class="tags">
+    <a href="/tags/技术/">技术</a>
+  </div>
+
+
+                  <div class="share">
+  
+</div>
+                  
+<nav class="article-nav clearfix">
+ 
+
+<div class="article-next">
+<a href="/rabbitmq-auto-ack/"  title="探究rabbitmq接收自动应答">
+ <span>探究rabbitmq接收自动应答
+</span>
+<i class="fa fa-long-arrow-right"></i>
+</a>
+</div>
+
+</nav>
+
+              </footer>
+            
+
+            <div class="clearfix"></div>
+
+
+
+    </div>
+</article>
+
+
+    <section id="comment">
+      <!--
+      <h2 class="title">留言</h2>
+      -->
+
+      
+
+      
+        <div id="container">
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css?v=0.0.0">
+            <div id="gitalk-container"></div>
+            <script src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=0.0.0"></script>
+            <script src="https://unpkg.com/gitalk/dist/gitalk.min.js?v=0.0.0"></script>
+            <script type="text/javascript">
+                var gitalk = new Gitalk({
+                    clientID: 'dba722f78823fd4ce557',
+                    clientSecret: '5c86ba6e2ef5e93793d134c8abe3658f15552938',
+                    id: window.location.pathname,
+                    repo: 'git@github.com:mugbya/mugbya.github.io.git',
+                    owner: 'mugbya',
+                    admin: 'mugbya'
+                })
+                gitalk.render('gitalk-container')
+            </script>
+        </div>
+      
+
+    </section>
+
+
+
+</div></div>
+        <aside id="sidebar" class="pure-u-1-4 alignright"><div class="padding">
+	
+	  
+        
+            <div class="toc">
+                <h2> 文章目录 </h2> 
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-缘起"><span class="toc-text">1. 缘起</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-实践"><span class="toc-text">2. 实践</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-总结"><span class="toc-text">3. 总结</span></a></li></ol>
+            </div>
+        
+
+
+
+
+	
+	  
+<div class="widget recent-post">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/es-term-freq/">ES之词频统计</a>
+      </li>
+    
+      <li>
+        <a href="/rabbitmq-auto-ack/">探究rabbitmq接收自动应答</a>
+      </li>
+    
+      <li>
+        <a href="/es-discovery/">ES之集群自动发现</a>
+      </li>
+    
+      <li>
+        <a href="/freeswitch-1-6-deploy-01/">freeswitch-1.6部署-01</a>
+      </li>
+    
+      <li>
+        <a href="/es-close-freeze/">ES之简介close与freeze</a>
+      </li>
+    
+  </ul>
+</div>
+
+	
+	  
+<div class="widget category">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/elasticsearch/">elasticsearch</a><small>5</small></li>
+  
+    <li><a href="/categories/freeswitch/">freeswitch</a><small>1</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/categories/rabbitmq/">rabbitmq</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+	
+	  
+<div class="widget category">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/maupassant/">maupassant</a><small>1</small></li>
+  
+    <li><a href="/tags/技术/">技术</a><small>8</small></li>
+  
+  </ul>
+</div>
+
+
+	
+</div></aside>
+        <!-- <div class="clearfix"></div> -->
+      </div>
+      <footer id="footer" class="inner"><div class="padding ">
+
+	<div class="alignleft">
+
+
+
+	  
+	  &copy; 2020 mugbya
+	  
+	  Powerd by <a href="http://hexo.io/" target="_blank">hexo</a>
+	  and Theme by <a href="https://github.com/mugbya/moon-metro" target="_blank">moon-metro</a>
+
+		
+		
+			<a href="https://github.com/mugbya" target="_blank" title="mugbya Github"><i class="fa fa-github-square"></i></a>
+		
+		
+		
+		
+		
+		
+			<a href="/atom.xml" target="_blank" title="mugbya RSS"><i class="fa fa-rss-square"></i></a>
+		
+	</div>
+
+	<div class="alignright ">
+
+	</div>
+
+	<div class="clearfix"></div>
+</div>
+
+<div class="scroll-top"><i class="fa fa-arrow-circle-up"></i></div>
+</footer>
+      
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<script type="text/javascript">
+$(window).scroll(function() {
+
+    if($(this).scrollTop() > 400) {
+        $('.scroll-top').fadeIn(200);
+    } else {
+        $('.scroll-top').fadeOut(200);
+    }
+});
+
+$('.scroll-top').bind('click', function(e) {
+    e.preventDefault();
+    $('body,html').animate({scrollTop:0},200);
+});
+</script>
+
+
+      <!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </div>
+</body>
+</html>
