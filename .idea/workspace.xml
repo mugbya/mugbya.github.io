@@ -1,0 +1,691 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f6fb085d-f391-4cdd-996e-de4b410abaad" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/blog/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/blog/_config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/source/_posts/ES-close-freeze.md" beforeDir="false" afterPath="$PROJECT_DIR$/blog/source/_posts/es/close-freeze.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/source/_posts/ES-discovery.md" beforeDir="false" afterPath="$PROJECT_DIR$/blog/source/_posts/es/discovery.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/source/_posts/ES-doc_values-fielddata.md" beforeDir="false" afterPath="$PROJECT_DIR$/blog/source/_posts/es/doc_values-fielddata.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/source/_posts/ES-version-history.md" beforeDir="false" afterPath="$PROJECT_DIR$/blog/source/_posts/es/version-history.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/themes/maupassant" beforeDir="false" afterPath="$PROJECT_DIR$/blog/themes/maupassant" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/themes/maupassant/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/blog/themes/maupassant/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/themes/maupassant/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/blog/themes/maupassant/_config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/themes/maupassant/source/css/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/blog/themes/maupassant/source/css/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/themes/moon-metro" beforeDir="false" afterPath="$PROJECT_DIR$/blog/themes/moon-metro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/themes/moon-metro/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/blog/themes/moon-metro/_config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/themes/moon-metro/layout/_partial/archive.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/blog/themes/moon-metro/layout/_partial/archive.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/themes/moon-metro/layout/_partial/article.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/blog/themes/moon-metro/layout/_partial/article.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/themes/moon-metro/layout/_partial/comment.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/blog/themes/moon-metro/layout/_partial/comment.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/themes/moon-metro/layout/_partial/post/title.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/blog/themes/moon-metro/layout/_partial/post/title.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/themes/moon-metro/layout/_widget/tag.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/blog/themes/moon-metro/layout/_widget/tag.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/themes/moon-metro/layout/post.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/blog/themes/moon-metro/layout/post.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/themes/moon-metro/source/css/_base/layout.styl" beforeDir="false" afterPath="$PROJECT_DIR$/blog/themes/moon-metro/source/css/_base/layout.styl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/themes/moon-metro/source/css/_base/variable.styl" beforeDir="false" afterPath="$PROJECT_DIR$/blog/themes/moon-metro/source/css/_base/variable.styl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/themes/moon-metro/source/css/_partial/article.styl" beforeDir="false" afterPath="$PROJECT_DIR$/blog/themes/moon-metro/source/css/_partial/article.styl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/themes/moon-metro/source/css/_partial/footer.styl" beforeDir="false" afterPath="$PROJECT_DIR$/blog/themes/moon-metro/source/css/_partial/footer.styl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/themes/moon-metro/source/css/_partial/header.styl" beforeDir="false" afterPath="$PROJECT_DIR$/blog/themes/moon-metro/source/css/_partial/header.styl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/themes/moon-metro/source/css/_partial/sidebar.styl" beforeDir="false" afterPath="$PROJECT_DIR$/blog/themes/moon-metro/source/css/_partial/sidebar.styl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/themes/moon-metro/source/css/_partial/syntax.styl" beforeDir="false" afterPath="$PROJECT_DIR$/blog/themes/moon-metro/source/css/_partial/syntax.styl" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/source/css/_partial/article.styl">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="6188">
+              <caret line="364" column="24" selection-start-line="364" selection-start-column="24" selection-end-line="364" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/blog/source/_posts/rabbitmq/auto-ack.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="FIRST">
+              <first_editor relative-caret-position="122">
+                <caret line="165" selection-start-line="165" selection-end-line="165" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/blog/source/_posts/es/doc_values-fielddata.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="FIRST">
+              <first_editor>
+                <caret selection-end-line="9" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/blog/source/_posts/es/term-freq.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="FIRST">
+              <first_editor relative-caret-position="347">
+                <caret line="158" column="1" selection-start-line="158" selection-start-column="1" selection-end-line="158" selection-end-column="1" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/blog/_config.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="469">
+              <caret line="106" column="16" selection-start-line="106" selection-start-column="16" selection-end-line="106" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/blog/source/_posts/Hexo-maupassant.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="FIRST">
+              <first_editor relative-caret-position="-1113">
+                <caret line="3" selection-start-line="3" selection-end-line="3" selection-end-column="9" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/layout/_partial/article.ejs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="578">
+              <caret line="34" column="25" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>google_analytics</find>
+      <find>comment</find>
+      <find>aff2512c92ba5a12f3de45807b1d85361ae1a127</find>
+      <find>disqus_shortname</find>
+      <find>gitalk</find>
+      <find>link</find>
+      <find>version</find>
+      <find>admin</find>
+      <find>unpkg.com/gitalk/dist/gitalk.css</find>
+      <find>gitalk.min.js</find>
+      <find>md5</find>
+      <find>b1afb0</find>
+      <find>post-content-index</find>
+      <find>color-link</find>
+      <find>inline-block</find>
+      <find>before</find>
+      <find>header</find>
+      <find>index</find>
+      <find>blockquote</find>
+      <find>font-header</find>
+      <find>font-serif</find>
+      <find>italic</find>
+      <find>git</find>
+      <find>padding-left</find>
+      <find>demo地址</find>
+      <find>name</find>
+      <find>permalink</find>
+      <find>tag</find>
+      <find>new_post_name</find>
+      <find>Delivery</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>38ad5a</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$/blog/themes/maupassant/layout/_partial</dir>
+      <dir>$PROJECT_DIR$</dir>
+      <dir>$PROJECT_DIR$/blog/themes/maupassant/source/js</dir>
+      <dir>$PROJECT_DIR$/blog/themes/maupassant</dir>
+      <dir>$PROJECT_DIR$/blog/themes/moon-metro</dir>
+      <dir>$PROJECT_DIR$/blog/themes/moon-metro/layout</dir>
+      <dir>$PROJECT_DIR$/blog/themes/moon-metro/source/css</dir>
+      <dir>$PROJECT_DIR$/blog/themes/moon-metro/source</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/blog/themes/maupassant/layout/_widget/toc.pug" />
+        <option value="$PROJECT_DIR$/blog/source/_posts/elasticsearch入门.md" />
+        <option value="$PROJECT_DIR$/blog/themes/maupassant/layout/post.pug" />
+        <option value="$PROJECT_DIR$/blog/themes/maupassant/layout/index.pug" />
+        <option value="$PROJECT_DIR$/blog/source/_posts/Hexo主题maupassant加载gitment评论.md" />
+        <option value="$PROJECT_DIR$/blog/scaffolds/post.md" />
+        <option value="$PROJECT_DIR$/blog/source/_posts/ES使用聚合功能须知一.md" />
+        <option value="$PROJECT_DIR$/blog/themes/maupassant/_config.yml" />
+        <option value="$PROJECT_DIR$/blog/source/robots.txt" />
+        <option value="$PROJECT_DIR$/blog/themes/maupassant/source/css/dark.css" />
+        <option value="$PROJECT_DIR$/blog/themes/maupassant/source/js/codeblock-resizer.js" />
+        <option value="$PROJECT_DIR$/blog/themes/maupassant/README.md" />
+        <option value="$PROJECT_DIR$/blog/public/js/codeblock-resizer.js" />
+        <option value="$PROJECT_DIR$/blog/public/2020/05/26/ES版本变化史/index.html" />
+        <option value="$PROJECT_DIR$/blog/node_modules/hexo-util/lib/highlight.js" />
+        <option value="$PROJECT_DIR$/blog/source/_posts/ES下简介close与freeze.md" />
+        <option value="$PROJECT_DIR$/blog/themes/maupassant/source/css/style.scss" />
+        <option value="$PROJECT_DIR$/blog/source/_posts/ES之简介close与freeze.md" />
+        <option value="$PROJECT_DIR$/blog/themes/moon-metro/layout/_partial/head.ejs" />
+        <option value="$PROJECT_DIR$/blog/themes/moon-metro/layout/_partial/header.ejs" />
+        <option value="$PROJECT_DIR$/blog/themes/moon-metro/layout/layout.ejs" />
+        <option value="$PROJECT_DIR$/blog/source/_posts/ES之集群自动发现.md" />
+        <option value="$PROJECT_DIR$/blog/themes/moon-metro/layout/_widget/toc.ejs" />
+        <option value="$PROJECT_DIR$/blog/themes/moon-metro/layout/_partial/footer.ejs" />
+        <option value="$PROJECT_DIR$/blog/source/_posts/freeswitch-1.6部署-01.md" />
+        <option value="$PROJECT_DIR$/blog/source/_posts/ES版本变化史.md" />
+        <option value="$PROJECT_DIR$/blog/source/_posts/Hexo主题maupassant优化.md" />
+        <option value="$PROJECT_DIR$/blog/source/_posts/ES之doc_values与fielddata.md" />
+        <option value="$PROJECT_DIR$/blog/themes/moon-metro/_config.yml" />
+        <option value="$PROJECT_DIR$/blog/themes/moon-metro/layout/_partial/comment.ejs" />
+        <option value="$PROJECT_DIR$/blog/themes/moon-metro/layout/post.ejs" />
+        <option value="$PROJECT_DIR$/blog/themes/moon-metro/source/css/_base/variable.styl" />
+        <option value="$PROJECT_DIR$/blog/themes/moon-metro/layout/_partial/archive.ejs" />
+        <option value="$PROJECT_DIR$/blog/themes/moon-metro/layout/_partial/post/title.ejs" />
+        <option value="$PROJECT_DIR$/blog/source/_posts/ES-discovery.md" />
+        <option value="$PROJECT_DIR$/blog/source/_posts/ES-version-history.md" />
+        <option value="$PROJECT_DIR$/blog/source/_posts/Hexo-maupassant.md" />
+        <option value="$PROJECT_DIR$/blog/source/_posts/freeswitch-1.6-deploy-01.md" />
+        <option value="$PROJECT_DIR$/blog/themes/moon-metro/source/css/_partial/syntax.styl" />
+        <option value="$PROJECT_DIR$/blog/themes/moon-metro/layout/_widget/tag.ejs" />
+        <option value="$PROJECT_DIR$/blog/themes/moon-metro/source/css/_partial/sidebar.styl" />
+        <option value="$PROJECT_DIR$/blog/themes/moon-metro/source/css/_base/layout.styl" />
+        <option value="$PROJECT_DIR$/blog/themes/moon-metro/source/css/_partial/header.styl" />
+        <option value="$PROJECT_DIR$/blog/source/_posts/ES-close-freeze.md" />
+        <option value="$PROJECT_DIR$/blog/themes/moon-metro/source/css/_partial/footer.styl" />
+        <option value="$PROJECT_DIR$/blog/themes/moon-metro/source/css/_partial/article.styl" />
+        <option value="$PROJECT_DIR$/blog/themes/moon-metro/layout/_partial/article.ejs" />
+        <option value="$PROJECT_DIR$/blog/source/_posts/rabbitmq-auto-ack.md" />
+        <option value="$PROJECT_DIR$/blog/source/_posts/rabbitmq/auto-ack.md" />
+        <option value="$PROJECT_DIR$/blog/source/_posts/es/term-freq.md" />
+        <option value="$PROJECT_DIR$/blog/_config.yml" />
+      </list>
+    </option>
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="x" value="1293" />
+    <option name="width" value="147" />
+    <option name="height" value="900" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="mugbya.github.io" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mugbya.github.io" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mugbya.github.io" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mugbya.github.io" type="462c0819:PsiDirectoryNode" />
+              <item name="blog" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.path.for.package.stylelint" value="project" />
+    <property name="node.js.selected.package.stylelint" value="" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/blog/source/_posts/es" />
+      <recent name="$PROJECT_DIR$/blog/source/_posts/rabbitmq" />
+      <recent name="$PROJECT_DIR$/blog/themes/maupassant/source/img" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/blog/source/images/es" />
+      <recent name="$PROJECT_DIR$/blog/source/images/rabbitmq" />
+      <recent name="$PROJECT_DIR$/blog/source/images/freeswitch" />
+      <recent name="$PROJECT_DIR$/blog/source" />
+      <recent name="$PROJECT_DIR$/blog/source/images" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f6fb085d-f391-4cdd-996e-de4b410abaad" name="Default Changelist" comment="" />
+      <created>1590456825616</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1590456825616</updated>
+      <workItem from="1590456829645" duration="1591000" />
+      <workItem from="1590460254874" duration="32737000" />
+      <workItem from="1590974557337" duration="12375000" />
+      <workItem from="1592216884437" duration="6272000" />
+      <workItem from="1594627903249" duration="16017000" />
+      <workItem from="1595851084162" duration="599000" />
+      <workItem from="1600325002310" duration="13310000" />
+      <workItem from="1600440763074" duration="14969000" />
+      <workItem from="1600518733664" duration="11862000" />
+      <workItem from="1600579396494" duration="2426000" />
+      <workItem from="1601188324208" duration="14239000" />
+      <workItem from="1603868517474" duration="3974000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="130371000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2644092" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.18618989" />
+      <window_info anchor="bottom" id="Python Console" order="12" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.pug" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/blog/themes/maupassant/source/css/copyright.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-294" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/maupassant/source/css/copycode.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="17" column="22" lean-forward="true" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/source/css/_base/utils.styl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/layout/_partial/page-heading.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-251">
+          <caret column="9" selection-start-column="9" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/maupassant/layout/base.pug">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="47">
+          <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/layout/index.ejs">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/layout/_partial/head.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="86" selection-start-line="86" selection-end-line="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/layout/_partial/header.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="20" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/source/img/apple-icon.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/source/img/favicon.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/layout/layout.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="34" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/maupassant/layout/_widget/tag.pug">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/layout/_widget/toc.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/layout/_partial/footer.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="458">
+          <caret line="30" column="15" selection-start-line="30" selection-start-column="15" selection-end-line="30" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/layout/archive.ejs">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/maupassant/layout/archive.pug">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="37" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/maupassant/source/css/style.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="1770" column="18" lean-forward="true" selection-start-line="1770" selection-start-column="18" selection-end-line="1770" selection-end-column="18" />
+          <folding>
+            <element signature="e#4170#4755#1" expanded="true" />
+            <element signature="e#13525#19594#1" expanded="true" />
+            <element signature="e#20303#26372#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/layout/_partial/after_footer.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="47" selection-start-column="40" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/languages/zh-CN.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="7" selection-start-line="7" selection-end-line="7" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/maupassant/_config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/maupassant/layout/_partial/comments.pug">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="81" column="88" selection-start-line="81" selection-start-column="39" selection-end-line="81" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/layout/_partial/comment.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="37" column="39" selection-start-line="37" selection-start-column="31" selection-end-line="37" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/_config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="24" column="15" lean-forward="true" selection-start-line="24" selection-start-column="15" selection-end-line="24" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/layout/post.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/source/css/style.styl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/layout/_partial/archive.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="25" column="23" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/layout/_partial/post/title.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/source/_posts/es/discovery.md" />
+    <entry file="file://$PROJECT_DIR$/blog/source/_posts/es/version-history.md" />
+    <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/source/css/_base/variable.styl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="358">
+          <caret line="23" selection-start-line="23" selection-end-line="23" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/source/_posts/freeswitch-1.6-deploy-01.md" />
+    <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/layout/_widget/category.ejs">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/layout/_widget/tag.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/source/css/_partial/sidebar.styl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/source/css/_base/layout.styl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="2" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/source/css/_partial/syntax.styl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="46" column="11" selection-start-line="46" selection-start-column="11" selection-end-line="46" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/source/css/_partial/header.styl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="19" lean-forward="true" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/source/_posts/es/close-freeze.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="306">
+            <caret line="57" lean-forward="true" selection-start-line="57" selection-end-line="57" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/.deploy_git/2020/09/27/rabbitmq-auto-ack/index.html" />
+    <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/source/css/_partial/footer.styl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="492">
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/public/rabbitmq-auto-ack/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="188" column="4" lean-forward="true" selection-start-line="188" selection-start-column="4" selection-end-line="188" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/public/favicon.ico">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/source/favicon.ico">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/source/img/favicon.ico">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/source/css/_partial/article.styl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6188">
+          <caret line="364" column="24" selection-start-line="364" selection-start-column="24" selection-end-line="364" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/themes/moon-metro/layout/_partial/article.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="34" column="25" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/source/_posts/rabbitmq/auto-ack.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="122">
+            <caret line="165" selection-start-line="165" selection-end-line="165" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/source/_posts/es/doc_values-fielddata.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor>
+            <caret selection-end-line="9" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/source/_posts/Hexo-maupassant.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="-1113">
+            <caret line="3" selection-start-line="3" selection-end-line="3" selection-end-column="9" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/source/_posts/es/term-freq.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="347">
+            <caret line="158" column="1" selection-start-line="158" selection-start-column="1" selection-end-line="158" selection-end-column="1" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/_config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="469">
+          <caret line="106" column="16" selection-start-line="106" selection-start-column="16" selection-end-line="106" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="Copyright.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
