@@ -1,0 +1,472 @@
+<!DOCTYPE HTML>
+
+    <html lang="zh-Hans">
+  
+<head>
+  <meta charset="utf-8">
+  
+  <title>ES进阶之term vector | mugbya探索</title>
+  <meta name="author" content="mugbya">
+  
+  <meta name="description" content="本站点的折腾文章都在自己一定的能力跟环境下而得。所以对你并不完全适用,请看官小心参照">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="ES进阶之term vector"/>
+  <meta property="og:site_name" content="mugbya探索"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <meta http-equiv="Content-Language" content="zh-Hans"/>
+  
+
+  <link href="/img/favicon.ico" rel="icon">
+  
+    <link rel="apple-touch-icon" href="/img/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="/img/favicon.ico">
+    
+
+  <link rel="alternate" href="/atom.xml" title="mugbya探索" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+  <!-- Chinese readability improment -->
+  <style type="text/css">
+    article {font-weight: 400;letter-spacing: .01rem;}
+    article .entry{line-height:2;}
+  </style>
+  
+
+  <style type="text/css">
+  /* Tim Pietrusky advanced checkbox hack (Android <= 4.1.2) */
+body{ -webkit-animation: bugfix infinite 1s; }
+@-webkit-keyframes bugfix { from {padding:0;} to {padding:0;} }
+</style>
+
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-168207447-1', 'auto');
+  ga('send', 'pageview');
+ 
+</script>
+
+
+
+
+  
+    <!-- 360 Font and Baidu CDN in China -->
+    
+    
+  <link href='http://apps.bdimg.com/libs/fontawesome/4.1.0/css/font-awesome.css' rel='stylesheet' type='text/css'>
+  <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+  
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <div class="body_container">
+      <header id="header" class="inner">
+
+<div class="padding">
+    <div class="alignleft logo">
+      <h1><a href="/">mugbya探索</a></h1>
+      <p class="description"> 本站点的折腾文章都在自己一定的能力跟环境下而得。所以对你并不完全适用,请看官小心参照</p>
+    </div>
+    <nav id="main-nav" class="alignright">
+        <input type="checkbox" id="toggle" />
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu" onclick><i class="fa fa-bars"></i></label>
+      <ul class="menu">
+        
+          <!-- <li><a href="[object Object]">0</a></li> -->
+          <!-- +a_with_current(theme.menu[i].directory, __(theme.menu[i].page), theme.menu[i].icon)-->
+          <li><a href="/"><i class="fa fa-home"> home </i></a></li>
+        
+          <!-- <li><a href="[object Object]">1</a></li> -->
+          <!-- +a_with_current(theme.menu[i].directory, __(theme.menu[i].page), theme.menu[i].icon)-->
+          <li><a href="/archives"><i class="fa fa-archive"> archive </i></a></li>
+        
+
+      </ul>
+    </nav>
+    <div class="clearfix"></div>
+</div>
+
+</header>
+
+      <!-- <div id="page-heading-wrap">
+  	<div class="inner">
+      <div class="padding">
+    		
+          <h1>ES进阶之term vector</h1>
+          <ul>
+            <li>
+              <span class="heading-span">Posted on: </span>
+              <time datetime="2020-10-28T12:10:52.000Z">2020-10-28</time>
+            </li>
+            
+              <li>
+                <span class="heading-span">By: </span>
+
+                
+                  <a href="/">mugbya</a>
+                
+
+              </li>
+            
+            <li>
+              <span class="heading-span">With: </span>
+              
+            </li>
+          </ul>
+        
+      </div>
+  	</div>
+  </div> -->
+
+      <div id="content" class="inner">
+        <div id="main-col" class="pure-u-md-3-4 alignleft"><div id="wrapper" class="padding"><article class="post">
+  
+  
+    <div class="post-content">
+  
+        <header>
+          <div class="icon"></div>
+
+            <time datetime="2020-10-28T12:10:52.000Z"><a href="/es-term-vector/">2020-10-28</a></time>
+             &nbsp; &nbsp;
+              
+    
+      <h1 class="title transition"> ES进阶之term vector</h1>
+
+
+    
+  
+
+
+        </header>
+
+      <div class="entry">
+        
+
+          <h2 id="1-须知"><a href="#1-须知" class="headerlink" title="1. 须知"></a>1. 须知</h2><blockquote>
+<p>本篇涉及词汇</p>
+<ol>
+<li>词频-TF(Term Frequency): 检索词在一篇文档中出现的频率</li>
+<li>总词频-TTF(total Term Frequency): 检索词在index中出现的频率</li>
+<li>文档频率-DF(Document Frequency): 检索词出现的文档数量占总文档数量的比重，DF 越大，出现的文档数越多，说明对应用意义越小，该词的相关性也就越小，比如 “and”, “is” 这些词出现非常频繁，用户反而不关心</li>
+<li>逆向文档频率-IDF(Inverse document frequency): 因为 DF 的值算出来结果范围会非常大，为了减少 DF 对打分的影响，引入了 IDF，其实就是对 DF 取对数来减少打分影响</li>
+<li>字段长度(Field-length): 搜索的字段越短，相关性越高</li>
+</ol>
+</blockquote>
+<h2 id="2-正文"><a href="#2-正文" class="headerlink" title="2. 正文"></a>2. 正文</h2><p>上一篇遇到一个统计词元的api(<code>_mtermvectors</code>), 具体能实现的功能已经明白，但是对于它更多的了解却不多，所以搜索更多资料，进一步学习</p>
+<p>term vector 可以翻译为词向量，但是看到用它的中文还是蛮少的，所以本文还是用英文</p>
+<h3 id="2-1-概念"><a href="#2-1-概念" class="headerlink" title="2.1 概念"></a>2.1 概念</h3><p>每当有document数据插入时，elasticsearch除了对document进行正排、倒排索引的存储之外，如果此索引的field设置了term_vector参数，es还会对这个的分词信息进行计算、统计，比如这个document有多少个field，每个field的值分词处理后得到的term的df值，ttf值是多少，每个term存储的位置偏移量等信息，这些统计信息统称为term vector</p>
+<h3 id="2-2-term-vector"><a href="#2-2-term-vector" class="headerlink" title="2.2 term_vector"></a>2.2 term_vector</h3><p>term_vector 的值有5个</p>
+<ul>
+<li>no：不存储term vector信息，默认值</li>
+<li>yes：只存储field terms信息，不包含position和offset信息</li>
+<li>with_positions：存储term信息和position信息</li>
+<li>with_offsets：存储term信息和offset信息</li>
+<li>with_positions_offsets：存储terms、position、offset信息</li>
+<li>with_positions_payloads: 存储terms、position、payloads信息</li>
+<li>with_positions_offsets_payloads: 存储terms、position、offsets、payloads信息</li>
+</ul>
+<p>需要在定义mappings时指定 term_vector 的值</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">PUT</span> <span class="string">my-index-000001</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line">  <span class="attr">"mappings":</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="attr">"properties":</span> <span class="string">&#123;</span></span><br><span class="line">      <span class="attr">"text":</span> <span class="string">&#123;</span></span><br><span class="line">        <span class="attr">"type":</span>        <span class="string">"text"</span><span class="string">,</span></span><br><span class="line">        <span class="attr">"term_vector":</span> <span class="string">"with_positions_offsets"</span></span><br><span class="line">      <span class="string">&#125;</span></span><br><span class="line">    <span class="string">&#125;</span></span><br><span class="line">  <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="string">PUT</span> <span class="string">my-index-000001/_doc/1</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line">  <span class="attr">"text":</span> <span class="string">"Quick brown fox"</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="string">GET</span> <span class="string">my-index-000001/_search</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line">  <span class="attr">"query":</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="attr">"match":</span> <span class="string">&#123;</span></span><br><span class="line">      <span class="attr">"text":</span> <span class="string">"brown fox"</span></span><br><span class="line">    <span class="string">&#125;</span></span><br><span class="line">  <span class="string">&#125;,</span></span><br><span class="line">  <span class="attr">"highlight":</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="attr">"fields":</span> <span class="string">&#123;</span></span><br><span class="line">      <span class="attr">"text":</span> <span class="string">&#123;&#125;</span> </span><br><span class="line">    <span class="string">&#125;</span></span><br><span class="line">  <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样方式时在数据索引时就生成term vector信息</p>
+<h3 id="2-3-查询"><a href="#2-3-查询" class="headerlink" title="2.3 查询"></a>2.3 查询</h3><p>指定文档查询</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">GET</span> <span class="string">/my-index-000001/_doc/1/_termvectors</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line">  <span class="string">"fields"</span> <span class="string">:</span> <span class="string">["text"],</span></span><br><span class="line">  <span class="string">"offsets"</span> <span class="string">:</span> <span class="literal">true</span><span class="string">,</span></span><br><span class="line">  <span class="string">"positions"</span> <span class="string">:</span> <span class="literal">true</span><span class="string">,</span></span><br><span class="line">  <span class="string">"term_statistics"</span> <span class="string">:</span> <span class="literal">true</span><span class="string">,</span></span><br><span class="line">  <span class="string">"field_statistics"</span> <span class="string">:</span> <span class="literal">true</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>指定多个文档查询</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">GET</span> <span class="string">_mtermvectors</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line">   <span class="attr">"docs":</span> <span class="string">[</span></span><br><span class="line">      <span class="string">&#123;</span></span><br><span class="line">         <span class="attr">"_index":</span> <span class="string">"my-index-000001"</span><span class="string">,</span></span><br><span class="line">         <span class="attr">"_type":</span> <span class="string">" _doc"</span><span class="string">,</span></span><br><span class="line">         <span class="attr">"_id":</span> <span class="string">"2"</span><span class="string">,</span></span><br><span class="line">         <span class="attr">"term_statistics":</span> <span class="literal">true</span></span><br><span class="line">      <span class="string">&#125;,</span></span><br><span class="line">      <span class="string">&#123;</span></span><br><span class="line">         <span class="attr">"_index":</span> <span class="string">"my-index-000001"</span><span class="string">,</span></span><br><span class="line">         <span class="attr">"_type":</span> <span class="string">"_doc"</span><span class="string">,</span></span><br><span class="line">         <span class="attr">"_id":</span> <span class="string">"1"</span><span class="string">,</span></span><br><span class="line">         <span class="attr">"fields":</span> <span class="string">[</span></span><br><span class="line">            <span class="string">"text"</span></span><br><span class="line">         <span class="string">]</span></span><br><span class="line">      <span class="string">&#125;</span></span><br><span class="line">   <span class="string">]</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>或者上一节的写法</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">GET</span> <span class="string">my_index_003/_mtermvectors</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line">  <span class="attr">"ids":</span> <span class="string">[</span></span><br><span class="line">    <span class="number">1</span><span class="string">,</span></span><br><span class="line">    <span class="number">2</span><span class="string">,</span></span><br><span class="line">    <span class="number">3</span><span class="string">,</span></span><br><span class="line">    <span class="number">4</span><span class="string">,</span></span><br><span class="line">    <span class="number">5</span><span class="string">,</span></span><br><span class="line">    <span class="number">6</span></span><br><span class="line">  <span class="string">],</span></span><br><span class="line">  <span class="attr">"parameters":</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="attr">"fields":</span> <span class="string">[</span></span><br><span class="line">      <span class="string">"tags"</span></span><br><span class="line">    <span class="string">],</span></span><br><span class="line">    <span class="attr">"term_statistics":</span> <span class="literal">true</span><span class="string">,</span></span><br><span class="line">    <span class="attr">"offsets":</span> <span class="literal">false</span><span class="string">,</span></span><br><span class="line">    <span class="attr">"payloads":</span> <span class="literal">false</span><span class="string">,</span></span><br><span class="line">    <span class="attr">"positions":</span> <span class="literal">false</span></span><br><span class="line">  <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>当没有在mapping阶段就指定 term_vector 时，也时也可探查文档的term vector，只是mapping阶段指定就是index-time, 否则就是query-time</p>
+<h2 id="3-总结"><a href="#3-总结" class="headerlink" title="3. 总结"></a>3. 总结</h2><p>对于查询某些文档的字段的词元情况可以用这个term vector。<br>详细跟踪字段里的词元情况它也是极好用的</p>
+<h2 id="4-参考链接"><a href="#4-参考链接" class="headerlink" title="4. 参考链接"></a>4. 参考链接</h2><ul>
+<li><p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/term-vector.html" target="_blank" rel="noopener">官方文档:term_vector</a></p>
+</li>
+<li><p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html" target="_blank" rel="noopener">官方文档</a></p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/139148510" target="_blank" rel="noopener">Elasticsearch系列—Term Vector工具探查数据</a></p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/104631505" target="_blank" rel="noopener">Elasticsearch 搜索的高级功能学习</a></p>
+</li>
+</ul>
+
+        
+      </div>
+
+
+
+            
+             <footer>
+             <div class="agreement">
+                  本作品系原创，<a target="_blank" class="text-secondary" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">采用《署名-非商业性使用-禁止演绎 4.0国际》许可协议</a>
+                </div>
+                  
+  
+  <div class="categories">
+    <a href="/categories/elasticsearch/">elasticsearch</a>
+  </div>
+
+                  
+  
+  <div class="tags">
+    <a href="/tags/技术/">技术</a>
+  </div>
+
+
+                  <div class="share">
+  
+</div>
+                  
+<nav class="article-nav clearfix">
+ 
+
+<div class="article-next">
+<a href="/es-term-freq/"  title="ES之词频统计">
+ <span>ES之词频统计
+</span>
+<i class="fa fa-long-arrow-right"></i>
+</a>
+</div>
+
+</nav>
+
+              </footer>
+            
+
+            <div class="clearfix"></div>
+
+
+
+    </div>
+</article>
+
+
+    <section id="comment">
+      <!--
+      <h2 class="title">留言</h2>
+      -->
+
+      
+
+      
+        <div id="container">
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css?v=0.0.0">
+            <div id="gitalk-container"></div>
+            <script src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=0.0.0"></script>
+            <script src="https://unpkg.com/gitalk/dist/gitalk.min.js?v=0.0.0"></script>
+            <script type="text/javascript">
+                var gitalk = new Gitalk({
+                    clientID: 'dba722f78823fd4ce557',
+                    clientSecret: '5c86ba6e2ef5e93793d134c8abe3658f15552938',
+                    id: window.location.pathname,
+                    repo: 'mugbya.github.io',
+                    owner: 'mugbya',
+                    admin: 'mugbya'
+                })
+                gitalk.render('gitalk-container')
+            </script>
+        </div>
+      
+
+    </section>
+
+
+
+</div></div>
+        <aside id="sidebar" class="pure-u-1-4 alignright"><div class="padding">
+	
+	  
+        
+            <div class="toc">
+                <h2> 文章目录 </h2> 
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-须知"><span class="toc-text">1. 须知</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-正文"><span class="toc-text">2. 正文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-概念"><span class="toc-text">2.1 概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-term-vector"><span class="toc-text">2.2 term_vector</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-查询"><span class="toc-text">2.3 查询</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-总结"><span class="toc-text">3. 总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-参考链接"><span class="toc-text">4. 参考链接</span></a></li></ol>
+            </div>
+        
+
+
+
+
+	
+	  
+<div class="widget recent-post">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/es-term-vector/">ES进阶之term vector</a>
+      </li>
+    
+      <li>
+        <a href="/es-term-freq/">ES之词频统计</a>
+      </li>
+    
+      <li>
+        <a href="/rabbitmq-auto-ack/">探究rabbitmq接收自动应答</a>
+      </li>
+    
+      <li>
+        <a href="/es-discovery/">ES之集群自动发现</a>
+      </li>
+    
+      <li>
+        <a href="/freeswitch-1-6-deploy-01/">freeswitch-1.6部署-01</a>
+      </li>
+    
+  </ul>
+</div>
+
+	
+	  
+<div class="widget category">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/elasticsearch/">elasticsearch</a><small>6</small></li>
+  
+    <li><a href="/categories/freeswitch/">freeswitch</a><small>1</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/categories/rabbitmq/">rabbitmq</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+	
+	  
+<div class="widget category">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/maupassant/">maupassant</a><small>1</small></li>
+  
+    <li><a href="/tags/技术/">技术</a><small>9</small></li>
+  
+  </ul>
+</div>
+
+
+	
+</div></aside>
+        <!-- <div class="clearfix"></div> -->
+      </div>
+      <footer id="footer" class="inner"><div class="padding ">
+
+	<div class="alignleft">
+
+
+
+	  
+	  &copy; 2020 mugbya
+	  
+	  Powerd by <a href="http://hexo.io/" target="_blank">hexo</a>
+	  and Theme by <a href="https://github.com/mugbya/moon-metro" target="_blank">moon-metro</a>
+
+		
+		
+			<a href="https://github.com/mugbya" target="_blank" title="mugbya Github"><i class="fa fa-github-square"></i></a>
+		
+		
+		
+		
+		
+		
+			<a href="/atom.xml" target="_blank" title="mugbya RSS"><i class="fa fa-rss-square"></i></a>
+		
+	</div>
+
+	<div class="alignright ">
+
+	</div>
+
+	<div class="clearfix"></div>
+</div>
+
+<div class="scroll-top"><i class="fa fa-arrow-circle-up"></i></div>
+</footer>
+      
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<script type="text/javascript">
+$(window).scroll(function() {
+
+    if($(this).scrollTop() > 400) {
+        $('.scroll-top').fadeIn(200);
+    } else {
+        $('.scroll-top').fadeOut(200);
+    }
+});
+
+$('.scroll-top').bind('click', function(e) {
+    e.preventDefault();
+    $('body,html').animate({scrollTop:0},200);
+});
+</script>
+
+
+      <!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </div>
+</body>
+</html>

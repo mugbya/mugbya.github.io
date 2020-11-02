@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.mugbya.me/es-term-vector/</loc>
+    
+    <lastmod>2020-11-02</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.mugbya.me/es-version-history/</loc>
+    
+    <lastmod>2020-10-28</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.mugbya.me/es-term-freq/</loc>
     
     <lastmod>2020-10-28</lastmod>
@@ -17,13 +31,6 @@
   
   <url>
     <loc>http://blog.mugbya.me/rabbitmq-auto-ack/</loc>
-    
-    <lastmod>2020-10-28</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.mugbya.me/es-version-history/</loc>
     
     <lastmod>2020-10-28</lastmod>
     
@@ -60,7 +67,7 @@
 
   <url>
     <loc>http://blog.mugbya.me/</loc>
-    <lastmod>2020-10-28</lastmod>
+    <lastmod>2020-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -68,14 +75,14 @@
   
   <url>
     <loc>http://blog.mugbya.me/tags/%E6%8A%80%E6%9C%AF/</loc>
-    <lastmod>2020-10-28</lastmod>
+    <lastmod>2020-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://blog.mugbya.me/tags/maupassant/</loc>
-    <lastmod>2020-10-28</lastmod>
+    <lastmod>2020-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -84,28 +91,28 @@
   
   <url>
     <loc>http://blog.mugbya.me/categories/hexo/</loc>
-    <lastmod>2020-10-28</lastmod>
+    <lastmod>2020-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://blog.mugbya.me/categories/freeswitch/</loc>
-    <lastmod>2020-10-28</lastmod>
+    <lastmod>2020-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://blog.mugbya.me/categories/elasticsearch/</loc>
-    <lastmod>2020-10-28</lastmod>
+    <lastmod>2020-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://blog.mugbya.me/categories/rabbitmq/</loc>
-    <lastmod>2020-10-28</lastmod>
+    <lastmod>2020-11-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
