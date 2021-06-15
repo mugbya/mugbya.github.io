@@ -2,6 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.mugbya.me/not-fonts-found/</loc>
+    
+    <lastmod>2021-06-15</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.mugbya.me/freeswitch-fs-ice/</loc>
+    
+    <lastmod>2021-01-14</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.mugbya.me/freeswitch-freeswitch-1-6-deploy-01/</loc>
+    
+    <lastmod>2020-12-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.mugbya.me/image-recognition-feature/</loc>
+    
+    <lastmod>2020-11-20</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.mugbya.me/image-recognition-template/</loc>
+    
+    <lastmod>2020-11-18</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.mugbya.me/es-term-vector/</loc>
     
     <lastmod>2020-11-02</lastmod>
@@ -17,13 +52,6 @@
   
   <url>
     <loc>http://blog.mugbya.me/es-term-freq/</loc>
-    
-    <lastmod>2020-10-28</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.mugbya.me/freeswitch-1-6-deploy-01/</loc>
     
     <lastmod>2020-10-28</lastmod>
     
@@ -67,7 +95,7 @@
 
   <url>
     <loc>http://blog.mugbya.me/</loc>
-    <lastmod>2020-11-02</lastmod>
+    <lastmod>2021-06-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -75,14 +103,21 @@
   
   <url>
     <loc>http://blog.mugbya.me/tags/%E6%8A%80%E6%9C%AF/</loc>
-    <lastmod>2020-11-02</lastmod>
+    <lastmod>2021-06-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://blog.mugbya.me/tags/maupassant/</loc>
-    <lastmod>2020-11-02</lastmod>
+    <lastmod>2021-06-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.mugbya.me/tags/openCV/</loc>
+    <lastmod>2021-06-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -91,28 +126,35 @@
   
   <url>
     <loc>http://blog.mugbya.me/categories/hexo/</loc>
-    <lastmod>2020-11-02</lastmod>
+    <lastmod>2021-06-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://blog.mugbya.me/categories/freeswitch/</loc>
-    <lastmod>2020-11-02</lastmod>
+    <lastmod>2021-06-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://blog.mugbya.me/categories/elasticsearch/</loc>
-    <lastmod>2020-11-02</lastmod>
+    <lastmod>2021-06-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>http://blog.mugbya.me/categories/rabbitmq/</loc>
-    <lastmod>2020-11-02</lastmod>
+    <lastmod>2021-06-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.mugbya.me/categories/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB/</loc>
+    <lastmod>2021-06-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>

@@ -1,0 +1,475 @@
+<!DOCTYPE HTML>
+
+    <html lang="zh-Hans">
+  
+<head>
+  <meta charset="utf-8">
+  
+  <title>freeswitch之ice穿透 | mugbya探索</title>
+  <meta name="author" content="mugbya">
+  
+  <meta name="description" content="本站点的折腾文章都在自己一定的能力跟环境下而得。所以对你并不完全适用,请看官小心参照">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="freeswitch之ice穿透"/>
+  <meta property="og:site_name" content="mugbya探索"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <meta http-equiv="Content-Language" content="zh-Hans"/>
+  
+
+  <link href="/img/favicon.ico" rel="icon">
+  
+    <link rel="apple-touch-icon" href="/img/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="/img/favicon.ico">
+    
+
+  <link rel="alternate" href="/atom.xml" title="mugbya探索" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+  <!-- Chinese readability improment -->
+  <style type="text/css">
+    article {font-weight: 400;letter-spacing: .01rem;}
+    article .entry{line-height:2;}
+  </style>
+  
+
+  <style type="text/css">
+  /* Tim Pietrusky advanced checkbox hack (Android <= 4.1.2) */
+body{ -webkit-animation: bugfix infinite 1s; }
+@-webkit-keyframes bugfix { from {padding:0;} to {padding:0;} }
+</style>
+
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-168207447-1', 'auto');
+  ga('send', 'pageview');
+ 
+</script>
+
+
+
+
+  
+    <!-- 360 Font and Baidu CDN in China -->
+    
+    
+  <link href='http://apps.bdimg.com/libs/fontawesome/4.1.0/css/font-awesome.css' rel='stylesheet' type='text/css'>
+  <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+  
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <div class="body_container">
+      <header id="header" class="inner">
+
+<div class="padding">
+    <div class="alignleft logo">
+      <h1><a href="/">mugbya探索</a></h1>
+      <p class="description"> 本站点的折腾文章都在自己一定的能力跟环境下而得。所以对你并不完全适用,请看官小心参照</p>
+    </div>
+    <nav id="main-nav" class="alignright">
+        <input type="checkbox" id="toggle" />
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu" onclick><i class="fa fa-bars"></i></label>
+      <ul class="menu">
+        
+          <!-- <li><a href="[object Object]">0</a></li> -->
+          <!-- +a_with_current(theme.menu[i].directory, __(theme.menu[i].page), theme.menu[i].icon)-->
+          <li><a href="/"><i class="fa fa-home"> home </i></a></li>
+        
+          <!-- <li><a href="[object Object]">1</a></li> -->
+          <!-- +a_with_current(theme.menu[i].directory, __(theme.menu[i].page), theme.menu[i].icon)-->
+          <li><a href="/archives"><i class="fa fa-archive"> archive </i></a></li>
+        
+
+      </ul>
+    </nav>
+    <div class="clearfix"></div>
+</div>
+
+</header>
+
+      <!-- <div id="page-heading-wrap">
+  	<div class="inner">
+      <div class="padding">
+    		
+          <h1>freeswitch之ice穿透</h1>
+          <ul>
+            <li>
+              <span class="heading-span">Posted on: </span>
+              <time datetime="2021-01-11T09:07:55.000Z">2021-01-11</time>
+            </li>
+            
+              <li>
+                <span class="heading-span">By: </span>
+
+                
+                  <a href="/">mugbya</a>
+                
+
+              </li>
+            
+            <li>
+              <span class="heading-span">With: </span>
+              
+            </li>
+          </ul>
+        
+      </div>
+  	</div>
+  </div> -->
+
+      <div id="content" class="inner">
+        <div id="main-col" class="pure-u-md-3-4 alignleft"><div id="wrapper" class="padding"><article class="post">
+  
+  
+    <div class="post-content">
+  
+        <header>
+          <div class="icon"></div>
+
+            <time datetime="2021-01-11T09:07:55.000Z"><a href="/freeswitch-fs-ice/">2021-01-11</a></time>
+             &nbsp; &nbsp;
+              
+    
+      <h1 class="title transition"> freeswitch之ice穿透</h1>
+
+
+    
+  
+
+
+        </header>
+
+      <div class="entry">
+        
+
+          <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">首先强调下环境：</span> <span class="string">centos6</span>  <span class="string">freeswitch1.6</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="1-目的"><a href="#1-目的" class="headerlink" title="1. 目的"></a>1. 目的</h2><p>公司使用freeswitch作为软电话载体承接业务，freeswitch部署在阿里云公网，在不同的小区都接入了很多话机。</p>
+<p>现在sip请求后，在同一内网下，rtp也只能走公网freeswitch作为桥接，实际情况下来效果不好，因为网络问题，掉帧，视频质量差，断断续续</p>
+<p>故希望能判断 主叫与被叫是否是同一内网的设备，如果是，则rtp流直接走P2P, 内网情况下同时开音频，视频效果都会大幅度提升，即使内网不通，如果公网能够互通，则直接通过公网P2P也减少rtp转发请求</p>
+<p>本节默认背景知识较多，本文不详细介绍，但会给出参考连接</p>
+<h2 id="须知概念"><a href="#须知概念" class="headerlink" title="须知概念"></a>须知概念</h2><ul>
+<li>NAT 概念</li>
+<li><a href="https://blog.csdn.net/eydwyz/article/details/87364157" target="_blank" rel="noopener">NAT 类型</a><ul>
+<li>全锥型(Full Cone)</li>
+<li>受限锥型(Restricted Cone)</li>
+<li>端口受限锥型(Port Restricted Cone)</li>
+<li>对称型(Symmetric)</li>
+</ul>
+</li>
+<li><a href="https://blog.csdn.net/xyphf/article/details/107298321" target="_blank" rel="noopener">如何判断网络的NAT类型</a></li>
+<li><a href="https://www.jianshu.com/p/84e8c78ca61d" target="_blank" rel="noopener">NAT穿越</a></li>
+<li><a href="https://www.jianshu.com/p/84e8c78ca61d" target="_blank" rel="noopener">ICE协议下NAT穿越的实现（STUN&amp;TURN）</a></li>
+</ul>
+<h2 id="实际遇到问题"><a href="#实际遇到问题" class="headerlink" title="实际遇到问题"></a>实际遇到问题</h2><p>第一接触ICE，也不知道如何跟终端调试ICE，磕磕绊绊，走了很多弯路，最终基本搞懂里面流程</p>
+<h3 id="交互流程"><a href="#交互流程" class="headerlink" title="交互流程"></a>交互流程</h3><p>这是实际业务对应的交互流程</p>
+<p><img src="/images/freeswitch/ice-fs.png" alt=""></p>
+<p>根据上面流程，如果实现网络穿透我们就非常好定位问题了，大多数在请求ICE服务处</p>
+<ul>
+<li>turn账号密码验证错误<ul>
+<li>终端没有传(参数设置错误)</li>
+</ul>
+</li>
+</ul>
+<p>跟终端联调时遇到的问题</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">2542: session 010000000000000001:</span> <span class="string">realm</span> <span class="string">&lt;realm&gt;</span> <span class="string">user</span> <span class="string">&lt;&gt;:</span> <span class="string">incoming</span> <span class="string">packet</span> <span class="string">message</span> <span class="string">processed,</span> <span class="attr">error 401:</span> <span class="string">Unauthorized</span></span><br><span class="line"><span class="attr">2542: session 003000000000000002:</span> <span class="string">realm</span> <span class="string">&lt;realm&gt;</span> <span class="string">user</span> <span class="string">&lt;&gt;:</span> <span class="string">incoming</span> <span class="string">packet</span> <span class="string">message</span> <span class="string">processed,</span> <span class="attr">error 401:</span> <span class="string">Unauthorized</span></span><br><span class="line"><span class="attr">2542: session 010000000000000001:</span> <span class="string">realm</span> <span class="string">&lt;realm&gt;</span> <span class="string">user</span> <span class="string">&lt;&gt;:</span> <span class="string">incoming</span> <span class="string">packet</span> <span class="string">message</span> <span class="string">processed,</span> <span class="attr">error 401:</span> <span class="string">Unauthorized</span></span><br><span class="line"><span class="attr">2542: session 003000000000000002:</span> <span class="string">realm</span> <span class="string">&lt;realm&gt;</span> <span class="string">user</span> <span class="string">&lt;&gt;:</span> <span class="string">incoming</span> <span class="string">packet</span> <span class="string">message</span> <span class="string">processed,</span> <span class="attr">error 401:</span> <span class="string">Unauthorized</span></span><br><span class="line"><span class="attr">2543: session 010000000000000001:</span> <span class="string">realm</span> <span class="string">&lt;realm&gt;</span> <span class="string">user</span> <span class="string">&lt;&gt;:</span> <span class="string">incoming</span> <span class="string">packet</span> <span class="string">message</span> <span class="string">processed,</span> <span class="attr">error 401:</span> <span class="string">Unauthorized</span></span><br><span class="line"><span class="attr">2543: session 003000000000000002:</span> <span class="string">realm</span> <span class="string">&lt;realm&gt;</span> <span class="string">user</span> <span class="string">&lt;&gt;:</span> <span class="string">incoming</span> <span class="string">packet</span> <span class="string">message</span> <span class="string">processed,</span> <span class="attr">error 401:</span> <span class="string">Unauthorized</span></span><br><span class="line"><span class="attr">2543: session 010000000000000001:</span> <span class="string">realm</span> <span class="string">&lt;realm&gt;</span> <span class="string">user</span> <span class="string">&lt;&gt;:</span> <span class="string">incoming</span> <span class="string">packet</span> <span class="string">message</span> <span class="string">processed,</span> <span class="attr">error 401:</span> <span class="string">Unauthorized</span></span><br><span class="line"><span class="attr">2543: session 003000000000000002:</span> <span class="string">realm</span> <span class="string">&lt;realm&gt;</span> <span class="string">user</span> <span class="string">&lt;&gt;:</span> <span class="string">incoming</span> <span class="string">packet</span> <span class="string">message</span> <span class="string">processed,</span> <span class="attr">error 401:</span> <span class="string">Unauthorized</span></span><br><span class="line"><span class="attr">2543: session 010000000000000001:</span> <span class="string">realm</span> <span class="string">&lt;realm&gt;</span> <span class="string">user</span> <span class="string">&lt;&gt;:</span> <span class="string">incoming</span> <span class="string">packet</span> <span class="string">message</span> <span class="string">processed,</span> <span class="attr">error 401:</span> <span class="string">Unauthorized</span></span><br><span class="line"><span class="attr">2543: session 003000000000000002:</span> <span class="string">realm</span> <span class="string">&lt;realm&gt;</span> <span class="string">user</span> <span class="string">&lt;&gt;:</span> <span class="string">incoming</span> <span class="string">packet</span> <span class="string">message</span> <span class="string">processed,</span> <span class="attr">error 401:</span> <span class="string">Unauthorized</span></span><br><span class="line"><span class="attr">2543: session 010000000000000001:</span> <span class="string">realm</span> <span class="string">&lt;realm&gt;</span> <span class="string">user</span> <span class="string">&lt;&gt;:</span> <span class="string">incoming</span> <span class="string">packet</span> <span class="string">message</span> <span class="string">processed,</span> <span class="attr">error 401:</span> <span class="string">Unauthorized</span></span><br><span class="line"><span class="attr">2543: session 003000000000000002:</span> <span class="string">realm</span> <span class="string">&lt;realm&gt;</span> <span class="string">user</span> <span class="string">&lt;&gt;:</span> <span class="string">incoming</span> <span class="string">packet</span> <span class="string">message</span> <span class="string">processed,</span> <span class="attr">error 401:</span> <span class="string">Unauthorized</span></span><br><span class="line"><span class="attr">2543: session 010000000000000001:</span> <span class="string">realm</span> <span class="string">&lt;realm&gt;</span> <span class="string">user</span> <span class="string">&lt;&gt;:</span> <span class="string">incoming</span> <span class="string">packet</span> <span class="string">message</span> <span class="string">processed,</span> <span class="attr">error 401:</span> <span class="string">Unauthorized</span></span><br><span class="line"><span class="attr">2595: session 010000000000000001:</span> <span class="string">realm</span> <span class="string">&lt;realm&gt;</span> <span class="string">user</span> <span class="string">&lt;&gt;:</span> <span class="string">incoming</span> <span class="string">packet</span> <span class="string">message</span> <span class="string">processed,</span> <span class="attr">error 401:</span> <span class="string">Unauthorized</span></span><br><span class="line"><span class="attr">2595: session 003000000000000002:</span> <span class="string">realm</span> <span class="string">&lt;realm&gt;</span> <span class="string">user</span> <span class="string">&lt;&gt;:</span> <span class="string">incoming</span> <span class="string">packet</span> <span class="string">message</span> <span class="string">processed,</span> <span class="attr">error 401:</span> <span class="string">Unauthorized</span></span><br></pre></td></tr></table></figure>
+
+<p>一直401，然后看 user &lt;&gt; 里面时空的，都没有传账号到 conturn 服务。</p>
+<p>最终终端的小伙伴自己查出参数设置错误，修改后成功拿到ICE信息，以下时成功的请求</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">realm</span> <span class="string">&lt;realm&gt;</span> <span class="string">user</span> <span class="string">&lt;1610504773:3005&gt;:</span> <span class="string">incoming</span> <span class="string">packet</span> <span class="string">ALLOCATE</span> <span class="string">processed,</span> <span class="string">success</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># or</span></span><br><span class="line"><span class="string">realm</span> <span class="string">&lt;realm&gt;</span> <span class="string">user</span> <span class="string">&lt;1610504773:3005&gt;:</span> <span class="string">incoming</span> <span class="string">packet</span> <span class="string">REFRESH</span> <span class="string">processed,</span> <span class="string">success</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>目前不能找到完成的正常日志，所以贴出正常日志的其中两种情形</p>
+</blockquote>
+
+        
+      </div>
+
+
+
+            
+             <footer>
+             <div class="agreement">
+                  本作品系原创，<a target="_blank" class="text-secondary" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">采用《署名-非商业性使用-禁止演绎 4.0国际》许可协议</a>
+                </div>
+                  
+  
+  <div class="categories">
+    <a href="/categories/freeswitch/">freeswitch</a>
+  </div>
+
+                  
+  
+  <div class="tags">
+    <a href="/tags/技术/">技术</a>
+  </div>
+
+
+                  <div class="share">
+  
+</div>
+                  
+<nav class="article-nav clearfix">
+ 
+ <div class="article-prev" >
+ <a href="/not-fonts-found/" title="Probable fatal error:No fonts found">
+  <i class="fa fa-long-arrow-left"></i>
+  <span>
+  Probable fatal error:No fonts found</span>
+</a>
+</div>
+
+
+<div class="article-next">
+<a href="/image-recognition-feature/"  title="图像识别之特征匹配">
+ <span>图像识别之特征匹配
+</span>
+<i class="fa fa-long-arrow-right"></i>
+</a>
+</div>
+
+</nav>
+
+              </footer>
+            
+
+            <div class="clearfix"></div>
+
+
+
+    </div>
+</article>
+
+
+    <section id="comment">
+      <!--
+      <h2 class="title">留言</h2>
+      -->
+
+      
+
+      
+        <div id="container">
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css?v=0.0.0">
+            <div id="gitalk-container"></div>
+            <script src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=0.0.0"></script>
+            <script src="https://unpkg.com/gitalk/dist/gitalk.min.js?v=0.0.0"></script>
+            <script type="text/javascript">
+                var gitalk = new Gitalk({
+                    clientID: 'dba722f78823fd4ce557',
+                    clientSecret: '5c86ba6e2ef5e93793d134c8abe3658f15552938',
+                    id: window.location.pathname,
+                    repo: 'mugbya.github.io',
+                    owner: 'mugbya',
+                    admin: 'mugbya'
+                })
+                gitalk.render('gitalk-container')
+            </script>
+        </div>
+      
+
+    </section>
+
+
+
+</div></div>
+        <aside id="sidebar" class="pure-u-1-4 alignright"><div class="padding">
+	
+	  
+        
+            <div class="toc">
+                <h2> 文章目录 </h2> 
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-目的"><span class="toc-text">1. 目的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#须知概念"><span class="toc-text">须知概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实际遇到问题"><span class="toc-text">实际遇到问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#交互流程"><span class="toc-text">交互流程</span></a></li></ol></li></ol>
+            </div>
+        
+
+
+
+
+	
+	  
+<div class="widget recent-post">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/not-fonts-found/">Probable fatal error:No fonts found</a>
+      </li>
+    
+      <li>
+        <a href="/freeswitch-fs-ice/">freeswitch之ice穿透</a>
+      </li>
+    
+      <li>
+        <a href="/image-recognition-feature/">图像识别之特征匹配</a>
+      </li>
+    
+      <li>
+        <a href="/image-recognition-template/">图像识别之模版匹配</a>
+      </li>
+    
+      <li>
+        <a href="/es-term-vector/">ES进阶之term vector</a>
+      </li>
+    
+  </ul>
+</div>
+
+	
+	  
+<div class="widget category">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/elasticsearch/">elasticsearch</a><small>6</small></li>
+  
+    <li><a href="/categories/freeswitch/">freeswitch</a><small>2</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/categories/rabbitmq/">rabbitmq</a><small>1</small></li>
+  
+    <li><a href="/categories/图像识别/">图像识别</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+	
+	  
+<div class="widget category">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/maupassant/">maupassant</a><small>1</small></li>
+  
+    <li><a href="/tags/openCV/">openCV</a><small>2</small></li>
+  
+    <li><a href="/tags/技术/">技术</a><small>13</small></li>
+  
+  </ul>
+</div>
+
+
+	
+</div></aside>
+        <!-- <div class="clearfix"></div> -->
+      </div>
+      <footer id="footer" class="inner"><div class="padding ">
+
+	<div class="alignleft">
+
+
+
+	  
+	  &copy; 2021 mugbya
+	  
+	  Powerd by <a href="http://hexo.io/" target="_blank">hexo</a>
+	  and Theme by <a href="https://github.com/mugbya/moon-metro" target="_blank">moon-metro</a>
+
+		
+		
+			<a href="https://github.com/mugbya" target="_blank" title="mugbya Github"><i class="fa fa-github-square"></i></a>
+		
+		
+		
+		
+		
+		
+			<a href="/atom.xml" target="_blank" title="mugbya RSS"><i class="fa fa-rss-square"></i></a>
+		
+	</div>
+
+	<div class="alignright ">
+
+	</div>
+
+	<div class="clearfix"></div>
+</div>
+
+<div class="scroll-top"><i class="fa fa-arrow-circle-up"></i></div>
+</footer>
+      
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<script type="text/javascript">
+$(window).scroll(function() {
+
+    if($(this).scrollTop() > 400) {
+        $('.scroll-top').fadeIn(200);
+    } else {
+        $('.scroll-top').fadeOut(200);
+    }
+});
+
+$('.scroll-top').bind('click', function(e) {
+    e.preventDefault();
+    $('body,html').animate({scrollTop:0},200);
+});
+</script>
+
+
+      <!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </div>
+</body>
+</html>

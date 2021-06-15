@@ -1,0 +1,436 @@
+<!DOCTYPE HTML>
+
+    <html lang="zh-Hans">
+  
+<head>
+  <meta charset="utf-8">
+  
+  <title>Probable fatal error:No fonts found | mugbya探索</title>
+  <meta name="author" content="mugbya">
+  
+  <meta name="description" content="本站点的折腾文章都在自己一定的能力跟环境下而得。所以对你并不完全适用,请看官小心参照">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Probable fatal error:No fonts found"/>
+  <meta property="og:site_name" content="mugbya探索"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+    <meta http-equiv="Content-Language" content="zh-Hans"/>
+  
+
+  <link href="/img/favicon.ico" rel="icon">
+  
+    <link rel="apple-touch-icon" href="/img/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="/img/favicon.ico">
+    
+
+  <link rel="alternate" href="/atom.xml" title="mugbya探索" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+  <!-- Chinese readability improment -->
+  <style type="text/css">
+    article {font-weight: 400;letter-spacing: .01rem;}
+    article .entry{line-height:2;}
+  </style>
+  
+
+  <style type="text/css">
+  /* Tim Pietrusky advanced checkbox hack (Android <= 4.1.2) */
+body{ -webkit-animation: bugfix infinite 1s; }
+@-webkit-keyframes bugfix { from {padding:0;} to {padding:0;} }
+</style>
+
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-168207447-1', 'auto');
+  ga('send', 'pageview');
+ 
+</script>
+
+
+
+
+  
+    <!-- 360 Font and Baidu CDN in China -->
+    
+    
+  <link href='http://apps.bdimg.com/libs/fontawesome/4.1.0/css/font-awesome.css' rel='stylesheet' type='text/css'>
+  <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+  
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <div class="body_container">
+      <header id="header" class="inner">
+
+<div class="padding">
+    <div class="alignleft logo">
+      <h1><a href="/">mugbya探索</a></h1>
+      <p class="description"> 本站点的折腾文章都在自己一定的能力跟环境下而得。所以对你并不完全适用,请看官小心参照</p>
+    </div>
+    <nav id="main-nav" class="alignright">
+        <input type="checkbox" id="toggle" />
+        <label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu" onclick><i class="fa fa-bars"></i></label>
+      <ul class="menu">
+        
+          <!-- <li><a href="[object Object]">0</a></li> -->
+          <!-- +a_with_current(theme.menu[i].directory, __(theme.menu[i].page), theme.menu[i].icon)-->
+          <li><a href="/"><i class="fa fa-home"> home </i></a></li>
+        
+          <!-- <li><a href="[object Object]">1</a></li> -->
+          <!-- +a_with_current(theme.menu[i].directory, __(theme.menu[i].page), theme.menu[i].icon)-->
+          <li><a href="/archives"><i class="fa fa-archive"> archive </i></a></li>
+        
+
+      </ul>
+    </nav>
+    <div class="clearfix"></div>
+</div>
+
+</header>
+
+      <!-- <div id="page-heading-wrap">
+  	<div class="inner">
+      <div class="padding">
+    		
+          <h1>Probable fatal error:No fonts found</h1>
+          <ul>
+            <li>
+              <span class="heading-span">Posted on: </span>
+              <time datetime="2021-06-15T03:18:25.000Z">2021-06-15</time>
+            </li>
+            
+              <li>
+                <span class="heading-span">By: </span>
+
+                
+                  <a href="/">mugbya</a>
+                
+
+              </li>
+            
+            <li>
+              <span class="heading-span">With: </span>
+              
+            </li>
+          </ul>
+        
+      </div>
+  	</div>
+  </div> -->
+
+      <div id="content" class="inner">
+        <div id="main-col" class="pure-u-md-3-4 alignleft"><div id="wrapper" class="padding"><article class="post">
+  
+  
+    <div class="post-content">
+  
+        <header>
+          <div class="icon"></div>
+
+            <time datetime="2021-06-15T03:18:25.000Z"><a href="/not-fonts-found/">2021-06-15</a></time>
+             &nbsp; &nbsp;
+              
+    
+      <h1 class="title transition"> Probable fatal error:No fonts found</h1>
+
+
+    
+  
+
+
+        </header>
+
+      <div class="entry">
+        
+
+          <h2 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h2><p>今天上uat环境做可一个业务操作，然后一直报 Probable fatal error:No fonts found.错误。<br>但是开发环境，测试环境都没有该问题， 网上也找相关问题，然后都是安装字体，中文字体</p>
+<p>一开始我也跑去安装了字体，结果还是不行，然后又有点懵圈… </p>
+<h2 id="排查定位"><a href="#排查定位" class="headerlink" title="排查定位"></a>排查定位</h2><p>折腾不行，就需要认真自己分析了</p>
+<p>首先自己确认测试环境跟uat环境的默认字体</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[unisound@localhost iot-work-order]$ fc-match</span><br><span class="line">DejaVuSans.ttf: "DejaVu Sans" "Book"</span><br></pre></td></tr></table></figure>
+
+<p>发现两个环境都是上面输出，那这肯定不是字体了。然后我就去看了下java版本(因为之前查资料发现openjdk有这个问题)</p>
+<p>结果有重大发现， 测试环境是sun 的jdk, 而uat环境(容器)是openjdk的，因为之前的资料查阅，一下就怀疑是openjdk版本的问题</p>
+<p>让运维升级到最新版本(1.8.0_282), 然后再次访问，就OK了</p>
+<hr>
+<p><strong>后面运维依旧用这个版本(1.8.0_282)，但是换了一个linux系统版本，依旧还是出现该问题，把容器里面系统换回来又OK了，但因为运维时间原因，并未继续排查到是因为系统那些差别导致这个，但是这个问题需要注意！！！</strong></p>
+<h2 id="附"><a href="#附" class="headerlink" title="附"></a>附</h2><p>下面是完整的日志</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br></pre></td><td class="code"><pre><span class="line">2021-06-03 16:14:29.371 ERROR 1 --- [nio-7081-exec-2] - [TID:242.94.16227080693290061] c.s.i.w.e.GlobalExceptionHandler         116 : Handler dispatch failed; nested exception is java.lang.Error: Probable fatal error:No fonts found.</span><br><span class="line">org.springframework.web.util.NestedServletException: Handler dispatch failed; nested exception is java.lang.Error: Probable fatal error:No fonts found.</span><br><span class="line">        at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1053)</span><br><span class="line">        at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)</span><br><span class="line">        at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005)</span><br><span class="line">        at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:908)</span><br><span class="line">        at javax.servlet.http.HttpServlet.service(HttpServlet.java:665)</span><br><span class="line">        at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882)</span><br><span class="line">        at javax.servlet.http.HttpServlet.service(HttpServlet.java:750)</span><br><span class="line">        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)</span><br><span class="line">        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)</span><br><span class="line">        at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)</span><br><span class="line">        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)</span><br><span class="line">        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)</span><br><span class="line">        at com.github.xiaoymin.swaggerbootstrapui.filter.SecurityBasicAuthFilter.doFilter(SecurityBasicAuthFilter.java:84)</span><br><span class="line">        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)</span><br><span class="line">        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)</span><br><span class="line">        at com.github.xiaoymin.swaggerbootstrapui.filter.ProductionSecurityFilter.doFilter(ProductionSecurityFilter.java:53)</span><br><span class="line">        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)</span><br><span class="line">        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)</span><br><span class="line">        at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:96)</span><br><span class="line">        at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)</span><br><span class="line">        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)</span><br><span class="line">        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)</span><br><span class="line">        at org.springframework.boot.actuate.web.trace.servlet.HttpTraceFilter.doFilterInternal(HttpTraceFilter.java:90)</span><br><span class="line">        at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)</span><br><span class="line">        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)</span><br><span class="line">        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)</span><br><span class="line">        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:320)</span><br><span class="line">        at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:127)</span><br><span class="line">        at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:91)</span><br><span class="line">        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)</span><br><span class="line">        at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:119)</span><br><span class="line">        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)</span><br><span class="line">        at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:137)</span><br><span class="line">        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)</span><br><span class="line">        at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:111)</span><br><span class="line">        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)</span><br><span class="line">        at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:170)</span><br><span class="line">        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)</span><br><span class="line">        at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)</span><br><span class="line">        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)</span><br><span class="line">        at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:116)</span><br><span class="line">        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)</span><br><span class="line">        at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:74)</span><br><span class="line">        at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)</span><br><span class="line">        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)</span><br><span class="line">        at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105)</span><br><span class="line">        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)</span><br><span class="line">        at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:56)</span><br><span class="line">        at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)</span><br><span class="line">        at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334)</span><br><span class="line">        at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:215)</span><br><span class="line">        at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:178)</span><br><span class="line">        at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:357)</span><br><span class="line">        at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:270)</span><br><span class="line">        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)</span><br><span class="line">        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)</span><br><span class="line">        at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)</span><br><span class="line">        at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)</span><br><span class="line">        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)</span><br><span class="line">        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)</span><br><span class="line">        at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92)</span><br><span class="line">        at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)</span><br><span class="line">        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)</span><br><span class="line">        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)</span><br><span class="line">        at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93)</span><br><span class="line">        at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)</span><br><span class="line">        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)</span><br><span class="line">        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)</span><br><span class="line">        at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.filterAndRecordMetrics(WebMvcMetricsFilter.java:117)</span><br><span class="line">        at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:106)</span><br><span class="line">        at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)</span><br><span class="line">        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)</span><br><span class="line">        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)</span><br><span class="line">        at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)</span><br><span class="line">        at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)</span><br><span class="line">        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)</span><br><span class="line">        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)</span><br><span class="line">        at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:199)</span><br><span class="line">        at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)</span><br><span class="line">        at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)</span><br><span class="line">        at org.apache.catalina.core.StandardHostValve.invoke$original$OfsqmaBz(StandardHostValve.java:139)</span><br><span class="line">        at org.apache.catalina.core.StandardHostValve.invoke$original$OfsqmaBz$accessor$9X87nMD9(StandardHostValve.java)</span><br><span class="line">        at org.apache.catalina.core.StandardHostValve$auxiliary$XftkP7JC.call(Unknown Source)</span><br><span class="line">        at org.apache.skywalking.apm.agent.core.plugin.interceptor.enhance.InstMethodsInter.intercept(InstMethodsInter.java:93)</span><br><span class="line">        at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java)</span><br><span class="line">        at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)</span><br><span class="line">        at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)</span><br><span class="line">        at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)</span><br><span class="line">        at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)</span><br><span class="line">        at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)</span><br><span class="line">        at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834)</span><br><span class="line">        at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1417)</span><br><span class="line">        at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)</span><br><span class="line">        at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)</span><br><span class="line">        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)</span><br><span class="line">        at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)</span><br><span class="line">        at java.lang.Thread.run(Thread.java:748)</span><br><span class="line">Caused by: java.lang.Error: Probable fatal error:No fonts found.</span><br><span class="line">        at sun.font.SunFontManager.getDefaultPhysicalFont(SunFontManager.java:1236)</span><br><span class="line">        at sun.font.SunFontManager.initialiseDeferredFont(SunFontManager.java:1106)</span><br><span class="line">        at sun.font.CompositeFont.doDeferredInitialisation(CompositeFont.java:287)</span><br><span class="line">        at sun.font.CompositeFont.getSlotFont(CompositeFont.java:376)</span><br><span class="line">        at sun.font.CompositeStrike.getStrikeForSlot(CompositeStrike.java:82)</span><br><span class="line">        at sun.font.CompositeStrike.getFontMetrics(CompositeStrike.java:97)</span><br><span class="line">        at sun.font.FontDesignMetrics.initMatrixAndMetrics(FontDesignMetrics.java:359)</span><br><span class="line">        at sun.font.FontDesignMetrics.&lt;init&gt;(FontDesignMetrics.java:350)</span><br><span class="line">        at sun.font.FontDesignMetrics.getMetrics(FontDesignMetrics.java:302)</span><br><span class="line">        at sun.java2d.SunGraphics2D.getFontMetrics(SunGraphics2D.java:855)</span><br><span class="line">        at org.flowable.image.impl.DefaultProcessDiagramCanvas.initialize(DefaultProcessDiagramCanvas.java:219)</span><br><span class="line">        at org.flowable.image.impl.DefaultProcessDiagramCanvas.&lt;init&gt;(DefaultProcessDiagramCanvas.java:178)</span><br><span class="line">        at org.flowable.image.impl.DefaultProcessDiagramGenerator.initProcessDiagramCanvas(DefaultProcessDiagramGenerator.java:1041)</span><br><span class="line">        at org.flowable.image.impl.DefaultProcessDiagramGenerator.generateProcessDiagram(DefaultProcessDiagramGenerator.java:574)</span><br><span class="line">        at org.flowable.image.impl.DefaultProcessDiagramGenerator.generateImage(DefaultProcessDiagramGenerator.java:553)</span><br><span class="line">        at org.flowable.image.impl.DefaultProcessDiagramGenerator.generateImage(DefaultProcessDiagramGenerator.java:560)</span><br><span class="line">        at org.flowable.image.impl.DefaultProcessDiagramGenerator.generatePngImage(DefaultProcessDiagramGenerator.java:565)</span><br><span class="line">        at org.flowable.ui.modeler.util.ImageGenerator.createImage(ImageGenerator.java:39)</span><br><span class="line">        at org.flowable.ui.modeler.service.ModelImageService.generateThumbnailImage(ModelImageService.java:70)</span><br><span class="line">        at org.flowable.ui.modeler.service.ModelImageService$$FastClassBySpringCGLIB$$6d09a974.invoke(&lt;generated&gt;)</span><br><span class="line">        at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)</span><br><span class="line">        at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:749)</span><br><span class="line">        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)</span><br><span class="line">        at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:294)</span><br><span class="line">        at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:98)</span><br><span class="line">        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)</span><br><span class="line">        at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:688)</span><br><span class="line">        at org.flowable.ui.modeler.service.ModelImageService$$EnhancerBySpringCGLIB$$1ea24b2b.generateThumbnailImage(&lt;generated&gt;)</span><br><span class="line">        at com.shimao.iot.workorder.service.workflow.converter.json.FlowModelService.persistModel(FlowModelService.java:631)</span><br><span class="line">        at com.shimao.iot.workorder.service.workflow.converter.json.FlowModelService.createModel(FlowModelService.java:277)</span><br><span class="line">        at com.shimao.iot.workorder.service.workflow.converter.json.FlowModelService$$FastClassBySpringCGLIB$$be6a03e7.invoke(&lt;generated&gt;)</span><br><span class="line">        at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)</span><br><span class="line">        at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:749)</span><br><span class="line">        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)</span><br><span class="line">        at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:294)</span><br><span class="line">        at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:98)</span><br><span class="line">        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)</span><br><span class="line">        at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:688)</span><br><span class="line">        at com.shimao.iot.workorder.service.workflow.converter.json.FlowModelService$$EnhancerBySpringCGLIB$$6ba9fa64.createModel(&lt;generated&gt;)</span><br><span class="line">        at org.flowable.ui.modeler.rest.app.ModelsResource.createModel$original$SqoaTQFt(ModelsResource.java:131)</span><br><span class="line">        at org.flowable.ui.modeler.rest.app.ModelsResource.createModel$original$SqoaTQFt$accessor$TQ5qeE0P(ModelsResource.java)</span><br><span class="line">        at org.flowable.ui.modeler.rest.app.ModelsResource$auxiliary$FBHoVvZW.call(Unknown Source)</span><br><span class="line">        at org.apache.skywalking.apm.agent.core.plugin.interceptor.enhance.InstMethodsInter.intercept(InstMethodsInter.java:93)</span><br><span class="line">        at org.flowable.ui.modeler.rest.app.ModelsResource.createModel(ModelsResource.java)</span><br><span class="line">        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span><br><span class="line">        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)</span><br><span class="line">        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">        at java.lang.reflect.Method.invoke(Method.java:498)</span><br><span class="line">        at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:189)</span><br><span class="line">        at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)</span><br><span class="line">        at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)</span><br><span class="line">        at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)</span><br><span class="line">        at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:800)</span><br><span class="line">        at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)</span><br><span class="line">        at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038)</span><br><span class="line">        ... 96 common frames omitted</span><br></pre></td></tr></table></figure>
+
+        
+      </div>
+
+
+
+            
+             <footer>
+             <div class="agreement">
+                  本作品系原创，<a target="_blank" class="text-secondary" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">采用《署名-非商业性使用-禁止演绎 4.0国际》许可协议</a>
+                </div>
+                  
+                  
+  
+  <div class="tags">
+    <a href="/tags/技术/">技术</a>
+  </div>
+
+
+                  <div class="share">
+  
+</div>
+                  
+<nav class="article-nav clearfix">
+ 
+
+<div class="article-next">
+<a href="/freeswitch-fs-ice/"  title="freeswitch之ice穿透">
+ <span>freeswitch之ice穿透
+</span>
+<i class="fa fa-long-arrow-right"></i>
+</a>
+</div>
+
+</nav>
+
+              </footer>
+            
+
+            <div class="clearfix"></div>
+
+
+
+    </div>
+</article>
+
+
+    <section id="comment">
+      <!--
+      <h2 class="title">留言</h2>
+      -->
+
+      
+
+      
+        <div id="container">
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css?v=0.0.0">
+            <div id="gitalk-container"></div>
+            <script src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=0.0.0"></script>
+            <script src="https://unpkg.com/gitalk/dist/gitalk.min.js?v=0.0.0"></script>
+            <script type="text/javascript">
+                var gitalk = new Gitalk({
+                    clientID: 'dba722f78823fd4ce557',
+                    clientSecret: '5c86ba6e2ef5e93793d134c8abe3658f15552938',
+                    id: window.location.pathname,
+                    repo: 'mugbya.github.io',
+                    owner: 'mugbya',
+                    admin: 'mugbya'
+                })
+                gitalk.render('gitalk-container')
+            </script>
+        </div>
+      
+
+    </section>
+
+
+
+</div></div>
+        <aside id="sidebar" class="pure-u-1-4 alignright"><div class="padding">
+	
+	  
+        
+            <div class="toc">
+                <h2> 文章目录 </h2> 
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#缘起"><span class="toc-text">缘起</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排查定位"><span class="toc-text">排查定位</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#附"><span class="toc-text">附</span></a></li></ol>
+            </div>
+        
+
+
+
+
+	
+	  
+<div class="widget recent-post">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/not-fonts-found/">Probable fatal error:No fonts found</a>
+      </li>
+    
+      <li>
+        <a href="/freeswitch-fs-ice/">freeswitch之ice穿透</a>
+      </li>
+    
+      <li>
+        <a href="/image-recognition-feature/">图像识别之特征匹配</a>
+      </li>
+    
+      <li>
+        <a href="/image-recognition-template/">图像识别之模版匹配</a>
+      </li>
+    
+      <li>
+        <a href="/es-term-vector/">ES进阶之term vector</a>
+      </li>
+    
+  </ul>
+</div>
+
+	
+	  
+<div class="widget category">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/elasticsearch/">elasticsearch</a><small>6</small></li>
+  
+    <li><a href="/categories/freeswitch/">freeswitch</a><small>2</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/categories/rabbitmq/">rabbitmq</a><small>1</small></li>
+  
+    <li><a href="/categories/图像识别/">图像识别</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+	
+	  
+<div class="widget category">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/maupassant/">maupassant</a><small>1</small></li>
+  
+    <li><a href="/tags/openCV/">openCV</a><small>2</small></li>
+  
+    <li><a href="/tags/技术/">技术</a><small>13</small></li>
+  
+  </ul>
+</div>
+
+
+	
+</div></aside>
+        <!-- <div class="clearfix"></div> -->
+      </div>
+      <footer id="footer" class="inner"><div class="padding ">
+
+	<div class="alignleft">
+
+
+
+	  
+	  &copy; 2021 mugbya
+	  
+	  Powerd by <a href="http://hexo.io/" target="_blank">hexo</a>
+	  and Theme by <a href="https://github.com/mugbya/moon-metro" target="_blank">moon-metro</a>
+
+		
+		
+			<a href="https://github.com/mugbya" target="_blank" title="mugbya Github"><i class="fa fa-github-square"></i></a>
+		
+		
+		
+		
+		
+		
+			<a href="/atom.xml" target="_blank" title="mugbya RSS"><i class="fa fa-rss-square"></i></a>
+		
+	</div>
+
+	<div class="alignright ">
+
+	</div>
+
+	<div class="clearfix"></div>
+</div>
+
+<div class="scroll-top"><i class="fa fa-arrow-circle-up"></i></div>
+</footer>
+      
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.0.4/jquery.imagesloaded.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+<script type="text/javascript">
+$(window).scroll(function() {
+
+    if($(this).scrollTop() > 400) {
+        $('.scroll-top').fadeIn(200);
+    } else {
+        $('.scroll-top').fadeOut(200);
+    }
+});
+
+$('.scroll-top').bind('click', function(e) {
+    e.preventDefault();
+    $('body,html').animate({scrollTop:0},200);
+});
+</script>
+
+
+      <!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </div>
+</body>
+</html>
